@@ -37,13 +37,19 @@
 #    --unknown           list files in the BIOS folder that match nothing known
 #    --fix-script FILE   write the suggested fix commands to FILE (never run)
 #    --max-hash-mb N     skip hashing files bigger than N MiB (default 64)
+#    --report            friendly HTML report, opened in your browser
+#    --report-file FILE  write the HTML report to FILE (implies --report)
+#    --no-open           with --report: write the file but don't open it
+#    --install-shortcut  add a "BIOS Checker" icon (desktop + app menu)
+#    --uninstall-shortcut  remove it again
+#    --json FILE         machine-readable results
 #    --no-color          plain output      --ascii   no unicode symbols
 #    -h, --help
 #
 #  Exit code: 0 = nothing blocking, 1 = something you NEED is missing, 2 = error
 # =============================================================================
 
-VERSION="1.0.1"
+VERSION="1.1.0"
 set -u
 shopt -s nullglob extglob
 
@@ -56,6 +62,7 @@ fi
 # ----------------------------------------------------------------------------
 OPT_BIOS="" OPT_ROMS="" OPT_FRONTEND="" OPT_ALL=0 OPT_VERBOSE=0 OPT_UNKNOWN=0
 OPT_FIXSCRIPT="" OPT_MAXMB=64 OPT_COLOR=1 OPT_ASCII=0
+OPT_JSON="" OPT_REPORT=0 OPT_REPORTFILE="" OPT_NOOPEN=0 OPT_INSTALL=""
 
 usage() { sed -n '/^#  Usage:/,/^#  Exit code/p' "$0" | sed -E 's/^# ?//'; }
 
@@ -71,6 +78,12 @@ while (($#)); do
     --max-hash-mb) OPT_MAXMB="${2:-64}"; shift ;;
     --no-color) OPT_COLOR=0 ;;
     --ascii) OPT_ASCII=1 ;;
+    --json) OPT_JSON="${2:-}"; shift ;;
+    --report) OPT_REPORT=1 ;;
+    --report-file) OPT_REPORT=1; OPT_REPORTFILE="${2:-}"; shift ;;
+    --no-open) OPT_NOOPEN=1 ;;
+    --install-shortcut) OPT_INSTALL=install ;;
+    --uninstall-shortcut) OPT_INSTALL=uninstall ;;
     -h|--help) usage; exit 0 ;;
     --version) echo "$VERSION"; exit 0 ;;
     *) echo "Unknown option: $1 (try --help)" >&2; exit 2 ;;
@@ -97,18 +110,51 @@ fi
 NEEDS=() WARNS=() FIXES=()
 CNT_OK=0 CNT_NEED=0 CNT_WARN=0
 
-hdr()   { PENDING=""; printf '\n%s%s== %s ==%s%s\n' "$C_BOLD" "$C_B" "$1" "$C_0" "$( ((NOTINST)) && printf ' %s(not installed - shown because of --all)%s' "$C_D" "$C_0")"; }
+# ---------------------------------------------------------------------------
+# Structured recording (for --json / --report). Every printed line becomes an
+# event tied to its section (hdr) and sub-section (sub). report() fills R_* so
+# the UI can phrase findings in plain language.
+# ---------------------------------------------------------------------------
+REC=0 SEC_ID=0 CUR_SUB="" CUR_SUBD="" JV=""
+EVJ=() SECJ=() NEEDS_LOC=() WARNS_LOC=()
+R_KIND="" R_FILE="" R_FOUND="" R_WANT="" R_WHAT="" R_NOTE=""
+jv() {   # JSON-escape $1 into JV (no subshell)
+  local s=$1
+  s=${s//$'\e'\[+([0-9;])m/}
+  s=${s//\\/\\\\}; s=${s//\"/\\\"}; s=${s//$'\n'/\\n}; s=${s//$'\r'/}; s=${s//$'\t'/\\t}
+  s=${s//[$'\001'-$'\037']/}
+  JV=$s
+}
+ev() {
+  ((REC)) || return 0
+  local o="{\"sec\":$SEC_ID"
+  jv "$CUR_SUB";  o+=",\"sub\":\"$JV\""
+  jv "$CUR_SUBD"; o+=",\"subd\":\"$JV\""
+  o+=",\"lvl\":\"$1\",\"kind\":\"$R_KIND\""
+  jv "$2";        o+=",\"text\":\"$JV\""
+  jv "$R_FILE";   o+=",\"file\":\"$JV\""
+  jv "$R_FOUND";  o+=",\"found\":\"$JV\""
+  jv "$R_WANT";   o+=",\"want\":\"$JV\""
+  jv "$R_WHAT";   o+=",\"what\":\"$JV\""
+  jv "$R_NOTE";   o+=",\"note\":\"$JV\"}"
+  EVJ+=("$o")
+  R_KIND="" R_FILE="" R_FOUND="" R_WANT="" R_WHAT="" R_NOTE=""
+}
+hdr()   { CUR_SUB="" CUR_SUBD=""; ((SEC_ID++))
+          if ((REC)); then local t=${1%%  \[*} n=""; [[ $1 == *"  ["* ]] && n="[${1#*  \[}"
+            local o; jv "${CTX:-}"; o="{\"id\":$SEC_ID,\"ctx\":\"$JV\""; jv "$t"; o+=",\"title\":\"$JV\""; jv "$n"; o+=",\"games\":\"$JV\",\"notinst\":$NOTINST}"; SECJ+=("$o"); fi
+          PENDING=""; printf '\n%s%s== %s ==%s%s\n' "$C_BOLD" "$C_B" "$1" "$C_0" "$( ((NOTINST)) && printf ' %s(not installed - shown because of --all)%s' "$C_D" "$C_0")"; }
 PENDING=""
-sub()   { PENDING=$(printf '\n  %s%s%s%s' "$C_BOLD" "$1" "$C_0" "${2:+ $C_D$2$C_0}"); }
+sub()   { CUR_SUB=$1 CUR_SUBD=${2:-}; PENDING=$(printf '\n  %s%s%s%s' "$C_BOLD" "$1" "$C_0" "${2:+ $C_D$2$C_0}"); }
 subnow(){ sub "$@"; pflush; }
 pflush(){ [[ -n $PENDING ]] && { printf '%s\n' "$PENDING"; PENDING=""; }; return 0; }
-l_ok()  { pflush; printf '    %s%s%s %s\n' "$C_G" "$S_OK" "$C_0" "$1"; }
-l_bad() { pflush; printf '    %s%s %s%s\n' "$C_R" "$S_BAD" "$1" "$C_0"; }
-l_warn(){ pflush; printf '    %s%s%s %s\n' "$C_Y" "$S_WARN" "$C_0" "$1"; }
-l_info(){ pflush; printf '    %s%s %s%s\n' "$C_D" "$S_INFO" "$1" "$C_0"; }
-l_opt() { pflush; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$1" "$C_0"; }
-l_fix() { pflush; printf '      %s%s %s%s\n' "$C_C" "$S_FIX" "$1" "$C_0"; }
-l_sub() { pflush; printf '      %s%s%s\n' "$C_D" "$1" "$C_0"; }
+l_ok()  { pflush; ev ok "$1"; printf '    %s%s%s %s\n' "$C_G" "$S_OK" "$C_0" "$1"; }
+l_bad() { pflush; ev bad "$1"; printf '    %s%s %s%s\n' "$C_R" "$S_BAD" "$1" "$C_0"; }
+l_warn(){ pflush; ev warn "$1"; printf '    %s%s%s %s\n' "$C_Y" "$S_WARN" "$C_0" "$1"; }
+l_info(){ pflush; ev info "$1"; printf '    %s%s %s%s\n' "$C_D" "$S_INFO" "$1" "$C_0"; }
+l_opt() { pflush; ev opt "$1"; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$1" "$C_0"; }
+l_fix() { pflush; ev fix "$1"; printf '      %s%s %s%s\n' "$C_C" "$S_FIX" "$1" "$C_0"; }
+l_sub() { pflush; ev sub "$1"; printf '      %s%s%s\n' "$C_D" "$1" "$C_0"; }
 
 # Needs are recorded per system key (rom folder). If ANY emulator/core for that
 # system turns out to be ready, the other emulators' gaps become warnings.
@@ -117,21 +163,22 @@ CUR_KEY=""
 NOTINST=0
 add_need() {
   if ((NOTINST)); then add_warn "$1  (emulator not installed)"; return; fi
-  local k=${2:-$CUR_KEY}; k=${k:-_}; PNEED[$k]+="$1"$'\n'
+  local k=${2:-$CUR_KEY}; k=${k:-_}; PNEED[$k]+="$SEC_ID"$'\x1f'"$CUR_SUB"$'\x1f'"$1"$'\n'
 }
 mark_ok()  { local k; for k in ${1//,/ }; do SAT[$k]=1; done; }
 resolve_needs() {
   local k line
   for k in "${!PNEED[@]}"; do
-    while IFS= read -r line; do
+    local ls lu
+    while IFS=$'\x1f' read -r ls lu line; do
       [[ -z $line ]] && continue
-      if [[ $k != _ && -n ${SAT[${k%%,*}]:-} ]]; then add_warn "$line  (not blocking: another emulator for this system is ready)"
-      else NEEDS+=("$line"); ((CNT_NEED++)); fi
+      if [[ $k != _ && -n ${SAT[${k%%,*}]:-} ]]; then add_warn "$line  (not blocking: another emulator for this system is ready)" "$ls" "$lu"
+      else NEEDS+=("$line"); NEEDS_LOC+=("$ls"$'\x1f'"$lu"); ((CNT_NEED++)); fi
     done <<<"${PNEED[$k]}"
   done
   PNEED=()
 }
-add_warn() { WARNS+=("$1"); ((CNT_WARN++)); }
+add_warn() { WARNS+=("$1"); WARNS_LOC+=("${2:-$SEC_ID}"$'\x1f'"${3-$CUR_SUB}"); ((CNT_WARN++)); }
 add_fix()  { local f; for f in "${FIXES[@]}"; do [[ $f == "$1" ]] && return; done; FIXES+=("$1"); }
 
 q() { printf '%q' "$1"; }                       # shell-quote for fix commands
@@ -445,52 +492,54 @@ report() {
   local label=$1 want=$2 hs=$3 imp=$4 rp=$5 sys=$6 note=${7:-}
   local disp; disp=$(short "$want")
   probe "$want" "$hs"
+  R_FILE=${want##*/} R_WANT=$disp R_NOTE=$note R_FOUND=""
+  [[ -n $P_PATH ]] && R_FOUND=$(short "$P_PATH")
   case $P_STATE in
-    OK)      l_ok "$label ${C_D}$(ident "$P_MD5")${C_0}"; ((CNT_OK++)); return 0 ;;
-    NOHASH)  l_ok "$label ${C_D}present ($(human "$(fsize "$want")"), no reference hash to verify)${C_0}"; ((CNT_OK++)); return 0 ;;
+    OK)      R_KIND=ok R_WHAT=$(ident "$P_MD5"); l_ok "$label ${C_D}$(ident "$P_MD5")${C_0}"; ((CNT_OK++)); return 0 ;;
+    NOHASH)  R_KIND=present; l_ok "$label ${C_D}present ($(human "$(fsize "$want")"), no reference hash to verify)${C_0}"; ((CNT_OK++)); return 0 ;;
     BADHASH)
       local what; what=$(ident "$P_MD5")
       if [[ $want == *.zip ]]; then
-        l_ok "$label ${C_D}present (zip hash differs from reference - normal between MAME/FBNeo versions)${C_0}"; ((CNT_OK++)); return 0
+        R_KIND=zipok; l_ok "$label ${C_D}present (zip hash differs from reference - normal between MAME/FBNeo versions)${C_0}"; ((CNT_OK++)); return 0
       fi
       local exp_tag="" got_tag=${K_TAG[$P_MD5]:-} hh
       for hh in ${hs//,/ }; do exp_tag=${K_TAG[$hh]:-}; [[ -n $exp_tag ]] && break; done
       if [[ -n $got_tag && $got_tag != "$exp_tag" ]]; then
-        l_bad "$label is the WRONG file - it is actually: ${C_BOLD}$what${C_0}"
+        R_KIND=wrongfile R_WHAT=$what; l_bad "$label is the WRONG file - it is actually: ${C_BOLD}$what${C_0}"
         if [[ $imp == REQ && $rp == 1 ]]; then add_need "$sys: $disp is really '$what' - replace it with the correct dump"
         elif [[ $imp != OPT && $imp != ANY ]]; then add_warn "$sys: $disp is really '$what'"; fi
         return 1
       fi
-      l_warn "$label ${C_Y}hash mismatch${C_0} - this file is: ${C_BOLD}$what${C_0} ${C_D}(md5 $P_MD5)${C_0}"
+      R_KIND=badhash R_WHAT=$what; l_warn "$label ${C_Y}hash mismatch${C_0} - this file is: ${C_BOLD}$what${C_0} ${C_D}(md5 $P_MD5)${C_0}"
       add_warn "$sys: $disp has an unexpected hash ($what) - may be a bad/alternate dump"
       return 0 ;;
     CASE)
-      l_warn "$label ${C_Y}wrong filename case${C_0}: found $(short "$P_PATH") - Linux is case-sensitive"
+      R_KIND=case; l_warn "$label ${C_Y}wrong filename case${C_0}: found $(short "$P_PATH") - Linux is case-sensitive"
       l_fix "mv -n $(q "$P_PATH") $(q "$want")"; add_fix "mv -n $(q "$P_PATH") $(q "$want")"
       add_warn "$sys: rename $(short "$P_PATH") -> $(basename "$want") (case)"
       [[ $imp == OPT ]] && return 1
       return 2 ;;
     ELSEWHERE)
-      l_warn "$label ${C_Y}not at $disp${C_0}, but the right file is here: $(short "$P_PATH")"
+      R_KIND=elsewhere; l_warn "$label ${C_Y}not at $disp${C_0}, but the right file is here: $(short "$P_PATH")"
       local cmd="cp -n $(q "$P_PATH") $(q "$want")"
       [[ -d $(dirname "$want") ]] || cmd="mkdir -p $(q "$(dirname "$want")") && $cmd"
       l_fix "$cmd"; add_fix "$cmd"
       add_warn "$sys: copy $(short "$P_PATH") -> $disp"
       return 2 ;;
-    EMPTY)   l_bad "$label is a 0-byte file ($disp)"; add_warn "$sys: $disp is empty"; return 1 ;;
-    BROKEN)  l_bad "$label is a broken symlink ($disp -> $(readlink "$want"))"; add_warn "$sys: broken symlink $disp"; return 1 ;;
+    EMPTY)   R_KIND=empty; l_bad "$label is a 0-byte file ($disp)"; add_warn "$sys: $disp is empty"; return 1 ;;
+    BROKEN)  R_KIND=broken; l_bad "$label is a broken symlink ($disp -> $(readlink "$want"))"; add_warn "$sys: broken symlink $disp"; return 1 ;;
     MISSING)
       case $imp in
-        OPT) ((OPT_VERBOSE)) && l_opt "$label - optional, not present${note:+ ($note)}"; return 1 ;;
-        ANY) ((OPT_VERBOSE)) && l_opt "$label - not present"; return 1 ;;
-        REC) if [[ $rp == 0 ]]; then l_opt "$label - recommended once you add games ($disp)${note:+ - $note}"
-             else l_warn "$label - ${C_Y}recommended, missing${C_0} ($disp)${note:+ - $note}"
+        OPT) if ((OPT_VERBOSE || REC)); then R_KIND=missing_opt; ev opt "$label - optional, not present${note:+ ($note)}"; ((OPT_VERBOSE)) && { pflush; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$label - optional, not present${note:+ ($note)}" "$C_0"; }; fi; R_KIND=""; return 1 ;;
+        ANY) ((OPT_VERBOSE)) && l_opt "$label - not present"; R_KIND=""; return 1 ;;
+        REC) if [[ $rp == 0 ]]; then R_KIND=missing_later; l_opt "$label - recommended once you add games ($disp)${note:+ - $note}"
+             else R_KIND=missing_rec; l_warn "$label - ${C_Y}recommended, missing${C_0} ($disp)${note:+ - $note}"
                   add_warn "$sys: recommended $(basename "$want") missing${note:+ ($note)}"; fi
              return 1 ;;
         REQ) if [[ $rp == 1 ]]; then
-               l_bad "$label - MISSING, needed ($disp)${note:+ - $note}"; add_need "$sys: $(basename "$want") -> $disp${note:+ ($note)}"
+               R_KIND=missing_req; l_bad "$label - MISSING, needed ($disp)${note:+ - $note}"; add_need "$sys: $(basename "$want") -> $disp${note:+ ($note)}"
              else
-               l_opt "$label - missing ($disp) - needed once you add games${note:+ - $note}"
+               R_KIND=missing_later; l_opt "$label - missing ($disp) - needed once you add games${note:+ - $note}"
              fi
              return 1 ;;
       esac ;;
@@ -547,7 +596,7 @@ hashdir() {
     t=${K_TAG[$m]:-}
     if [[ $t == "$tag" ]]; then
       r=${K_REG[$m]}; ((found++))
-      l_ok "$(basename "$f") ${C_D}${K_DESC[$m]} [$r]${C_0}"; ((CNT_OK++))
+      R_KIND=bios_found R_FILE=${f##*/} R_WHAT=${K_DESC[$m]} R_NOTE=$r; l_ok "$(basename "$f") ${C_D}${K_DESC[$m]} [$r]${C_0}"; ((CNT_OK++))
       regs+=" $r"
     elif [[ $tag == PS2 && $(fsize "$f") -eq 4194304 ]]; then
       local rv; rv=$(LC_ALL=C grep -a -m1 -oE '[0-9]{4}[JAEHCRKT][CDTX][0-9]{8}' "$f" 2>/dev/null | head -n1)
@@ -1174,19 +1223,19 @@ ra_flush_groups() {
     rp=$(rp_flag "${grp_roms[$g]}")
     CUR_KEY=${grp_roms[$g]%%,*}
     if [[ -n ${grp_ok[$g]:-} ]]; then
-      l_info "satisfied: ${grp_note[$g]:-one of the above}"
+      R_KIND=group_ok R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_info "satisfied: ${grp_note[$g]:-one of the above}"
       [[ -n ${grp_roms[$g]} ]] && { CORE_HAS[${grp_roms[$g]}]=1; }
     elif [[ -n ${grp_fix[$g]:-} ]]; then
-      l_warn "not usable until you apply the fix above - ${grp_note[$g]:-}"
+      R_KIND=group_fix R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_warn "not usable until you apply the fix above - ${grp_note[$g]:-}"
       [[ -n ${grp_roms[$g]} ]] && { CORE_HAS[${grp_roms[$g]}]=1; CORE_FAIL[${grp_roms[$g]}]=1; }
       [[ $rp == 1 ]] && add_need "$(grp_label "$g") (${g%%:*}): apply the rename/copy fix for its BIOS (see fix commands)"
     elif [[ $rp == 1 ]]; then
       CORE_HAS[${grp_roms[$g]}]=1; CORE_FAIL[${grp_roms[$g]}]=1
-      l_bad "MISSING - ${grp_note[$g]:-at least one is required} $(rom_note "${grp_roms[$g]}")"
+      R_KIND=group_missing R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_bad "MISSING - ${grp_note[$g]:-at least one is required} $(rom_note "${grp_roms[$g]}")"
       l_sub "any of: ${grp_names[$g]}"
       add_need "$(grp_label "$g") (${g%%:*}): ${grp_note[$g]:-one of: ${grp_names[$g]}} -> $(short "$RA_SYS")/"
     else
-      l_opt "none present - ${grp_note[$g]:-one is required} - needed once you add games"
+      R_KIND=group_later R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_opt "none present - ${grp_note[$g]:-one is required} - needed once you add games"
       ((OPT_VERBOSE)) || l_sub "any of: ${grp_names[$g]}"
     fi
   done
@@ -1209,13 +1258,105 @@ check_unknown() {
 }
 
 # ============================================================================
+# JSON / HTML report / desktop shortcut
+# ============================================================================
+CTXJ=()
+jarr() { local IFS=,; printf '%s' "$*"; }
+jstrs() { local out=() x; for x; do jv "$x"; out+=("\"$JV\""); done; jarr "${out[@]}"; }
+jlocs() {   # name-of-text-array name-of-loc-array
+  local -n _t=$1 _l=$2; local out=() i sec sb
+  for i in "${!_t[@]}"; do
+    IFS=$'\x1f' read -r sec sb <<<"${_l[$i]:-0}"
+    jv "${_t[$i]}"; local tx=$JV; jv "$sb"
+    out+=("{\"text\":\"$tx\",\"sec\":${sec:-0},\"sub\":\"$JV\"}")
+  done
+  jarr "${out[@]}"
+}
+build_json() {
+  local o
+  jv "$VERSION"; o="{\"tool\":\"deck-bios-check\",\"version\":\"$JV\""
+  jv "$(date '+%Y-%m-%d %H:%M')"; o+=",\"generated\":\"$JV\""
+  o+=",\"counts\":{\"ok\":$CNT_OK,\"need\":$CNT_NEED,\"warn\":$CNT_WARN,\"fix\":${#FIXES[@]}}"
+  o+=",\"all\":$OPT_ALL,\"contexts\":[$(jarr "${CTXJ[@]}")]"
+  o+=",\"sections\":[$(jarr "${SECJ[@]}")]"
+  o+=",\"events\":[$(jarr "${EVJ[@]}")]"
+  o+=",\"needs\":[$(jlocs NEEDS NEEDS_LOC)]"
+  o+=",\"warns\":[$(jlocs WARNS WARNS_LOC)]"
+  o+=",\"fixes\":[$(jstrs "${FIXES[@]}")]}"
+  JSON_OUT=$o
+}
+REPORT_TPL=$(cat <<'@@REPORT_END@@'
+@@REPORT_HTML@@
+@@REPORT_END@@
+)
+write_report() {   # $1 = output file
+  local data=${JSON_OUT//<\//<\\/}
+  local pre=${REPORT_TPL%%@@DATA@@*} post=${REPORT_TPL#*@@DATA@@}
+  mkdir -p "$(dirname "$1")" && printf '%s%s%s\n' "$pre" "$data" "$post" >"$1"
+}
+open_file() {
+  local opener
+  for opener in xdg-open kde-open5 kde-open gio; do
+    if command -v "$opener" >/dev/null 2>&1; then
+      if [[ $opener == gio ]]; then nohup gio open "$1" >/dev/null 2>&1 &
+      else nohup "$opener" "$1" >/dev/null 2>&1 & fi
+      return 0
+    fi
+  done
+  return 1
+}
+notify() {
+  if command -v kdialog >/dev/null 2>&1; then kdialog --title "BIOS Checker" --passivepopup "$1" 4 >/dev/null 2>&1 &
+  elif command -v notify-send >/dev/null 2>&1; then notify-send "BIOS Checker" "$1" >/dev/null 2>&1 &
+  fi
+}
+shortcut() {   # install | uninstall
+  local dir="$HOME/.local/share/deck-bios-check" app="$HOME/.local/share/applications/deck-bios-checker.desktop" desk f
+  desk=$(xdg-user-dir DESKTOP 2>/dev/null); [[ -z $desk || $desk == "$HOME" ]] && desk="$HOME/Desktop"
+  if [[ $1 == uninstall ]]; then
+    rm -f "$app" "$desk/deck-bios-checker.desktop"; rm -rf "$dir"
+    echo "BIOS Checker shortcut removed."; return 0
+  fi
+  mkdir -p "$dir" "$(dirname "$app")"
+  local self; self=$(realpath -- "$0")
+  [[ $self != "$dir/deck-bios-check.sh" ]] && cp -f -- "$self" "$dir/deck-bios-check.sh"
+  chmod +x "$dir/deck-bios-check.sh"
+  cat >"$app" <<DESKTOP
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=BIOS Checker
+GenericName=Emulator BIOS checker
+Comment=Checks your emulator BIOS, firmware and keys and explains what is missing
+Exec=bash "$dir/deck-bios-check.sh" --report
+Icon=system-search
+Terminal=false
+Categories=Game;Utility;
+DESKTOP
+  chmod +x "$app"
+  if [[ -d $desk ]]; then
+    f="$desk/deck-bios-checker.desktop"; cp -f "$app" "$f"; chmod +x "$f"
+    command -v gio >/dev/null 2>&1 && gio set "$f" metadata::trusted true >/dev/null 2>&1
+  fi
+  echo "Installed:"
+  echo "  app menu:  BIOS Checker  ($app)"
+  [[ -d $desk ]] && echo "  desktop:   $desk/deck-bios-checker.desktop"
+  echo "  script:    $dir/deck-bios-check.sh"
+  echo "Double-click 'BIOS Checker' to get the friendly report. Remove with --uninstall-shortcut."
+}
+
+# ============================================================================
 # MAIN
 # ============================================================================
+if [[ -n $OPT_INSTALL ]]; then shortcut "$OPT_INSTALL"; exit $?; fi
+[[ -n $OPT_JSON || $OPT_REPORT == 1 ]] && REC=1
+((OPT_REPORT)) && notify "Checking your BIOS files..."
 load_known
 detect_contexts
 
 printf '%s%sSteam Deck BIOS checker v%s%s\n' "$C_BOLD" "$C_M" "$VERSION" "$C_0"
 if ((${#CONTEXTS[@]}==0)); then
+  ((OPT_REPORT)) && notify "No EmuDeck or RetroDECK install found."
   printf '%sNo EmuDeck or RetroDECK install found.%s Point me at a folder:  %s --bios ~/path/to/bios [--roms ~/path/to/roms]\n' "$C_R" "$C_0" "$0"
   exit 2
 fi
@@ -1224,6 +1365,11 @@ for ctx in "${CONTEXTS[@]}"; do
   IFS='|' read -r CTX BIOS ROMS STORAGE SAVES XDGC <<<"$ctx"
   BIOS=${BIOS%/}; ROMS=${ROMS%/}; STORAGE=${STORAGE%/}; SAVES=${SAVES%/}
   printf '\n%s%s################  %s  ################%s\n' "$C_BOLD" "$C_M" "$CTX" "$C_0"
+  if ((REC)); then
+    _c=""; jv "$CTX"; _c="{\"name\":\"$JV\""; jv "$BIOS"; _c+=",\"bios\":\"$JV\""; jv "$ROMS"; _c+=",\"roms\":\"$JV\""
+    jv "$( [[ $CTX == EmuDeck ]] && echo "${EMUDECK_SETTINGS:-}")"; _c+=",\"settings\":\"$JV\""
+    jv "$( [[ $CTX == EmuDeck ]] && echo "${EMUDECK_NOTE:-}")"; _c+=",\"note\":\"$JV\"}"; CTXJ+=("$_c")
+  fi
   printf '  BIOS:    %s\n  ROMs:    %s\n  storage: %s\n' "$BIOS" "${ROMS:-?}" "${STORAGE:-?}"
   [[ $CTX == EmuDeck ]] && printf '  %ssettings: %s%s\n' "$C_D" "${EMUDECK_SETTINGS:-}" "$C_0"
   [[ $CTX == EmuDeck && -n ${EMUDECK_NOTE:-} ]] && printf '  %s%s%s\n' "$C_Y" "$EMUDECK_NOTE" "$C_0"
@@ -1282,5 +1428,16 @@ if ((${#FIXES[@]})); then
 fi
 ((${#NEEDS[@]}==0)) && printf '\n  %s%s Nothing blocking: every system you have games for has what it needs.%s\n' "$C_G" "$S_OK" "$C_0"
 printf '\n'
+if ((REC)); then
+  build_json
+  if [[ -n $OPT_JSON ]]; then printf '%s\n' "$JSON_OUT" >"$OPT_JSON" && printf '  JSON written to %s\n' "$OPT_JSON"; fi
+  if ((OPT_REPORT)); then
+    rf=${OPT_REPORTFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/deck-bios-check/report.html}
+    if write_report "$rf"; then
+      printf '  %sReport: %s%s\n' "$C_BOLD" "$rf" "$C_0"
+      if ((OPT_NOOPEN==0)); then open_file "$rf" || printf '  (could not open a browser - open the file above yourself)\n'; fi
+    fi
+  fi
+fi
 ((${#NEEDS[@]})) && exit 1
 exit 0

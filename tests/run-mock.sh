@@ -38,5 +38,17 @@ Q=$work/q; mkdir -p "$Q/Emu Virtual/Emulation/bios" "$Q/.config/EmuDeck"
 printf 'emulationPath="%s/Emu Virtual"/Emulation\nbiosPath="$emulationPath/bios"  # c\nromsPath="%s/Emu Virtual"/Emulation/roms\n' "$Q" "$Q" > "$Q/.config/EmuDeck/settings.sh"
 qout=$(HOME=$Q bash "$work/t.sh" --no-color 2>&1)
 if grep -qF "BIOS:    $Q/Emu Virtual/Emulation/bios" <<<"$qout" && ! grep -q "folder missing" <<<"$qout"; then echo "PASS  quoted settings.sh paths"; else echo "FAIL  quoted settings.sh paths"; echo "$qout" | head; fail=1; fi
+# friendly report + JSON
+HOME=$H bash "$work/t.sh" --no-color --report-file "$work/report.html" --no-open --json "$work/r.json" >/dev/null 2>&1
+if [[ -s $work/report.html ]] && grep -q '"tool":"deck-bios-check"' "$work/report.html" && ! grep -q '@@DATA@@' "$work/report.html"; then echo "PASS  HTML report generated"; else echo "FAIL  HTML report"; fail=1; fi
+if command -v python3 >/dev/null 2>&1; then
+  if python3 -I -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["needs"] and d["events"] and d["sections"]' "$work/r.json"; then echo "PASS  JSON is valid"; else echo "FAIL  JSON invalid"; fail=1; fi
+fi
+# desktop shortcut
+S=$work/sc; mkdir -p "$S/Desktop"
+HOME=$S bash "$here/../deck-bios-check.sh" --install-shortcut >/dev/null 2>&1
+if grep -q 'Exec=bash ".*deck-bios-check.sh" --report' "$S/.local/share/applications/deck-bios-checker.desktop" 2>/dev/null && [[ -x $S/Desktop/deck-bios-checker.desktop ]]; then echo "PASS  shortcut installed"; else echo "FAIL  shortcut"; fail=1; fi
+HOME=$S bash "$here/../deck-bios-check.sh" --uninstall-shortcut >/dev/null 2>&1
+[[ ! -e $S/Desktop/deck-bios-checker.desktop ]] && echo "PASS  shortcut removed" || { echo "FAIL  shortcut removal"; fail=1; }
 ((fail)) && { echo; echo "$out"; exit 1; }
 echo "all checks passed"

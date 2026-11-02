@@ -37,13 +37,19 @@
 #    --unknown           list files in the BIOS folder that match nothing known
 #    --fix-script FILE   write the suggested fix commands to FILE (never run)
 #    --max-hash-mb N     skip hashing files bigger than N MiB (default 64)
+#    --report            friendly HTML report, opened in your browser
+#    --report-file FILE  write the HTML report to FILE (implies --report)
+#    --no-open           with --report: write the file but don't open it
+#    --install-shortcut  add a "BIOS Checker" icon (desktop + app menu)
+#    --uninstall-shortcut  remove it again
+#    --json FILE         machine-readable results
 #    --no-color          plain output      --ascii   no unicode symbols
 #    -h, --help
 #
 #  Exit code: 0 = nothing blocking, 1 = something you NEED is missing, 2 = error
 # =============================================================================
 
-VERSION="1.0.1"
+VERSION="1.1.0"
 set -u
 shopt -s nullglob extglob
 
@@ -56,6 +62,7 @@ fi
 # ----------------------------------------------------------------------------
 OPT_BIOS="" OPT_ROMS="" OPT_FRONTEND="" OPT_ALL=0 OPT_VERBOSE=0 OPT_UNKNOWN=0
 OPT_FIXSCRIPT="" OPT_MAXMB=64 OPT_COLOR=1 OPT_ASCII=0
+OPT_JSON="" OPT_REPORT=0 OPT_REPORTFILE="" OPT_NOOPEN=0 OPT_INSTALL=""
 
 usage() { sed -n '/^#  Usage:/,/^#  Exit code/p' "$0" | sed -E 's/^# ?//'; }
 
@@ -71,6 +78,12 @@ while (($#)); do
     --max-hash-mb) OPT_MAXMB="${2:-64}"; shift ;;
     --no-color) OPT_COLOR=0 ;;
     --ascii) OPT_ASCII=1 ;;
+    --json) OPT_JSON="${2:-}"; shift ;;
+    --report) OPT_REPORT=1 ;;
+    --report-file) OPT_REPORT=1; OPT_REPORTFILE="${2:-}"; shift ;;
+    --no-open) OPT_NOOPEN=1 ;;
+    --install-shortcut) OPT_INSTALL=install ;;
+    --uninstall-shortcut) OPT_INSTALL=uninstall ;;
     -h|--help) usage; exit 0 ;;
     --version) echo "$VERSION"; exit 0 ;;
     *) echo "Unknown option: $1 (try --help)" >&2; exit 2 ;;
@@ -97,18 +110,51 @@ fi
 NEEDS=() WARNS=() FIXES=()
 CNT_OK=0 CNT_NEED=0 CNT_WARN=0
 
-hdr()   { PENDING=""; printf '\n%s%s== %s ==%s%s\n' "$C_BOLD" "$C_B" "$1" "$C_0" "$( ((NOTINST)) && printf ' %s(not installed - shown because of --all)%s' "$C_D" "$C_0")"; }
+# ---------------------------------------------------------------------------
+# Structured recording (for --json / --report). Every printed line becomes an
+# event tied to its section (hdr) and sub-section (sub). report() fills R_* so
+# the UI can phrase findings in plain language.
+# ---------------------------------------------------------------------------
+REC=0 SEC_ID=0 CUR_SUB="" CUR_SUBD="" JV=""
+EVJ=() SECJ=() NEEDS_LOC=() WARNS_LOC=()
+R_KIND="" R_FILE="" R_FOUND="" R_WANT="" R_WHAT="" R_NOTE=""
+jv() {   # JSON-escape $1 into JV (no subshell)
+  local s=$1
+  s=${s//$'\e'\[+([0-9;])m/}
+  s=${s//\\/\\\\}; s=${s//\"/\\\"}; s=${s//$'\n'/\\n}; s=${s//$'\r'/}; s=${s//$'\t'/\\t}
+  s=${s//[$'\001'-$'\037']/}
+  JV=$s
+}
+ev() {
+  ((REC)) || return 0
+  local o="{\"sec\":$SEC_ID"
+  jv "$CUR_SUB";  o+=",\"sub\":\"$JV\""
+  jv "$CUR_SUBD"; o+=",\"subd\":\"$JV\""
+  o+=",\"lvl\":\"$1\",\"kind\":\"$R_KIND\""
+  jv "$2";        o+=",\"text\":\"$JV\""
+  jv "$R_FILE";   o+=",\"file\":\"$JV\""
+  jv "$R_FOUND";  o+=",\"found\":\"$JV\""
+  jv "$R_WANT";   o+=",\"want\":\"$JV\""
+  jv "$R_WHAT";   o+=",\"what\":\"$JV\""
+  jv "$R_NOTE";   o+=",\"note\":\"$JV\"}"
+  EVJ+=("$o")
+  R_KIND="" R_FILE="" R_FOUND="" R_WANT="" R_WHAT="" R_NOTE=""
+}
+hdr()   { CUR_SUB="" CUR_SUBD=""; ((SEC_ID++))
+          if ((REC)); then local t=${1%%  \[*} n=""; [[ $1 == *"  ["* ]] && n="[${1#*  \[}"
+            local o; jv "${CTX:-}"; o="{\"id\":$SEC_ID,\"ctx\":\"$JV\""; jv "$t"; o+=",\"title\":\"$JV\""; jv "$n"; o+=",\"games\":\"$JV\",\"notinst\":$NOTINST}"; SECJ+=("$o"); fi
+          PENDING=""; printf '\n%s%s== %s ==%s%s\n' "$C_BOLD" "$C_B" "$1" "$C_0" "$( ((NOTINST)) && printf ' %s(not installed - shown because of --all)%s' "$C_D" "$C_0")"; }
 PENDING=""
-sub()   { PENDING=$(printf '\n  %s%s%s%s' "$C_BOLD" "$1" "$C_0" "${2:+ $C_D$2$C_0}"); }
+sub()   { CUR_SUB=$1 CUR_SUBD=${2:-}; PENDING=$(printf '\n  %s%s%s%s' "$C_BOLD" "$1" "$C_0" "${2:+ $C_D$2$C_0}"); }
 subnow(){ sub "$@"; pflush; }
 pflush(){ [[ -n $PENDING ]] && { printf '%s\n' "$PENDING"; PENDING=""; }; return 0; }
-l_ok()  { pflush; printf '    %s%s%s %s\n' "$C_G" "$S_OK" "$C_0" "$1"; }
-l_bad() { pflush; printf '    %s%s %s%s\n' "$C_R" "$S_BAD" "$1" "$C_0"; }
-l_warn(){ pflush; printf '    %s%s%s %s\n' "$C_Y" "$S_WARN" "$C_0" "$1"; }
-l_info(){ pflush; printf '    %s%s %s%s\n' "$C_D" "$S_INFO" "$1" "$C_0"; }
-l_opt() { pflush; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$1" "$C_0"; }
-l_fix() { pflush; printf '      %s%s %s%s\n' "$C_C" "$S_FIX" "$1" "$C_0"; }
-l_sub() { pflush; printf '      %s%s%s\n' "$C_D" "$1" "$C_0"; }
+l_ok()  { pflush; ev ok "$1"; printf '    %s%s%s %s\n' "$C_G" "$S_OK" "$C_0" "$1"; }
+l_bad() { pflush; ev bad "$1"; printf '    %s%s %s%s\n' "$C_R" "$S_BAD" "$1" "$C_0"; }
+l_warn(){ pflush; ev warn "$1"; printf '    %s%s%s %s\n' "$C_Y" "$S_WARN" "$C_0" "$1"; }
+l_info(){ pflush; ev info "$1"; printf '    %s%s %s%s\n' "$C_D" "$S_INFO" "$1" "$C_0"; }
+l_opt() { pflush; ev opt "$1"; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$1" "$C_0"; }
+l_fix() { pflush; ev fix "$1"; printf '      %s%s %s%s\n' "$C_C" "$S_FIX" "$1" "$C_0"; }
+l_sub() { pflush; ev sub "$1"; printf '      %s%s%s\n' "$C_D" "$1" "$C_0"; }
 
 # Needs are recorded per system key (rom folder). If ANY emulator/core for that
 # system turns out to be ready, the other emulators' gaps become warnings.
@@ -117,21 +163,22 @@ CUR_KEY=""
 NOTINST=0
 add_need() {
   if ((NOTINST)); then add_warn "$1  (emulator not installed)"; return; fi
-  local k=${2:-$CUR_KEY}; k=${k:-_}; PNEED[$k]+="$1"$'\n'
+  local k=${2:-$CUR_KEY}; k=${k:-_}; PNEED[$k]+="$SEC_ID"$'\x1f'"$CUR_SUB"$'\x1f'"$1"$'\n'
 }
 mark_ok()  { local k; for k in ${1//,/ }; do SAT[$k]=1; done; }
 resolve_needs() {
   local k line
   for k in "${!PNEED[@]}"; do
-    while IFS= read -r line; do
+    local ls lu
+    while IFS=$'\x1f' read -r ls lu line; do
       [[ -z $line ]] && continue
-      if [[ $k != _ && -n ${SAT[${k%%,*}]:-} ]]; then add_warn "$line  (not blocking: another emulator for this system is ready)"
-      else NEEDS+=("$line"); ((CNT_NEED++)); fi
+      if [[ $k != _ && -n ${SAT[${k%%,*}]:-} ]]; then add_warn "$line  (not blocking: another emulator for this system is ready)" "$ls" "$lu"
+      else NEEDS+=("$line"); NEEDS_LOC+=("$ls"$'\x1f'"$lu"); ((CNT_NEED++)); fi
     done <<<"${PNEED[$k]}"
   done
   PNEED=()
 }
-add_warn() { WARNS+=("$1"); ((CNT_WARN++)); }
+add_warn() { WARNS+=("$1"); WARNS_LOC+=("${2:-$SEC_ID}"$'\x1f'"${3-$CUR_SUB}"); ((CNT_WARN++)); }
 add_fix()  { local f; for f in "${FIXES[@]}"; do [[ $f == "$1" ]] && return; done; FIXES+=("$1"); }
 
 q() { printf '%q' "$1"; }                       # shell-quote for fix commands
@@ -1795,52 +1842,54 @@ report() {
   local label=$1 want=$2 hs=$3 imp=$4 rp=$5 sys=$6 note=${7:-}
   local disp; disp=$(short "$want")
   probe "$want" "$hs"
+  R_FILE=${want##*/} R_WANT=$disp R_NOTE=$note R_FOUND=""
+  [[ -n $P_PATH ]] && R_FOUND=$(short "$P_PATH")
   case $P_STATE in
-    OK)      l_ok "$label ${C_D}$(ident "$P_MD5")${C_0}"; ((CNT_OK++)); return 0 ;;
-    NOHASH)  l_ok "$label ${C_D}present ($(human "$(fsize "$want")"), no reference hash to verify)${C_0}"; ((CNT_OK++)); return 0 ;;
+    OK)      R_KIND=ok R_WHAT=$(ident "$P_MD5"); l_ok "$label ${C_D}$(ident "$P_MD5")${C_0}"; ((CNT_OK++)); return 0 ;;
+    NOHASH)  R_KIND=present; l_ok "$label ${C_D}present ($(human "$(fsize "$want")"), no reference hash to verify)${C_0}"; ((CNT_OK++)); return 0 ;;
     BADHASH)
       local what; what=$(ident "$P_MD5")
       if [[ $want == *.zip ]]; then
-        l_ok "$label ${C_D}present (zip hash differs from reference - normal between MAME/FBNeo versions)${C_0}"; ((CNT_OK++)); return 0
+        R_KIND=zipok; l_ok "$label ${C_D}present (zip hash differs from reference - normal between MAME/FBNeo versions)${C_0}"; ((CNT_OK++)); return 0
       fi
       local exp_tag="" got_tag=${K_TAG[$P_MD5]:-} hh
       for hh in ${hs//,/ }; do exp_tag=${K_TAG[$hh]:-}; [[ -n $exp_tag ]] && break; done
       if [[ -n $got_tag && $got_tag != "$exp_tag" ]]; then
-        l_bad "$label is the WRONG file - it is actually: ${C_BOLD}$what${C_0}"
+        R_KIND=wrongfile R_WHAT=$what; l_bad "$label is the WRONG file - it is actually: ${C_BOLD}$what${C_0}"
         if [[ $imp == REQ && $rp == 1 ]]; then add_need "$sys: $disp is really '$what' - replace it with the correct dump"
         elif [[ $imp != OPT && $imp != ANY ]]; then add_warn "$sys: $disp is really '$what'"; fi
         return 1
       fi
-      l_warn "$label ${C_Y}hash mismatch${C_0} - this file is: ${C_BOLD}$what${C_0} ${C_D}(md5 $P_MD5)${C_0}"
+      R_KIND=badhash R_WHAT=$what; l_warn "$label ${C_Y}hash mismatch${C_0} - this file is: ${C_BOLD}$what${C_0} ${C_D}(md5 $P_MD5)${C_0}"
       add_warn "$sys: $disp has an unexpected hash ($what) - may be a bad/alternate dump"
       return 0 ;;
     CASE)
-      l_warn "$label ${C_Y}wrong filename case${C_0}: found $(short "$P_PATH") - Linux is case-sensitive"
+      R_KIND=case; l_warn "$label ${C_Y}wrong filename case${C_0}: found $(short "$P_PATH") - Linux is case-sensitive"
       l_fix "mv -n $(q "$P_PATH") $(q "$want")"; add_fix "mv -n $(q "$P_PATH") $(q "$want")"
       add_warn "$sys: rename $(short "$P_PATH") -> $(basename "$want") (case)"
       [[ $imp == OPT ]] && return 1
       return 2 ;;
     ELSEWHERE)
-      l_warn "$label ${C_Y}not at $disp${C_0}, but the right file is here: $(short "$P_PATH")"
+      R_KIND=elsewhere; l_warn "$label ${C_Y}not at $disp${C_0}, but the right file is here: $(short "$P_PATH")"
       local cmd="cp -n $(q "$P_PATH") $(q "$want")"
       [[ -d $(dirname "$want") ]] || cmd="mkdir -p $(q "$(dirname "$want")") && $cmd"
       l_fix "$cmd"; add_fix "$cmd"
       add_warn "$sys: copy $(short "$P_PATH") -> $disp"
       return 2 ;;
-    EMPTY)   l_bad "$label is a 0-byte file ($disp)"; add_warn "$sys: $disp is empty"; return 1 ;;
-    BROKEN)  l_bad "$label is a broken symlink ($disp -> $(readlink "$want"))"; add_warn "$sys: broken symlink $disp"; return 1 ;;
+    EMPTY)   R_KIND=empty; l_bad "$label is a 0-byte file ($disp)"; add_warn "$sys: $disp is empty"; return 1 ;;
+    BROKEN)  R_KIND=broken; l_bad "$label is a broken symlink ($disp -> $(readlink "$want"))"; add_warn "$sys: broken symlink $disp"; return 1 ;;
     MISSING)
       case $imp in
-        OPT) ((OPT_VERBOSE)) && l_opt "$label - optional, not present${note:+ ($note)}"; return 1 ;;
-        ANY) ((OPT_VERBOSE)) && l_opt "$label - not present"; return 1 ;;
-        REC) if [[ $rp == 0 ]]; then l_opt "$label - recommended once you add games ($disp)${note:+ - $note}"
-             else l_warn "$label - ${C_Y}recommended, missing${C_0} ($disp)${note:+ - $note}"
+        OPT) if ((OPT_VERBOSE || REC)); then R_KIND=missing_opt; ev opt "$label - optional, not present${note:+ ($note)}"; ((OPT_VERBOSE)) && { pflush; printf '    %s%s %s%s\n' "$C_D" "$S_OPT" "$label - optional, not present${note:+ ($note)}" "$C_0"; }; fi; R_KIND=""; return 1 ;;
+        ANY) ((OPT_VERBOSE)) && l_opt "$label - not present"; R_KIND=""; return 1 ;;
+        REC) if [[ $rp == 0 ]]; then R_KIND=missing_later; l_opt "$label - recommended once you add games ($disp)${note:+ - $note}"
+             else R_KIND=missing_rec; l_warn "$label - ${C_Y}recommended, missing${C_0} ($disp)${note:+ - $note}"
                   add_warn "$sys: recommended $(basename "$want") missing${note:+ ($note)}"; fi
              return 1 ;;
         REQ) if [[ $rp == 1 ]]; then
-               l_bad "$label - MISSING, needed ($disp)${note:+ - $note}"; add_need "$sys: $(basename "$want") -> $disp${note:+ ($note)}"
+               R_KIND=missing_req; l_bad "$label - MISSING, needed ($disp)${note:+ - $note}"; add_need "$sys: $(basename "$want") -> $disp${note:+ ($note)}"
              else
-               l_opt "$label - missing ($disp) - needed once you add games${note:+ - $note}"
+               R_KIND=missing_later; l_opt "$label - missing ($disp) - needed once you add games${note:+ - $note}"
              fi
              return 1 ;;
       esac ;;
@@ -1897,7 +1946,7 @@ hashdir() {
     t=${K_TAG[$m]:-}
     if [[ $t == "$tag" ]]; then
       r=${K_REG[$m]}; ((found++))
-      l_ok "$(basename "$f") ${C_D}${K_DESC[$m]} [$r]${C_0}"; ((CNT_OK++))
+      R_KIND=bios_found R_FILE=${f##*/} R_WHAT=${K_DESC[$m]} R_NOTE=$r; l_ok "$(basename "$f") ${C_D}${K_DESC[$m]} [$r]${C_0}"; ((CNT_OK++))
       regs+=" $r"
     elif [[ $tag == PS2 && $(fsize "$f") -eq 4194304 ]]; then
       local rv; rv=$(LC_ALL=C grep -a -m1 -oE '[0-9]{4}[JAEHCRKT][CDTX][0-9]{8}' "$f" 2>/dev/null | head -n1)
@@ -2524,19 +2573,19 @@ ra_flush_groups() {
     rp=$(rp_flag "${grp_roms[$g]}")
     CUR_KEY=${grp_roms[$g]%%,*}
     if [[ -n ${grp_ok[$g]:-} ]]; then
-      l_info "satisfied: ${grp_note[$g]:-one of the above}"
+      R_KIND=group_ok R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_info "satisfied: ${grp_note[$g]:-one of the above}"
       [[ -n ${grp_roms[$g]} ]] && { CORE_HAS[${grp_roms[$g]}]=1; }
     elif [[ -n ${grp_fix[$g]:-} ]]; then
-      l_warn "not usable until you apply the fix above - ${grp_note[$g]:-}"
+      R_KIND=group_fix R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_warn "not usable until you apply the fix above - ${grp_note[$g]:-}"
       [[ -n ${grp_roms[$g]} ]] && { CORE_HAS[${grp_roms[$g]}]=1; CORE_FAIL[${grp_roms[$g]}]=1; }
       [[ $rp == 1 ]] && add_need "$(grp_label "$g") (${g%%:*}): apply the rename/copy fix for its BIOS (see fix commands)"
     elif [[ $rp == 1 ]]; then
       CORE_HAS[${grp_roms[$g]}]=1; CORE_FAIL[${grp_roms[$g]}]=1
-      l_bad "MISSING - ${grp_note[$g]:-at least one is required} $(rom_note "${grp_roms[$g]}")"
+      R_KIND=group_missing R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_bad "MISSING - ${grp_note[$g]:-at least one is required} $(rom_note "${grp_roms[$g]}")"
       l_sub "any of: ${grp_names[$g]}"
       add_need "$(grp_label "$g") (${g%%:*}): ${grp_note[$g]:-one of: ${grp_names[$g]}} -> $(short "$RA_SYS")/"
     else
-      l_opt "none present - ${grp_note[$g]:-one is required} - needed once you add games"
+      R_KIND=group_later R_NOTE=${grp_note[$g]:-} R_FILE=${grp_names[$g]}; l_opt "none present - ${grp_note[$g]:-one is required} - needed once you add games"
       ((OPT_VERBOSE)) || l_sub "any of: ${grp_names[$g]}"
     fi
   done
@@ -2559,13 +2608,524 @@ check_unknown() {
 }
 
 # ============================================================================
+# JSON / HTML report / desktop shortcut
+# ============================================================================
+CTXJ=()
+jarr() { local IFS=,; printf '%s' "$*"; }
+jstrs() { local out=() x; for x; do jv "$x"; out+=("\"$JV\""); done; jarr "${out[@]}"; }
+jlocs() {   # name-of-text-array name-of-loc-array
+  local -n _t=$1 _l=$2; local out=() i sec sb
+  for i in "${!_t[@]}"; do
+    IFS=$'\x1f' read -r sec sb <<<"${_l[$i]:-0}"
+    jv "${_t[$i]}"; local tx=$JV; jv "$sb"
+    out+=("{\"text\":\"$tx\",\"sec\":${sec:-0},\"sub\":\"$JV\"}")
+  done
+  jarr "${out[@]}"
+}
+build_json() {
+  local o
+  jv "$VERSION"; o="{\"tool\":\"deck-bios-check\",\"version\":\"$JV\""
+  jv "$(date '+%Y-%m-%d %H:%M')"; o+=",\"generated\":\"$JV\""
+  o+=",\"counts\":{\"ok\":$CNT_OK,\"need\":$CNT_NEED,\"warn\":$CNT_WARN,\"fix\":${#FIXES[@]}}"
+  o+=",\"all\":$OPT_ALL,\"contexts\":[$(jarr "${CTXJ[@]}")]"
+  o+=",\"sections\":[$(jarr "${SECJ[@]}")]"
+  o+=",\"events\":[$(jarr "${EVJ[@]}")]"
+  o+=",\"needs\":[$(jlocs NEEDS NEEDS_LOC)]"
+  o+=",\"warns\":[$(jlocs WARNS WARNS_LOC)]"
+  o+=",\"fixes\":[$(jstrs "${FIXES[@]}")]}"
+  JSON_OUT=$o
+}
+REPORT_TPL=$(cat <<'@@REPORT_END@@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIOS Checker</title>
+<style>
+  :root{
+    --bg:#11161d; --panel:#1b232e; --panel2:#222c39; --line:#2e3a4a; --text:#e6edf5; --dim:#93a3b8;
+    --blue:#1a9fff; --red:#ff5d5d; --yellow:#ffc53d; --green:#5cc84a; --grey:#7c8a9c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  a{color:var(--blue)}
+  code{font-family:ui-monospace,"DejaVu Sans Mono",monospace;font-size:.86em;background:#0d1218;border:1px solid var(--line);border-radius:5px;padding:1px 5px;word-break:break-all}
+  abbr{text-decoration:underline dotted var(--dim);cursor:help}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+  header{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  header h1{margin:0;font-size:28px;letter-spacing:.3px}
+  header .ver{color:var(--dim);font-size:14px}
+  .ctx{color:var(--dim);font-size:14px;margin:6px 0 0}
+  .ctx b{color:var(--text);font-weight:600}
+  .banner{margin:22px 0 16px;padding:22px 24px;border-radius:14px;background:var(--panel);border-left:8px solid var(--green)}
+  .banner.red{border-color:var(--red)} .banner.yellow{border-color:var(--yellow)}
+  .banner h2{margin:0 0 6px;font-size:24px}
+  .banner p{margin:0;color:var(--dim)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .chip{padding:6px 14px;border-radius:999px;background:var(--panel2);font-size:15px;cursor:pointer;border:2px solid transparent;user-select:none}
+  .chip.on{border-color:var(--blue)}
+  .chip .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:1px}
+  .todo{margin:0 0 20px;padding:16px 20px;border-radius:12px;background:#2a1b1f;border:1px solid #5a2a31}
+  .todo h3{margin:0 0 8px;font-size:18px;color:var(--red)}
+  .todo ol{margin:0;padding-left:22px} .todo li{margin:4px 0}
+  .todo a{color:var(--text);text-decoration:none;border-bottom:1px dashed var(--dim)}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+  button{font:inherit;font-size:15px;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px 16px;cursor:pointer;min-height:42px}
+  button:hover{border-color:var(--blue)} button.primary{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+  label.tog{display:flex;align-items:center;gap:8px;color:var(--dim);font-size:15px;cursor:pointer;user-select:none}
+  label.tog input{width:20px;height:20px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:16px}
+  @media (max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border-radius:14px;padding:18px 20px;border-top:5px solid var(--green);scroll-margin-top:16px}
+  .card.red{border-color:var(--red)} .card.yellow{border-color:var(--yellow)} .card.idle{border-color:var(--grey)}
+  .card.flash{outline:3px solid var(--blue)}
+  .card h3{margin:0;font-size:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pill{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;color:#111;white-space:nowrap}
+  .pill.red{background:var(--red)} .pill.yellow{background:var(--yellow)} .pill.green{background:var(--green)} .pill.idle{background:var(--grey)}
+  .emu{color:var(--dim);font-size:14px;margin-top:2px}
+  .headline{margin:10px 0 8px;font-size:16px}
+  .items{list-style:none;margin:0;padding:0}
+  .items li{padding:8px 0 8px 32px;position:relative;border-top:1px solid var(--line);font-size:15.5px}
+  .items li:first-child{border-top:none}
+  .items li .ic{position:absolute;left:4px;top:8px;width:20px;text-align:center;font-weight:700}
+  .ic.ok{color:var(--green)} .ic.bad{color:var(--red)} .ic.warn{color:var(--yellow)} .ic.info,.ic.opt{color:var(--grey)}
+  .items li.subhead{padding-left:0;font-weight:700;color:var(--blue);border-top:none;margin-top:6px}
+  .items li.note{color:var(--dim);font-size:14px}
+  .small{color:var(--dim);font-size:13.5px;display:block;margin-top:2px}
+  .fix{display:flex;gap:8px;align-items:flex-start;margin:6px 0 2px;background:#0d1218;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+  .fix code{flex:1;background:none;border:none;padding:0;font-size:13px}
+  .fix button{padding:4px 12px;min-height:32px;font-size:13px}
+  details{margin-top:10px} summary{cursor:pointer;color:var(--dim);font-size:14px;user-select:none}
+  details .help{margin:8px 0 0;font-size:15px;line-height:1.55}
+  details pre{white-space:pre-wrap;font-size:12.5px;color:var(--dim);background:#0d1218;border-radius:8px;padding:10px;margin:8px 0 0;font-family:ui-monospace,"DejaVu Sans Mono",monospace}
+  .group-title{margin:30px 0 12px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+  .howto{margin-top:30px;background:var(--panel);border-radius:14px;padding:18px 22px;font-size:15.5px}
+  .howto h3{margin:0 0 8px}
+  footer{margin-top:28px;color:var(--dim);font-size:13px;text-align:center}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:10px 20px;border-radius:999px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>BIOS Checker</h1><span class="ver" id="ver"></span>
+  </header>
+  <div class="ctx" id="ctx"></div>
+
+  <div class="banner" id="banner"><h2 id="bannerTitle"></h2><p id="bannerText"></p>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="todo hidden" id="todo"><h3>To do</h3><ol id="todoList"></ol></div>
+
+  <div class="toolbar">
+    <button class="primary hidden" id="btnCopyAll">Copy all fixes</button>
+    <button class="hidden" id="btnSave">Save fixes as a script</button>
+    <label class="tog"><input type="checkbox" id="optOptional"> Show optional extras</label>
+    <label class="tog"><input type="checkbox" id="optTech"> Show technical details</label>
+  </div>
+
+  <div id="cards"></div>
+
+  <div class="howto">
+    <h3>How to use a fix</h3>
+    Each fix is a single command that copies or renames a file. Fixes never overwrite anything (<code>cp -n</code> / <code>mv -n</code>); the only deletions are Windows junk files (<code>Zone.Identifier</code>).
+    <ol>
+      <li>Press <b>Copy</b> next to the fix (or <b>Copy all fixes</b> at the top).</li>
+      <li>Open <b>Konsole</b> (Desktop Mode - application menu - System - Konsole).</li>
+      <li>Paste with <b>Ctrl+Shift+V</b> and press <b>Enter</b>.</li>
+      <li>Run BIOS Checker again to confirm.</li>
+    </ol>
+    BIOS, firmware and keys must be dumped from hardware you own. This tool never downloads or shares them.
+  </div>
+  <footer id="foot"></footer>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script type="application/json" id="data">@@DATA@@</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const base = p => String(p||'').split('/').pop();
+
+// ---------- plain-language glossary (hover / tap) ----------
+const GLOSS = [
+  ['prod.keys','The Switch decryption keys, dumped from your own Switch. Emulators need them to read Switch games.'],
+  ['title.keys','Optional Switch keys for individual games/DLC.'],
+  ['keys.txt','A text file of Wii U disc keys. Only needed for encrypted .wud/.wux disc images.'],
+  ['aes_keys.txt','3DS decryption keys. Only needed for encrypted 3DS game dumps.'],
+  ['firmware','The console\'s own system software. Some emulators need it installed before games run.'],
+  ['BIOS','The console\'s startup chip. Many emulators need a copy of it (a "BIOS file") to start games.'],
+  ['NCAs?','The individual files a Switch firmware is made of.'],
+  ['MCPX','The original Xbox\'s tiny secret boot chip. xemu needs a dump of version 1.0.'],
+  ['flash ROM','The original Xbox\'s main BIOS chip.'],
+  ['qcow2','The disk-image format xemu uses for the Xbox hard drive.'],
+  ['HDD image','A file that acts as the console\'s hard drive.'],
+  ['EEPROM','A small settings chip. xemu creates one automatically.'],
+  ['IPL','The GameCube boot menu/animation. Optional.'],
+  ['HLE','"High-level emulation" - the emulator fakes the BIOS itself. Works for most games, a real BIOS works for all.'],
+  ['FreeBIOS','melonDS\'s built-in replacement for the DS BIOS.'],
+  ['hash','A fingerprint of a file\'s contents. Matching fingerprints prove you have the exact right file.'],
+  ['md5','A type of file fingerprint (hash).'],
+  ['ROMVER','A version tag stored inside every PS2 BIOS.'],
+  ['PUP','Sony\'s official system-update file. You install it from inside the emulator.'],
+  ['dev_flash','Where RPCS3 keeps the installed PS3 system software.'],
+  ['symlink','A shortcut that points to another folder. EmuDeck uses these to link emulator folders into your bios folder.'],
+  ['Kickstarts?','The Amiga\'s built-in ROM (its BIOS).'],
+  ['AROS','A free stand-in for the Amiga Kickstart. Works for some games, not all.'],
+  ['Y-ZOOM','A small ROM the Neo Geo CD needs for scaling graphics.'],
+  ['LLE','"Low-level emulation" - using real system files instead of fakes.'],
+  ['region','Where a console was sold (US, Europe, Japan). Some emulators want the BIOS that matches each game\'s region.'],
+  ['case-sensitive','On the Deck, "BIOS.BIN" and "bios.bin" are two different names.'],
+  ['core','A RetroArch "core" is one emulator running inside RetroArch.'],
+];
+const GLOSS_RE = new RegExp('\\b(' + GLOSS.map(g => g[0]).join('|') + ')\\b', 'g');
+function gloss(text){
+  return esc(text).replace(GLOSS_RE, m => {
+    const g = GLOSS.find(([k]) => new RegExp('^' + k + '$').test(m));
+    return g ? `<abbr title="${esc(g[1])}">${m}</abbr>` : m;
+  });
+}
+
+// ---------- what each system needs, in plain words ----------
+const HELP = [
+  [/hygiene/i, 'General problems in your BIOS folder that confuse emulators: leftover Windows files, zipped BIOS that need unzipping, empty files, broken shortcuts and duplicate names that only differ in capital letters.'],
+  [/PlayStation 2|PCSX2|LRPS2/i, 'PS2 emulation needs a dump of the PS2 BIOS. The filename does not matter for PCSX2 - it reads the file itself. Any region boots any game. It must be the full 4 MiB dump.'],
+  [/PlayStation 3|RPCS3/i, 'RPCS3 needs the PS3 system software (PS3UPDAT.PUP), which Sony offers as a free official download. Install it once inside RPCS3: File - Install Firmware.'],
+  [/PlayStation Vita|Vita3K/i, 'Vita3K needs the Vita system software (PSVUPDAT.PUP) and the separate font package (PSP2UPDAT.PUP), both official Sony downloads. Install both inside Vita3K: File - Install Firmware.'],
+  [/PlayStation 4|shadPS4/i, 'shadPS4 needs no BIOS. A few games run better with extra system modules copied from your own PS4.'],
+  [/PlayStation|DuckStation|swanstation|psx|pcsx_rearmed/i, 'PS1 emulation needs a PS1 BIOS. DuckStation recognises any PS1 BIOS by its contents, so the name does not matter. RetroArch cores need exact names: scph5501.bin (US), scph5502.bin (Europe), scph5500.bin (Japan). Having one per region you play is ideal.'],
+  [/Switch|Citron|Ryujinx|Yuzu|Eden|Suyu|Sudachi/i, 'Switch emulators need two things from your own Switch: prod.keys (decryption keys) and the firmware (system files). Keys must be from the same firmware version or newer. Ryujinx installs firmware through its menu: Tools - Install Firmware.'],
+  [/Xbox|xemu/i, 'xemu needs three files: the MCPX 1.0 boot ROM, the flash BIOS (Complex 4627 is the usual one) and an Xbox hard-drive image. xemu\'s website offers a ready-made hard-drive image.'],
+  [/Wii U|Cemu/i, 'Cemu needs no BIOS. keys.txt is only needed for encrypted disc images (.wud/.wux). Decrypted games and .wua files work without it.'],
+  [/3DS|Azahar|citra/i, 'Azahar needs no BIOS. aes_keys.txt only matters for encrypted dumps.'],
+  [/GameCube|Dolphin/i, 'Dolphin needs no BIOS. The IPL.bin file only adds the original GameCube boot animation and menu.'],
+  [/Nintendo DS|melonDS|desmume/i, 'melonDS has its own built-in BIOS that works for most games. The real files (bios7.bin, bios9.bin, firmware.bin) give the best compatibility. DSi mode needs all the DSi files.'],
+  [/Dreamcast|NAOMI|Atomiswave|flycast/i, 'Flycast can run most Dreamcast games without a BIOS. The real dc_boot.bin helps the few that need it. NAOMI and Atomiswave arcade games always need their BIOS zip (naomi.zip, naomi2.zip, awbios.zip).'],
+  [/Sega CD|genesis|picodrive|Sega 8/i, 'Genesis games need no BIOS. Sega CD games need the Sega CD BIOS matching the game\'s region: bios_CD_U.bin (US), bios_CD_E.bin (Europe), bios_CD_J.bin (Japan).'],
+  [/Saturn|kronos|yaba|mednafen_saturn/i, 'Beetle Saturn needs mpr-17933.bin for US/European games and sega_101.bin for Japanese games. Kronos uses kronos/saturn_bios.bin.'],
+  [/Neo Geo CD|neocd/i, 'The Neo Geo CD core needs two files in bios/neocd: one CD system BIOS (front loader, top loader or CDZ) and the Y-ZOOM ROM (ng-lo.rom or 000-lo.lo).'],
+  [/Neo Geo|neogeo/i, 'Every Neo Geo game needs neogeo.zip. Keep a copy in the same folder as your Neo Geo games.'],
+  [/64DD|RMG|mupen/i, 'The 64DD (a Japanese N64 add-on) needs its IPL BIOS. Regular N64 games need nothing.'],
+  [/3DO|opera/i, 'The 3DO needs one 3DO BIOS. panafz10.bin is the usual choice.'],
+  [/Amiga|puae/i, 'Amiga games run best with real Kickstart ROMs (kick34005.A500 for most A500 games, kick40068.A1200 for A1200/WHDLoad). Without them RetroArch uses AROS, which breaks many games.'],
+  [/Disk System|mesen|nestopia|fceumm/i, 'Regular NES games need nothing. Famicom Disk System games need disksys.rom.'],
+  [/PC Engine|TurboGrafx|pce/i, 'Regular PC Engine/TurboGrafx games need nothing. CD games need syscard3.pce.'],
+  [/RetroArch/i, 'RetroArch looks for all BIOS files in its "system" folder. On EmuDeck and RetroDECK that is your bios folder.'],
+];
+const help = t => (HELP.find(([re]) => re.test(t)) || [null, ''])[1];
+
+const CORE_NAMES = {
+  swanstation:'PlayStation', mednafen_psx_hw:'PlayStation', mednafen_psx:'PlayStation', pcsx_rearmed:'PlayStation',
+  mednafen_saturn:'Sega Saturn', kronos:'Sega Saturn', yabasanshiro:'Sega Saturn', yabause:'Sega Saturn',
+  genesis_plus_gx:'Sega Genesis / Sega CD', genesis_plus_gx_wide:'Sega Genesis / Sega CD (widescreen)', picodrive:'Sega Genesis / 32X / Sega CD',
+  flycast:'Dreamcast / NAOMI / Atomiswave', neocd:'Neo Geo CD', opera:'3DO', puae:'Amiga', puae2021:'Amiga',
+  mesen:'NES / Famicom Disk System', nestopia:'NES / Famicom Disk System', fceumm:'NES / Famicom Disk System',
+  snes9x:'Super Nintendo (Satellaview / Sufami Turbo)', bsnes:'Super Nintendo', 'mesen-s':'Super Nintendo / Game Boy',
+  mednafen_pce:'PC Engine / TurboGrafx-CD', mednafen_pce_fast:'PC Engine / TurboGrafx-CD', mednafen_supergrafx:'PC Engine SuperGrafx',
+  melonds:'Nintendo DS', melondsds:'Nintendo DS', desmume:'Nintendo DS', mupen64plus_next:'Nintendo 64 / 64DD',
+  mgba:'Game Boy Advance', gambatte:'Game Boy / Color', sameboy:'Game Boy / Color', gearboy:'Game Boy / Color',
+  same_cdi:'Philips CD-i', handy:'Atari Lynx', mednafen_lynx:'Atari Lynx', mednafen_pcfx:'PC-FX', a5200:'Atari 5200',
+  atari800:'Atari 800 / 5200', prosystem:'Atari 7800', hatari:'Atari ST', freeintv:'Intellivision', gearcoleco:'ColecoVision',
+  bluemsx:'MSX', fmsx:'MSX', px68k:'Sharp X68000', np2kai:'NEC PC-98', quasi88:'NEC PC-88', minivmac:'Macintosh',
+  o2em:'Odyssey 2 / Videopac', freechaf:'Channel F', pokemini:'Pokemon Mini', ppsspp:'PSP', dolphin:'GameCube / Wii',
+  fbneo:'Arcade (FinalBurn Neo)', prboom:'Doom', citra:'Nintendo 3DS', vice_x64sc:'Commodore 64',
+};
+const REGION = {US:'US', EU:'European', JP:'Japanese', ALL:'region-free', ASIA:'Asian', CN:'Chinese', RU:'Russian', KR:'Korean', 'US/EU':'US/European'};
+
+function parseGames(s){
+  if (!s) return {n:null, dir:''};
+  const m = s.match(/\[(\d+)\+? game files in (roms\/[^\]]*)\]/); if (m) return {n:+m[1], dir:m[2].replace(/ \| /g,', ')};
+  const z = s.match(/\[no games in (roms\/[^\]]*)\]/); if (z) return {n:0, dir:z[1].replace(/ \| /g,', ')};
+  return {n:null, dir:''};
+}
+
+// ---------- turn a raw event into a friendly line ----------
+const B = s => `<b>${esc(s)}</b>`;
+const C = s => `<code>${esc(s)}</code>`;
+const noteTxt = e => e.note ? `<span class="small">${gloss(e.note)}</span>` : '';
+function friendly(e){
+  const f = e.file, k = e.kind;
+  switch(k){
+    case 'ok': return ['ok', `${B(f)} is the right file.<span class="small">${esc(e.what)}</span>`];
+    case 'present': return ['ok', `${B(f)} is there.<span class="small">There's no reference fingerprint for this one (it's often unique to each console), so only its presence is checked.</span>`];
+    case 'zipok': return ['ok', `${B(f)} is there and not damaged.`];
+    case 'bios_found': return ['ok', `Found a ${esc(REGION[e.note]||e.note)} BIOS: ${B(f)}<span class="small">${esc(e.what)}</span>`];
+    case 'wrongfile': return ['bad', `${B(f)} is the <b>wrong file</b>. It is really: ${B(e.what)}. Replace it with the correct one.`];
+    case 'badhash': return ['warn', `${B(f)} is a different version than expected (${esc(e.what)}). It will probably work - if games act strange, replace it with a known-good dump.`];
+    case 'case': return ['warn', `${B(f)} is there, but spelled with different capital letters (${C(base(e.found))}). The Deck is <abbr title="On the Deck, &quot;BIOS.BIN&quot; and &quot;bios.bin&quot; are two different names.">case-sensitive</abbr>, so the emulator can't see it. The fix below renames it.`];
+    case 'elsewhere': return ['warn', `You have ${B(f)}, but it's in the wrong place: ${C(e.found)}. The emulator looks in ${C(e.want)}. The fix below copies it there.`];
+    case 'empty': return ['bad', `${B(f)} is an empty file (0 bytes) - the copy probably failed. Copy it again.`];
+    case 'broken': return ['bad', `${B(f)} is a broken shortcut that points nowhere.`];
+    case 'missing_req': return ['bad', `Missing ${B(f)}. You have games for this, so you need it. It goes here: ${C(e.want)}${noteTxt(e)}`];
+    case 'missing_rec': return ['warn', `Recommended: ${B(f)} - goes in ${C(e.want)}${noteTxt(e)}`];
+    case 'missing_later': return ['opt', `${B(f)} - you'll need this when you add games. It goes in ${C(e.want)}${noteTxt(e)}`];
+    case 'missing_opt': return ['opt', `Optional: ${B(f)}${noteTxt(e)}`, 'optional'];
+    case 'group_ok': return ['ok', `Requirement met${e.note ? ': ' + gloss(e.note) : ''}`];
+    case 'group_missing': return ['bad', `You need <b>at least one</b> of these: ${e.file.split(', ').map(C).join(' ')}${noteTxt(e)}`];
+    case 'group_fix': return ['warn', `The file you need is there, but not usable until you run the fix above.`];
+    case 'group_later': return ['opt', `When you add games you'll need one of: ${e.file.split(', ').map(C).join(' ')}${noteTxt(e)}`];
+  }
+  return [e.lvl, gloss(e.text)];
+}
+
+// ---------- build cards ----------
+const needs = D.needs || [], warns = D.warns || [];
+const cards = [];
+for (const s of D.sections){
+  if (/^SUMMARY$/.test(s.title)) continue;
+  const evs = D.events.filter(e => e.sec === s.id);
+  const isRA = /^RetroArch$/.test(s.title);
+  const groups = new Map();
+  for (const e of evs){
+    const key = isRA ? e.sub : '';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  if (!groups.size) groups.set('', []);
+  for (const [sub, list] of groups){
+    let title, emu, gamesStr;
+    if (isRA && sub){
+      const sysd = (list[0].subd || '').split('  [')[0].trim();
+      title = CORE_NAMES[sub] || sysd || sub;
+      emu = 'RetroArch - ' + sub + ' core';
+      gamesStr = (list[0].subd || '').includes('[') ? '[' + list[0].subd.split('  [')[1] : '';
+    } else if (isRA){
+      title = 'RetroArch setup'; emu = 'RetroArch'; gamesStr = '';
+    } else if (/hygiene/i.test(s.title)){
+      title = 'Your BIOS folder'; emu = 'General checks'; gamesStr = '';
+    } else if (/^Arcade - Neo Geo/.test(s.title)){
+      title = 'Neo Geo'; emu = 'Arcade BIOS (neogeo.zip)'; gamesStr = s.games;
+    } else {
+      const parts = s.title.split(' - ');
+      title = parts[0].replace(/^(Sony|Microsoft) /, ''); emu = parts.slice(1).join(' - '); gamesStr = s.games;
+    }
+    let g = parseGames(gamesStr);
+    if (g.n === null) for (const e of list){ const x = parseGames(e.text); if (x.n !== null){ g = x; break; } }
+    const match = x => x.sec === s.id && (!isRA || (x.sub || '') === sub);
+    const cn = needs.filter(match), cw = warns.filter(match);
+    const hasBadLine = list.some(e => e.lvl === 'bad' && e.kind !== 'missing_opt');
+    const hasWarnLine = list.some(e => e.lvl === 'warn');
+    let level = cn.length ? 'red' : (cw.length || hasWarnLine || (hasBadLine && g.n !== 0)) ? 'yellow' : 'green';
+    if (level !== 'red' && g.n === 0) level = 'idle';
+    if (level === 'green' && g.n === null && list.length && list.every(e => ['opt','sub','fix'].includes(e.lvl) || ['missing_later','group_later','missing_opt'].includes(e.kind))) level = 'idle';
+    if (s.notinst) level = 'idle';
+    cards.push({id:'c' + cards.length, title, emu, ctx:s.ctx, g, level, list, needs:cn, notinst:s.notinst, sectionTitle:s.title + ' ' + sub});
+  }
+}
+
+const ORDER = {red:0, yellow:1, green:2, idle:3};
+cards.sort((a,b) => ORDER[a.level] - ORDER[b.level] || a.title.localeCompare(b.title));
+const PILL = {red:'Needs attention', yellow:'Check this', green:'Ready', idle:'No games yet'};
+const HEAD = {
+  red: c => c.g.n ? `You have ${c.g.n} game file${c.g.n>1?'s':''} for this, and they won't start until this is fixed.` : 'Something required is missing.',
+  yellow: c => 'Should work - but there is something worth a look.',
+  green: c => c.g.n ? 'Ready to play.' : 'All good.',
+  idle: c => c.notinst ? 'This emulator is not installed (shown because of --all).' : `No games in ${esc(c.g.dir || 'its roms folder')} yet. Here's what you'll need when you add some.`,
+};
+
+function renderCard(c){
+  const el = document.createElement('div');
+  el.className = 'card ' + c.level; el.id = c.id; el.dataset.level = c.level;
+  let html = `<h3>${esc(c.title)} <span class="pill ${c.level}">${PILL[c.level]}</span></h3>`;
+  const meta = [c.emu, D.contexts.length > 1 ? c.ctx : '', c.g.n ? c.g.n + ' game file' + (c.g.n>1?'s':'') : ''].filter(Boolean);
+  html += `<div class="emu">${esc(meta.join(' - '))}</div>`;
+  html += `<div class="headline">${HEAD[c.level](c)}</div><ul class="items">`;
+  const raw = []; let lastSub = null, lastKind = '';
+  for (const e of c.list){
+    if (!/^RetroArch/.test(c.emu) && e.sub && e.sub !== lastSub){ lastSub = e.sub; html += `<li class="subhead">${esc(e.sub)}</li>`; }
+    if (e.lvl === 'sub' && /^any of:/.test(e.text) && /^group_/.test(lastKind)){ raw.push(e.text); continue; }
+    lastKind = e.kind;
+    raw.push((e.lvl === 'fix' ? '    -> ' : '') + e.text);
+    if (e.lvl === 'fix'){
+      html += `<li class="nobullet" style="padding-left:32px"><div class="fix"><code>${esc(e.text)}</code><button data-copy="${esc(e.text)}">Copy</button></div></li>`;
+      continue;
+    }
+    if (e.lvl === 'sub' && !e.kind){ html += `<li class="note" style="padding-left:32px">${gloss(e.text)}</li>`; continue; }
+    const [lvl, txt, tag] = friendly(e);
+    const icon = {ok:'✔', bad:'✘', warn:'!', info:'•', opt:'○', sub:'•'}[lvl] || '•';
+    const cls = tag === 'optional' || (e.lvl === 'opt' && e.kind === 'missing_opt') ? ' class="optional"' : (lvl === 'info' ? ' class="note"' : '');
+    html += `<li${cls}><span class="ic ${lvl}">${icon}</span>${txt}</li>`;
+  }
+  if (!c.list.length) html += `<li class="note">Nothing to report.</li>`;
+  html += `</ul>`;
+  const h = help(c.title + ' ' + c.emu + ' ' + c.sectionTitle);
+  if (h) html += `<details><summary>What does this system need?</summary><div class="help">${gloss(h)}</div></details>`;
+  html += `<details class="tech hidden"><summary>Technical details</summary><pre>${esc(raw.join('\n'))}</pre></details>`;
+  el.innerHTML = html;
+  return el;
+}
+
+// ---------- page ----------
+$('#ver').textContent = 'v' + D.version + ' - checked ' + D.generated;
+$('#ctx').innerHTML = D.contexts.map(c =>
+  `Checked your <b>${esc(c.name)}</b> setup - BIOS folder ${C(c.bios)}${c.roms ? ', games in ' + C(c.roms) : ''}${c.note ? '<br><span style="color:var(--yellow)">' + esc(c.note) + '</span>' : ''}`).join('<br>');
+
+const n = {red:0, yellow:0, green:0, idle:0}; cards.forEach(c => n[c.level]++);
+const banner = $('#banner');
+if (!D.contexts.length){
+  banner.className = 'banner red'; $('#bannerTitle').textContent = 'No EmuDeck or RetroDECK setup found';
+  $('#bannerText').textContent = 'Run the script from Konsole with --bios to point it at your BIOS folder.';
+} else if (n.red){
+  banner.className = 'banner red';
+  $('#bannerTitle').textContent = `${n.red} system${n.red>1?'s need':' needs'} something before ${n.red>1?'their':'its'} games will run`;
+  $('#bannerText').textContent = 'Start with the red cards. Each one says exactly which file is missing and where it goes.';
+} else if (n.yellow){
+  banner.className = 'banner yellow';
+  $('#bannerTitle').textContent = 'Everything you have games for should run';
+  $('#bannerText').textContent = 'A few things are worth a look - see the yellow cards.';
+} else {
+  banner.className = 'banner';
+  $('#bannerTitle').textContent = 'You\'re all set';
+  $('#bannerText').textContent = 'Every system you have games for has what it needs.';
+}
+
+let filter = 'all';
+const chipDefs = [['all','All', '#93a3b8', cards.length], ['red','Needs attention','var(--red)', n.red], ['yellow','Check this','var(--yellow)', n.yellow], ['green','Ready','var(--green)', n.green], ['idle','No games yet','var(--grey)', n.idle]];
+$('#chips').innerHTML = chipDefs.filter(d => d[3] || d[0] === 'all').map(([k,l,col,cnt]) =>
+  `<span class="chip${k==='all'?' on':''}" data-f="${k}"><span class="dot" style="background:${col}"></span>${l}: ${cnt}</span>`).join('');
+$('#chips').addEventListener('click', ev => {
+  const ch = ev.target.closest('.chip'); if (!ch) return;
+  filter = ch.dataset.f; document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === ch)); applyFilters();
+});
+
+// to-do list from blocking needs
+const todo = [];
+for (const c of cards) for (const nd of c.needs) todo.push([c, nd.text]);
+const orphan = needs.filter(nd => !cards.some(c => c.needs.includes(nd)));
+if (todo.length || orphan.length){
+  $('#todo').classList.remove('hidden');
+  $('#todoList').innerHTML = todo.map(([c,t]) => `<li><a href="#${c.id}" data-jump="${c.id}"><b>${esc(c.title)}</b></a> - ${gloss(t.replace(/^[^:]*:\s*/, ''))}</li>`).join('')
+    + orphan.map(nd => `<li>${gloss(nd.text)}</li>`).join('');
+}
+document.addEventListener('click', ev => {
+  const j = ev.target.closest('[data-jump]');
+  if (j){ ev.preventDefault(); const el = document.getElementById(j.dataset.jump); filter='all'; applyFilters(); el.scrollIntoView({behavior:'smooth'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1500); }
+  const b = ev.target.closest('[data-copy]'); if (b) copy(b.dataset.copy);
+});
+
+// cards, grouped
+const wrap = $('#cards');
+const GROUPS = [['red','Needs attention'], ['yellow','Worth a look'], ['green','Ready'], ['idle','No games yet']];
+for (const [lvl, label] of GROUPS){
+  const list = cards.filter(c => c.level === lvl); if (!list.length) continue;
+  const sec = document.createElement('section'); sec.dataset.level = lvl;
+  sec.innerHTML = `<div class="group-title">${label}</div>`;
+  const grid = document.createElement('div'); grid.className = 'grid';
+  list.forEach(c => grid.appendChild(renderCard(c)));
+  sec.appendChild(grid); wrap.appendChild(sec);
+}
+
+function applyFilters(){
+  document.querySelectorAll('#cards section').forEach(s => s.classList.toggle('hidden', filter !== 'all' && s.dataset.level !== filter));
+  document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x.dataset.f === filter));
+  const opt = $('#optOptional').checked, tech = $('#optTech').checked;
+  document.querySelectorAll('li.optional').forEach(li => li.classList.toggle('hidden', !opt));
+  document.querySelectorAll('details.tech').forEach(d => d.classList.toggle('hidden', !tech));
+}
+$('#optOptional').addEventListener('change', applyFilters);
+$('#optTech').addEventListener('change', applyFilters);
+applyFilters();
+
+// fixes
+const fixes = D.fixes || [];
+if (fixes.length){
+  $('#btnCopyAll').classList.remove('hidden'); $('#btnSave').classList.remove('hidden');
+  $('#btnCopyAll').textContent = `Copy all fixes (${fixes.length})`;
+}
+const script = () => '#!/usr/bin/env bash\n# BIOS Checker fixes - ' + D.generated + '\n# cp -n / mv -n never overwrite existing files.\n' + fixes.join('\n') + '\n';
+$('#btnCopyAll').addEventListener('click', () => copy(fixes.join('\n')));
+$('#btnSave').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([script()], {type:'text/x-shellscript'}));
+  a.download = 'bios-fixes.sh'; document.body.appendChild(a); a.click(); a.remove();
+  toast('Saved bios-fixes.sh to Downloads - run it with: bash ~/Downloads/bios-fixes.sh');
+});
+async function copy(t){
+  try { await navigator.clipboard.writeText(t); }
+  catch(e){ const a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }
+  toast('Copied - paste into Konsole with Ctrl+Shift+V');
+}
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2600); }
+$('#foot').innerHTML = `deck-bios-check v${esc(D.version)} - <a href="https://github.com/darkuni/emudeck-bios-validation-script">github.com/darkuni/emudeck-bios-validation-script</a>`;
+</script>
+</body>
+</html>
+@@REPORT_END@@
+)
+write_report() {   # $1 = output file
+  local data=${JSON_OUT//<\//<\\/}
+  local pre=${REPORT_TPL%%@@DATA@@*} post=${REPORT_TPL#*@@DATA@@}
+  mkdir -p "$(dirname "$1")" && printf '%s%s%s\n' "$pre" "$data" "$post" >"$1"
+}
+open_file() {
+  local opener
+  for opener in xdg-open kde-open5 kde-open gio; do
+    if command -v "$opener" >/dev/null 2>&1; then
+      if [[ $opener == gio ]]; then nohup gio open "$1" >/dev/null 2>&1 &
+      else nohup "$opener" "$1" >/dev/null 2>&1 & fi
+      return 0
+    fi
+  done
+  return 1
+}
+notify() {
+  if command -v kdialog >/dev/null 2>&1; then kdialog --title "BIOS Checker" --passivepopup "$1" 4 >/dev/null 2>&1 &
+  elif command -v notify-send >/dev/null 2>&1; then notify-send "BIOS Checker" "$1" >/dev/null 2>&1 &
+  fi
+}
+shortcut() {   # install | uninstall
+  local dir="$HOME/.local/share/deck-bios-check" app="$HOME/.local/share/applications/deck-bios-checker.desktop" desk f
+  desk=$(xdg-user-dir DESKTOP 2>/dev/null); [[ -z $desk || $desk == "$HOME" ]] && desk="$HOME/Desktop"
+  if [[ $1 == uninstall ]]; then
+    rm -f "$app" "$desk/deck-bios-checker.desktop"; rm -rf "$dir"
+    echo "BIOS Checker shortcut removed."; return 0
+  fi
+  mkdir -p "$dir" "$(dirname "$app")"
+  local self; self=$(realpath -- "$0")
+  [[ $self != "$dir/deck-bios-check.sh" ]] && cp -f -- "$self" "$dir/deck-bios-check.sh"
+  chmod +x "$dir/deck-bios-check.sh"
+  cat >"$app" <<DESKTOP
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=BIOS Checker
+GenericName=Emulator BIOS checker
+Comment=Checks your emulator BIOS, firmware and keys and explains what is missing
+Exec=bash "$dir/deck-bios-check.sh" --report
+Icon=system-search
+Terminal=false
+Categories=Game;Utility;
+DESKTOP
+  chmod +x "$app"
+  if [[ -d $desk ]]; then
+    f="$desk/deck-bios-checker.desktop"; cp -f "$app" "$f"; chmod +x "$f"
+    command -v gio >/dev/null 2>&1 && gio set "$f" metadata::trusted true >/dev/null 2>&1
+  fi
+  echo "Installed:"
+  echo "  app menu:  BIOS Checker  ($app)"
+  [[ -d $desk ]] && echo "  desktop:   $desk/deck-bios-checker.desktop"
+  echo "  script:    $dir/deck-bios-check.sh"
+  echo "Double-click 'BIOS Checker' to get the friendly report. Remove with --uninstall-shortcut."
+}
+
+# ============================================================================
 # MAIN
 # ============================================================================
+if [[ -n $OPT_INSTALL ]]; then shortcut "$OPT_INSTALL"; exit $?; fi
+[[ -n $OPT_JSON || $OPT_REPORT == 1 ]] && REC=1
+((OPT_REPORT)) && notify "Checking your BIOS files..."
 load_known
 detect_contexts
 
 printf '%s%sSteam Deck BIOS checker v%s%s\n' "$C_BOLD" "$C_M" "$VERSION" "$C_0"
 if ((${#CONTEXTS[@]}==0)); then
+  ((OPT_REPORT)) && notify "No EmuDeck or RetroDECK install found."
   printf '%sNo EmuDeck or RetroDECK install found.%s Point me at a folder:  %s --bios ~/path/to/bios [--roms ~/path/to/roms]\n' "$C_R" "$C_0" "$0"
   exit 2
 fi
@@ -2574,6 +3134,11 @@ for ctx in "${CONTEXTS[@]}"; do
   IFS='|' read -r CTX BIOS ROMS STORAGE SAVES XDGC <<<"$ctx"
   BIOS=${BIOS%/}; ROMS=${ROMS%/}; STORAGE=${STORAGE%/}; SAVES=${SAVES%/}
   printf '\n%s%s################  %s  ################%s\n' "$C_BOLD" "$C_M" "$CTX" "$C_0"
+  if ((REC)); then
+    _c=""; jv "$CTX"; _c="{\"name\":\"$JV\""; jv "$BIOS"; _c+=",\"bios\":\"$JV\""; jv "$ROMS"; _c+=",\"roms\":\"$JV\""
+    jv "$( [[ $CTX == EmuDeck ]] && echo "${EMUDECK_SETTINGS:-}")"; _c+=",\"settings\":\"$JV\""
+    jv "$( [[ $CTX == EmuDeck ]] && echo "${EMUDECK_NOTE:-}")"; _c+=",\"note\":\"$JV\"}"; CTXJ+=("$_c")
+  fi
   printf '  BIOS:    %s\n  ROMs:    %s\n  storage: %s\n' "$BIOS" "${ROMS:-?}" "${STORAGE:-?}"
   [[ $CTX == EmuDeck ]] && printf '  %ssettings: %s%s\n' "$C_D" "${EMUDECK_SETTINGS:-}" "$C_0"
   [[ $CTX == EmuDeck && -n ${EMUDECK_NOTE:-} ]] && printf '  %s%s%s\n' "$C_Y" "$EMUDECK_NOTE" "$C_0"
@@ -2632,5 +3197,16 @@ if ((${#FIXES[@]})); then
 fi
 ((${#NEEDS[@]}==0)) && printf '\n  %s%s Nothing blocking: every system you have games for has what it needs.%s\n' "$C_G" "$S_OK" "$C_0"
 printf '\n'
+if ((REC)); then
+  build_json
+  if [[ -n $OPT_JSON ]]; then printf '%s\n' "$JSON_OUT" >"$OPT_JSON" && printf '  JSON written to %s\n' "$OPT_JSON"; fi
+  if ((OPT_REPORT)); then
+    rf=${OPT_REPORTFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/deck-bios-check/report.html}
+    if write_report "$rf"; then
+      printf '  %sReport: %s%s\n' "$C_BOLD" "$rf" "$C_0"
+      if ((OPT_NOOPEN==0)); then open_file "$rf" || printf '  (could not open a browser - open the file above yourself)\n'; fi
+    fi
+  fi
+fi
 ((${#NEEDS[@]})) && exit 1
 exit 0

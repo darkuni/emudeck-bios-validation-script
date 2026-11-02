@@ -6,7 +6,29 @@ It works with **EmuDeck** and **RetroDECK**, or any folder you point it at. It's
 
 EmuDeck's built-in check answers true/false for 8 systems. This one hashes every file in your BIOS folder and checks it against about 510 known-good hashes and every firmware entry of every RetroArch core you have installed. Then it tells you exactly what's wrong and how to fix it.
 
-## Quick start
+## Quick start (friendly version)
+
+On the Deck, in Desktop Mode, open Konsole and paste:
+
+```bash
+curl -LO https://raw.githubusercontent.com/darkuni/emudeck-bios-validation-script/main/deck-bios-check.sh
+bash deck-bios-check.sh --install-shortcut
+```
+
+That puts a **BIOS Checker** icon on your desktop and in the app menu. Double-click it any time: it checks everything and opens a plain-English report in your browser.
+
+![BIOS Checker report](docs/report.png)
+
+The report:
+- sorts every system into **Needs attention**, **Check this**, **Ready** and **No games yet**
+- says in plain words what is wrong ("`bios_CD_U.bin` is the wrong file. It is really a Saturn BIOS.")
+- explains the jargon when you hover over it (prod.keys, firmware, hash, region...)
+- has a **Copy** button for every fix, plus **Copy all fixes** and **Save fixes as a script**
+- explains what each system needs in a "What does this system need?" section
+
+Remove the shortcut with `bash deck-bios-check.sh --uninstall-shortcut`.
+
+## Quick start (terminal)
 
 On the Deck, in Desktop Mode, open Konsole:
 
@@ -78,6 +100,12 @@ Windows `Zone.Identifier` junk, zipped BIOS that need extracting, 0-byte files, 
 --unknown           list files in the BIOS folder that match nothing known
 --fix-script FILE   write the suggested fix commands to FILE (never run)
 --max-hash-mb N     skip hashing files bigger than N MiB (default 64)
+--report            friendly HTML report, opened in your browser
+--report-file FILE  write the HTML report to FILE (implies --report)
+--no-open           with --report: write the file but don't open it
+--install-shortcut  add a "BIOS Checker" icon (desktop + app menu)
+--uninstall-shortcut  remove it again
+--json FILE         machine-readable results
 --no-color          plain output
 --ascii             no unicode symbols
 ```
@@ -145,6 +173,7 @@ The script is built from a template plus generated data:
 
 ```
 tools/template.sh       the script logic (edit this, not deck-bios-check.sh)
+tools/report.html       the friendly report page (inlined into the script at build time)
 tools/data/known.txt    md5|TAG|REGION|description
 tools/data/ra.txt       RetroArch core firmware table
 tools/update-data.sh    re-pull all upstream sources and rebuild (needs git, jq, python3)

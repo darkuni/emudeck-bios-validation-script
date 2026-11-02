@@ -10,7 +10,10 @@ s = open(tpl).read()
 k = open(known).read().strip(); r = open(ra).read().strip()
 s = s.replace("<<'@@KNOWN_END@@'\n@@KNOWN@@\n@@KNOWN_END@@", "<<'@@KNOWN_END@@'\n" + k + "\n@@KNOWN_END@@", 1)
 s = s.replace("@@RACORES@@\n@@RA_END@@", r + "\n@@RA_END@@", 1)
-assert '@@KNOWN@@' not in s and '@@RACORES@@' not in s, "placeholders not replaced"
+html = open(tpl.rsplit('/',1)[0] + '/report.html').read().strip()
+assert '@@REPORT_END@@' not in html and '@@DATA@@' in html
+s = s.replace("@@REPORT_HTML@@\n@@REPORT_END@@", html + "\n@@REPORT_END@@", 1)
+assert '@@KNOWN@@' not in s and '@@RACORES@@' not in s and '@@REPORT_HTML@@' not in s, "placeholders not replaced"
 open(out, 'w').write(s)
 PY
 chmod +x "$here/../deck-bios-check.sh"
