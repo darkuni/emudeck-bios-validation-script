@@ -1,0 +1,839 @@
+FreeIntvTSOverlay_libretro|Intellivision|exec.bin|R|62e761035cb657903761800f4437b8af|exec.bin (Intellivision Exec BIOS)
+FreeIntvTSOverlay_libretro|Intellivision|grom.bin|R|0cd5946c6473e42e8e4c2137785e427f|grom.bin (Intellivision Graphic Rom BIOS)
+a5200_libretro|Atari 5200|5200.rom|O|281f20ea4320404ec820fb7ec0693b38|5200.rom (5200 BIOS)
+amiberry_libretro|Amiga|kick34005.A500|O|82a21c1890cae844b3df741f2762d48d|A500 Kickstart v1.3 r34.5
+amiberry_libretro|Amiga|kick37350.A600|O|465646c9b6729f77eea5314d1f057951|A600 Kickstart v2.05 r37.350
+amiberry_libretro|Amiga|kick40068.A1200|O|646773759326fbac3b2311fd8c8793ee|A1200 Kickstart v3.1 r40.68
+amiberry_libretro|Amiga|kick33180.A500|O|85ad74194e87c08904327de1a9443b7a|A500 Kickstart v1.2 r33.180
+amiberry_libretro|Amiga|kick40068.A4000|O|9bdedde6a4f33555b4a270c8ca53297d|A4000 Kickstart v3.1 r40.68
+amiberry_libretro|Amiga|kick40060.CD32|O|5f8924d013dd57a89cf349f4cdedc6b1|CD32 Kickstart v3.1 r40.60
+amiberry_libretro|Amiga|kick40060.CD32.ext|O|bb72565701b1b6faece07d68ea5da639|CD32 Extended-ROM r40.60
+armsx2_libretro|Sony PlayStation 2|pcsx2/bios|R||'pcsx2/bios' folder (any valid PS2 BIOS dump, e.g. scph39001.bin)
+armsx2_libretro|Sony PlayStation 2|pcsx2/resources|R||'pcsx2/resources' folder (shaders, GameIndex.yaml, fonts)
+atari800_libretro|Atari 8-bit Family|5200.rom|O|281f20ea4320404ec820fb7ec0693b38|5200.rom (Atari 5200 BIOS)
+atari800_libretro|Atari 8-bit Family|ATARIBAS.ROM|O|0bac0c6a50104045d902df4503a4c30b|ATARIBAS.ROM (Atari BASIC)
+atari800_libretro|Atari 8-bit Family|ATARIOSA.ROM|O|eb1f32f5d9f382db1bbfb8d7f9cb343a|ATARIOSA.ROM (Atari 400/800 OS A)
+atari800_libretro|Atari 8-bit Family|ATARIOSB.ROM|O|a3e8d617c95d08031fe1b20d541434b2|ATARIOSB.ROM (Atari 400/800 OS B)
+atari800_libretro|Atari 8-bit Family|ATARIXL.ROM|O|06daac977823773a3eea3422fd26a703|ATARIXL.ROM (Atari XL/XE OS)
+atari800_libretro|Atari 8-bit Family|BB01R4_OS.ROM|O|b7a2a04677d34f069eeb643d5238bf86|BB01R4_OS.ROM (Atari XL/XE/XEGS OS v4)
+atari800_libretro|Atari 8-bit Family|XEGAME.ROM|O|d7eb37aec6960cba36bc500e0e5d00bc|XEGAME.ROM (Atari XEGS Missile Command)
+bbkemu_libretro|BBK Electronic Dictionary|BBKEmu/A4980/8.BIN|O||8.BIN (Font ROM)
+bbkemu_libretro|BBK Electronic Dictionary|BBKEmu/A4980/E.BIN|O||E.BIN (OS ROM)
+beetle_saturn_libretro|Saturn|sega_101.bin|R|85ec9ca47d8f6807718151cbcca8b964|sega_101.bin (Saturn JP BIOS)
+beetle_saturn_libretro|Saturn|mpr-17933.bin|R|3240872c70984b6cbfda1586cab68dbe|mpr-17933.bin (Saturn US/EU BIOS)
+beetle_saturn_libretro|Saturn|mpr-18811-mx.ic1|O|255113ba943c92a54facd25a10fd780c|mpr-18811-mx.ic1 (The King of Fighters '95 ROM Cartridge)
+beetle_saturn_libretro|Saturn|mpr-19367-mx.ic1|O|1cd19988d1d72a3e7caa0b73234c96b4|mpr-19367-mx.ic1 (Ultraman: Hikari no Kyojin Densetsu ROM Cartridge)
+bk_libretro|BK-0010/BK-0011(M)|bk/B11M_BOS.ROM|O|fe4627d1e3a1535874085050733263e7|bk/B11M_BOS.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/B11M_EXT.ROM|O|dc52f365d56fa1951f5d35b1101b9e3f|bk/B11M_EXT.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/BAS11M_0.ROM|O|946f6f23ded03c0e26187f0b3ca75993|bk/BAS11M_0.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/BAS11M_1.ROM|O|1e6637f32aa7d1de03510030cac40bcf|bk/BAS11M_1.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/DISK_327.ROM|O|5015228eeeb238e65da8edcd1b6dfac7|bk/DISK_327.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/BASIC10.ROM|O|3fa774326d75410a065659aea80252f0|bk/BASIC10.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/FOCAL10.ROM|O|5737f972e8638831ab71e9139abae052|bk/FOCAL10.ROM
+bk_libretro|BK-0010/BK-0011(M)|bk/MONIT10.ROM|O|95f8c41c6abf7640e35a6a03cecebd01|bk/MONIT10.ROM
+blastem_libretro|Sega 8/16-bit (Various)|rom.db|O|ff4a3572475236e859e3e9ac5c87d1f1|rom.db (ROM feature database)
+blastem_libretro|Sega 8/16-bit (Various)|bios_CD_U.bin|O|2efd74e3232ff260e371b99f84024f7f|bios_CD_U.bin (Sega CD US BIOS, required for Sega CD games)
+blastem_libretro|Sega 8/16-bit (Various)|bios_CD_E.bin|O|e66fa1dc5820d254611fdcdba0662372|bios_CD_E.bin (Mega-CD EU BIOS, required for Sega CD games)
+blastem_libretro|Sega 8/16-bit (Various)|bios_CD_J.bin|O|278a9397d192149e84e820ac621a8edd|bios_CD_J.bin (Mega-CD JP BIOS, required for Sega CD games)
+blastem_libretro|Sega 8/16-bit (Various)|32X_M_BIOS.bin|O||32X_M_BIOS.bin (32X Master SH2 BIOS, required for 32X games)
+blastem_libretro|Sega 8/16-bit (Various)|32X_S_BIOS.bin|O||32X_S_BIOS.bin (32X Slave SH2 BIOS, required for 32X games)
+blastem_libretro|Sega 8/16-bit (Various)|32X_G_BIOS.bin|O||32X_G_BIOS.bin (32X 68000 BIOS)
+blastem_libretro|Sega 8/16-bit (Various)|bios_MD.bin|O|d3293ebaaa7f4eb2a6766b68a0fb4609|bios_MD.bin (Mega Drive TMSS ROM, also read as tmss.md)
+blastem_libretro|Sega 8/16-bit (Various)|colecovision.rom|O|2c66f5911e5b42b8ebe113403548eee7|colecovision.rom (ColecoVision BIOS)
+blastem_libretro|Sega 8/16-bit (Various)|laseractive_dyw_1322a.bin|O||laseractive_dyw_1322a.bin (LaserActive uPD ROM)
+bluemsx_libretro|MSX/SVI/ColecoVision/SG-1000|Databases/msxromdb.xml|R|c0a94965701431e0df29949189e424dd|'Databases' folder
+bluemsx_libretro|MSX/SVI/ColecoVision/SG-1000|Machines/Shared Roms/MSX.rom|R||'Machines' folder
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes-jg_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes2014_accuracy_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes2014_balanced_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes2014_performance_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|SGB1.sfc|O|b15ddb15721c657d82c5bab6db982ee9|SGB1.sfc (SGB Boot Image)
+bsnes_hd_beta_libretro|Super Nintendo Entertainment System|SGB2.sfc|O|8ecd73eb4edf7ed7e81aef1be80031d5|SGB2.sfc (SGB Boot Image)
+bsnes_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes_libretro|Super Nintendo Entertainment System|SGB1.sfc|O|b15ddb15721c657d82c5bab6db982ee9|SGB1.sfc (SGB Boot Image)
+bsnes_libretro|Super Nintendo Entertainment System|SGB2.sfc|O|8ecd73eb4edf7ed7e81aef1be80031d5|SGB2.sfc (SGB Boot Image)
+bsnes_libretro|Super Nintendo Entertainment System|BS-X.bin|O|fed4d8242cfbed61343d53d48432aced|BS-X.bin (BS-X - Sore wa Namae o Nusumareta Machi no Monogatari (Japan) (Rev 1))
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes_mercury_accuracy_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes_mercury_balanced_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+bsnes_mercury_performance_libretro|Super Nintendo Entertainment System|sgb.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|sgb.boot.rom (SGB Boot Image)
+cdi2015_libretro|CD-i|cdimono1.zip|R|801c529739b83e1490b897f2d3ffbb3a|cdimono1.zip
+desmume2015_libretro|Nintendo DS|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS Firmware)
+desmume2015_libretro|Nintendo DS|bios7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|bios7.bin (ARM7 BIOS)
+desmume2015_libretro|Nintendo DS|bios9.bin|O|a392174eb3e572fed6447e956bde4b25|bios9.bin (ARM9 BIOS)
+desmume_libretro|Nintendo DS|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS Firmware)
+desmume_libretro|Nintendo DS|bios7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|bios7.bin (ARM7 BIOS)
+desmume_libretro|Nintendo DS|bios9.bin|O|a392174eb3e572fed6447e956bde4b25|bios9.bin (ARM9 BIOS)
+dolphin_libretro|GameCube / Wii|dolphin-emu/Sys/codehandler.bin|R|1f118b8735fcf40c20b38c3184eebfd9|Dolphin 'Sys' folder with dolphin-emu/Sys/codehandler.bin
+dolphin_libretro|GameCube / Wii|dolphin-emu/Sys/GC/JAP/IPL.bin|O|b17148254a5799684c7d783206504926|dolphin-emu/Sys/GC/JAP/IPL.bin (GameCube JP BIOS)
+dolphin_libretro|GameCube / Wii|dolphin-emu/Sys/GC/USA/IPL.bin|O|b17148254a5799684c7d783206504926|dolphin-emu/Sys/GC/USA/IPL.bin (GameCube US BIOS)
+dolphin_libretro|GameCube / Wii|dolphin-emu/Sys/GC/EUR/IPL.bin|O|db92574caab77a7ec99d4605fd6f2450|dolphin-emu/Sys/GC/EUR/IPL.bin (GameCube EU BIOS)
+dosbox_core_libretro|DOS|MT32_CONTROL.ROM|O|5626206284b22c2734f3e9efefcd2675|MT32_CONTROL.ROM (MT-32 Control ROM v1.07)
+dosbox_core_libretro|DOS|MT32_PCM.ROM|O|89e42e386e82e0cacb4a2704a03706ca|MT32_PCM.ROM (MT-32 PCM ROM)
+dosbox_core_libretro|DOS|CM32L_CONTROL.ROM|O|bfff32b6144c1d706109accb6e6b1113|CM32L_CONTROL.ROM (CM-32L/LAPC-I Control ROM v1.02)
+dosbox_core_libretro|DOS|CM32L_PCM.ROM|O|08cdcfa0ed93e9cb16afa76e6ac5f0a4|CM32L_PCM.ROM (CM-32L/CM-64/LAPC-I PCM ROM)
+dosbox_core_libretro|DOS|libbass.so|O|255fb8ab523b179320f08f44db36a9fa|libbass.so (BASS Linux library)
+dosbox_core_libretro|DOS|libbassmidi.so|O|3a48c08c224c32f2f4829b960e95f73b|libbassmidi.so (BASSMIDI Linux library)
+dosbox_core_libretro|DOS|bass.dll|O|7253a9fabc089044b3b8e9156b07d6f9|bass.dll (BASS Windows library)
+dosbox_core_libretro|DOS|bassmidi.dll|O|0b00a4ab6b68960efa49272d416b040d|bassmidi.dll (BASSMIDI Windows library)
+dosbox_core_libretro|DOS|libbass.dylib|O|19addeb0da536c753797ed59b44d5ba3|libbass.dylib (BASS macOS library)
+dosbox_core_libretro|DOS|libbassmidi.dylib|O|ea143b23779d01152633442abb1e0c67|libbassmidi.dylib (BASSMIDI macOS library)
+duckstation_libretro|PlayStation|scph5500.bin|R|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+duckstation_libretro|PlayStation|scph5501.bin|R|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+duckstation_libretro|PlayStation|scph5502.bin|R|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+ecwolf_libretro|Wolfenstein 3D Game Engine|ecwolf.pk3|R|c011b428819eea4a80b455c245a5a04d|ecwolf.pk3 (ECWolf System File)
+eka2l1_libretro|Symbian OS / N-Gage|eka2l1/firmware|R||'eka2l1/firmware' folder (a device firmware dump: an RPKG, or a ROM together with its ROFS)
+emuscv_libretro|Super Cassette Vision|upd7801g.s01|R|635a978fd40db9a18ee44eff449fc126|upd7801g.s01 (Super Cassette Vision BIOS)
+emux_gb_libretro|Game Boy/Game Boy Color|dmg_boot.bin|R|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (Game Boy Boot ROM)
+emux_sms_libretro|Sega Master System|bios.sms|R|840481177270d5642a14ca71ee72844c|bios.sms (Master System BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/exos21.rom|O|f36f24cbb87745fbd2714e4df881db09|exos21.rom (Enterprise 128 Expandible OS 2.1)
+ep128emu_core_libretro|128|ep128emu/roms/basic21.rom|O|e972fe42b398c9ff1d93ff014786aec6|basic21.rom (Enterprise 128 BASIC Interpreter v2.1)
+ep128emu_core_libretro|128|ep128emu/roms/exdos13.rom|O|ddff70c014d1958dc75378b6c9aab6f8|exdos13.rom (Enterprise 128 Disk Controller v1.3)
+ep128emu_core_libretro|128|ep128emu/roms/exos20.rom|O|5ad3baaad3b5156d6b60b34229a676fb|exos20.rom (Enterprise 64 Expandible OS 2.0)
+ep128emu_core_libretro|128|ep128emu/roms/basic20.rom|O|8e18edce4a7acb2c33cc0ab18f988482|basic20.rom (Enterprise 64 BASIC Interpreter v2.0)
+ep128emu_core_libretro|128|ep128emu/roms/epfileio.rom|O|a68ebcbc73a4d2178d755b7755bf18fe|epfileio.rom (Enterprise 128 Direct File I/O)
+ep128emu_core_libretro|128|ep128emu/roms/exos24uk.rom|O|55af78f877a21ca45eb2df68a74fcc60|exos24uk.rom (Enterprise 128 Expandible OS 2.4)
+ep128emu_core_libretro|128|ep128emu/roms/hun.rom|O|22167938f142c222f40992839aa21a06|hun.rom (Enterprise 128 Hungarian language extension)
+ep128emu_core_libretro|128|ep128emu/roms/epd19hft.rom|O|12cfc9c7e48c8a16c2e09edbd926d467|epd19hft.rom (Enterprise 128 EP-DOS with Hungarian language extension)
+ep128emu_core_libretro|128|ep128emu/roms/zt19hfnt.rom|O|653daaf7b9b29c2c4e577f489580f247|zt19hfnt.rom (Enterprise 128 ZozoTools with Hungarian language extension 1.9)
+ep128emu_core_libretro|128|ep128emu/roms/brd.rom|O|6af0402906944fd134004b85097c8524|brd.rom (Enterprise 128 German language extension)
+ep128emu_core_libretro|128|ep128emu/roms/zt19uk.rom|O|228540b6be83ae2acd7569c8ff0f91d0|zt19uk.rom (Enterprise 128 ZozoTools extension)
+ep128emu_core_libretro|128|ep128emu/roms/tvc22_sys.rom|O|8c54285f541930cde766069942bad0f2|tvc22_sys.rom (Videoton TVC system BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/tvc22_ext.rom|O|5ce95a26ceed5bec73995d83568da9cf|tvc22_ext.rom (Videoton TVC extension BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/tvcfileio.rom|O|a2cf86ba8e7fc58b242137fe59036832|tvcfileio.rom (Videoton TVC Direct File I/O)
+ep128emu_core_libretro|128|ep128emu/roms/tvc_dos12d.rom|O|88dc7876d584f90e4106f91444ab23b7|tvc_dos12d.rom (Videoton TVC disk BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/cpc464.rom|O|a993f85b88ac4350cf4d41554e87fe4f|cpc464.rom (Amstrad CPC 464 BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/cpc664.rom|O|5a384a2310f472c7857888371c00ed66|cpc664.rom (Amstrad CPC 664 BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/cpc6128.rom|O|b96280dc6c95a48857b4b8eb931533ae|cpc6128.rom (Amstrad CPC 6128 BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/cpc_amsdos.rom|O|25629dfe870d097469c217b95fdc1c95|cpc_amsdos.rom (Amstrad CPC AMSDOS BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/zx128.rom|O|85fede415f4294cc777517d7eada482e|zx128.rom (ZX Spectrum 128 BIOS)
+ep128emu_core_libretro|128|ep128emu/roms/zx48.rom|O|4c42a2f075212361c3117015b107ff68|zx48.rom (ZX Spectrum 48 BIOS)
+fbneo_cps12_libretro|CP System I/II|fbneo/hiscore.dat|O|37fc4e050b53a1ef2c2e7f3042553025|fbneo/hiscore.dat (High Score support database)
+fbneo_libretro|Arcade (various)|fbneo/neogeo.zip|O|00dad01abdbf8ea9e79ad2fe11bdb182|fbneo/neogeo.zip (Neo Geo BIOS)
+fbneo_libretro|Arcade (various)|fbneo/neocdz.zip|O|62d56b126e78f3d82faa4ee8a92c3e82|fbneo/neocdz.zip (Neo Geo CDZ System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/decocass.zip|O|b7e1189b341bf6a8e270017c096d21b0|fbneo/decocass.zip (DECO Cassette System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/isgsm.zip|O|4a56d56e2219c5e2b006b66a4263c01c|fbneo/isgsm.zip (ISG Selection Master Type 2006 System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/midssio.zip|O|5904b0de768d1d506e766aa7e18994c1|fbneo/midssio.zip (Midway SSIO Sound Board Internal ROM)
+fbneo_libretro|Arcade (various)|fbneo/nmk004.zip|O|bfacf1a68792d5348f93cf724d2f1dda|fbneo/nmk004.zip (NMK004 Internal ROM)
+fbneo_libretro|Arcade (various)|fbneo/pgm.zip|O|87cc944eef4c671aa2629a8ba48a08e0|fbneo/pgm.zip (PGM System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/skns.zip|O|3f956c4e7008804cb47cbde49bd5b908|fbneo/skns.zip (Super Kaneko Nova System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/ym2608.zip|O|79ae0d2bb1901b7e606b6dc339b79a97|fbneo/ym2608.zip (YM2608 Internal ROM)
+fbneo_libretro|Arcade (various)|fbneo/cchip.zip|O|df6f8a3d83c028a5cb9f2f2be60773f3|fbneo/cchip.zip (C-Chip Internal ROM)
+fbneo_libretro|Arcade (various)|fbneo/bubsys.zip|O|f81298afd68a1a24a49a1a2d9f087964|fbneo/bubsys.zip (Bubble System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/namcoc69.zip|O|ad9af7a9560cad74f1644328213748f6|fbneo/namcoc69.zip (Namco C69 BIOS)
+fbneo_libretro|Arcade (various)|fbneo/namcoc70.zip|O|aa569a303793510b2b4173480148de4b|fbneo/namcoc70.zip (Namco C70 BIOS)
+fbneo_libretro|Arcade (various)|fbneo/namcoc75.zip|O|17516c33298e52424ffb58afc2ad208c|fbneo/namcoc75.zip (Namco C75 BIOS)
+fbneo_libretro|Arcade (various)|fbneo/coleco.zip|O|94915714a814a84f7c292e6db71f3ad2|fbneo/coleco.zip (ColecoVision System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/fdsbios.zip|O|c26bf1744cb7f6ffe441f463870321f8|fbneo/fdsbios.zip (FDS System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/msx.zip|O|25a8912d7bf3cdad9beaa6d5cc14ea38|fbneo/msx.zip (MSX1 System BIOS)
+fbneo_libretro|Arcade (various)|fbneo/ngp.zip|O|5bc25f80395a68790a69b7eb3e57b897|fbneo/ngp.zip (NeoGeo Pocket BIOS)
+fbneo_libretro|Arcade (various)|fbneo/spectrum.zip|O|4698414be3369fff17bf6d3111734c6c|fbneo/spectrum.zip (ZX Spectrum BIOS)
+fbneo_libretro|Arcade (various)|fbneo/spec128.zip|O|1a524bfa489cec90c941e6587d553a56|fbneo/spec128.zip (ZX Spectrum 128 BIOS)
+fbneo_libretro|Arcade (various)|fbneo/spec1282a.zip|O|b2fed9c6a9e54af7d90b6f2b3516fcf9|fbneo/spec1282a.zip (ZX Spectrum 128 +2a BIOS)
+fbneo_libretro|Arcade (various)|fbneo/channelf.zip|O|2f2f8de3827ae1faf2495e497ca95232|fbneo/channelf.zip (Fairchild Channel F BIOS)
+fbneo_libretro|Arcade (various)|fbneo/hiscore.dat|O|37fc4e050b53a1ef2c2e7f3042553025|fbneo/hiscore.dat (High Score support database)
+fbneo_neogeo_libretro|Neo Geo|fbneo/neogeo.zip|O|00dad01abdbf8ea9e79ad2fe11bdb182|fbneo/neogeo.zip (Neo Geo BIOS)
+fbneo_neogeo_libretro|Neo Geo|fbneo/neocdz.zip|O|62d56b126e78f3d82faa4ee8a92c3e82|fbneo/neocdz.zip (Neo Geo CDZ System BIOS)
+fbneo_neogeo_libretro|Neo Geo|fbneo/hiscore.dat|O|37fc4e050b53a1ef2c2e7f3042553025|fbneo/hiscore.dat (High Score support database)
+fceumm_libretro|Nintendo Entertainment System|disksys.rom|O|ca30b50f880eb660a320674ed365ef7a|disksys.rom (Family Computer Disk System BIOS)
+fceumm_libretro|Nintendo Entertainment System|nes.pal|O||nes.pal (custom NES Palette)
+fceumm_libretro|Nintendo Entertainment System|gamegenie.nes|O|7f98d77d7a094ad7d069b74bd553ec98|gamegenie.nes (Game Genie add-on cartridge)
+fixgb_libretro|Game Boy/Game Boy Color|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (Game Boy Color BIOS)
+fixnes_libretro|Nintendo Entertainment System|disksys.rom|O|ca30b50f880eb660a320674ed365ef7a|disksys.rom (Family Computer Disk System BIOS)
+flycast_gles2_libretro|Sega Dreamcast|dc/dc_boot.bin|O|e10c53c2f8b90bab96ead2d368858623|dc/dc_boot.bin (Dreamcast BIOS)
+flycast_gles2_libretro|Sega Dreamcast|dc/naomi.zip|O|526eda1e2a7920c92c88178789d71d84|dc/naomi.zip (Naomi Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/naomi2.zip|O|c50072cbab75673e1b1a6b94355e6fa8|dc/naomi2.zip (Naomi2 Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/hod2bios.zip|O|f4011d3116500354edf7302a90402711|dc/hod2bios.zip (Naomi The House of the Dead 2 Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/f355dlx.zip|O|1028615bcac4c31634a3364ce5c04044|dc/f355dlx.zip (Naomi Ferrari F355 Challenge deluxe Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/f355bios.zip|O|547f3d12aed389058ca06148f1cca0ed|dc/f355bios.zip (Naomi Ferrari F355 Challenge twin/deluxe Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/airlbios.zip|O|7a11bfe0cc72886d032e386db68f890c|dc/airlbios.zip (Naomi Airline Pilots deluxe Bios from MAME)
+flycast_gles2_libretro|Sega Dreamcast|dc/awbios.zip|O|85254fbe320ca82a768ec2c26bb08def|dc/awbios.zip (Atomiswave BIOS from MAME)
+flycast_libretro|Sega Dreamcast|dc/dc_boot.bin|O|e10c53c2f8b90bab96ead2d368858623|dc/dc_boot.bin (Dreamcast BIOS)
+flycast_libretro|Sega Dreamcast|dc/naomi.zip|O|526eda1e2a7920c92c88178789d71d84|dc/naomi.zip (Naomi Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/naomi2.zip|O|c50072cbab75673e1b1a6b94355e6fa8|dc/naomi2.zip (Naomi2 Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/hod2bios.zip|O|f4011d3116500354edf7302a90402711|dc/hod2bios.zip (Naomi The House of the Dead 2 Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/f355dlx.zip|O|1028615bcac4c31634a3364ce5c04044|dc/f355dlx.zip (Naomi Ferrari F355 Challenge deluxe Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/f355bios.zip|O|547f3d12aed389058ca06148f1cca0ed|dc/f355bios.zip (Naomi Ferrari F355 Challenge twin/deluxe Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/airlbios.zip|O|7a11bfe0cc72886d032e386db68f890c|dc/airlbios.zip (Naomi Airline Pilots deluxe Bios from MAME)
+flycast_libretro|Sega Dreamcast|dc/awbios.zip|O|85254fbe320ca82a768ec2c26bb08def|dc/awbios.zip (Atomiswave BIOS from MAME)
+fmsx_libretro|MSX|MSX.ROM|R|aa95aea2563cd5ec0a0919b44cc17d47|MSX.ROM (MSX BIOS)
+fmsx_libretro|MSX|MSX2.ROM|R|ec3a01c91f24fbddcbcab0ad301bc9ef|MSX2.ROM (MSX2 BIOS)
+fmsx_libretro|MSX|MSX2EXT.ROM|R|2183c2aff17cf4297bdb496de78c2e8a|MSX2EXT.ROM (MSX2 ExtROM)
+fmsx_libretro|MSX|MSX2P.ROM|R|6d8c0ca64e726c82a4b726e9b01cdf1e|MSX2P.ROM (MSX2+ BIOS)
+fmsx_libretro|MSX|MSX2PEXT.ROM|R|7c8243c71d8f143b2531f01afa6a05dc|MSX2PEXT.ROM (MSX2+ ExtROM)
+fmsx_libretro|MSX|DISK.ROM|O|80dcd1ad1a4cf65d64b7ba10504e8190|DISK.ROM (DiskROM/BDOS)
+fmsx_libretro|MSX|FMPAC.ROM|O|6f69cc8b5ed761b03afd78000dfb0e19|FMPAC.ROM (FMPAC BIOS)
+fmsx_libretro|MSX|MSXDOS2.ROM|O|6418d091cd6907bbcf940324339e43bb|MSXDOS2.ROM (MSX-DOS 2)
+fmsx_libretro|MSX|PAINTER.ROM|O|403cdea1cbd2bb24fae506941f8f655e|PAINTER.ROM (Yamaha Painter)
+fmsx_libretro|MSX|KANJI.ROM|O|febe8782b466d7c3b16de6d104826b34|KANJI.ROM (Kanji Font)
+freechaf_libretro|Channel F|sl31253.bin|R|ac9804d4c0e9d07e33472e3726ed15c3|sl31253.bin
+freechaf_libretro|Channel F|sl31254.bin|R|da98f4bb3242ab80d76629021bb27585|sl31254.bin
+freechaf_libretro|Channel F|sl90025.bin|R|95d339631d867c8f1d15a5f2ec26069d|sl90025.bin
+freeintv_libretro|Intellivision|exec.bin|R|62e761035cb657903761800f4437b8af|exec.bin
+freeintv_libretro|Intellivision|grom.bin|R|0cd5946c6473e42e8e4c2137785e427f|grom.bin
+freej2me_libretro|J2ME|freej2me-lr.jar|R|ccd92e7156ce2f0ce14c88ffb68a16eb|freej2me-lr.jar
+freej2me_plus_libretro|J2ME|freej2me_plus-lr.jar|R||freej2me_plus-lr.jar (Main Application)
+fuse_libretro|ZX Spectrum (various)|fuse/128p-0.rom|O|a249565f03b98d004ee7f019570069cd|128p-0.rom (Pentagon machines)
+fuse_libretro|ZX Spectrum (various)|fuse/128p-1.rom|O|6e09e5d3c4aef166601669feaaadc01c|128p-1.rom (Pentagon machines)
+fuse_libretro|ZX Spectrum (various)|fuse/trdos.rom|O|0da70a5d2a0e733398e005b96b7e4ba6|trdos.rom (Pentagon machines)
+fuse_libretro|ZX Spectrum (various)|fuse/gluck.rom|O|d5869034604dbfd2c1d54170e874fd0a|gluck.rom (Pentagon 512K / 1024)
+fuse_libretro|ZX Spectrum (various)|fuse/256s-0.rom|O|b9fda5b6a747ff037365b0e2d8c4379a|256s-0.rom (Scorpion 256K)
+fuse_libretro|ZX Spectrum (various)|fuse/256s-1.rom|O|643861ad34831b255bf2eb64e8b6ecb8|256s-1.rom (Scorpion 256K)
+fuse_libretro|ZX Spectrum (various)|fuse/256s-2.rom|O|d8ad507b1c915a9acfe0d73957082926|256s-2.rom (Scorpion 256K)
+fuse_libretro|ZX Spectrum (various)|fuse/256s-3.rom|O|ce0723f9bc02f4948c15d3b3230ae831|256s-3.rom (Scorpion 256K)
+galaksija_libretro|Galaksija|galaksija/CHRGEN.BIN|O|ecae5c55d75a2fe0871d0ebd95663628|CHRGEN.BIN (Character ROM)
+galaksija_libretro|Galaksija|galaksija/ROM1.BIN|O|c7ce14d6a81062db862f3ce5afedcfb6|ROM1.BIN (Base ROM)
+galaksija_libretro|Galaksija|galaksija/ROM2.BIN|O|b406d05922dac2eaf3c2e68157b1b468|ROM2.BIN (Extensions)
+gambatte_libretro|Game Boy/Game Boy Color|gb_bios.bin|O|32fbbd84168d3482956eb3c5051637f5|gb_bios.bin (Game Boy BIOS)
+gambatte_libretro|Game Boy/Game Boy Color|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (Game Boy Color BIOS)
+gearboy_libretro|Game Boy/Game Boy Color/Super Game Boy|dmg_boot.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (Game Boy boot ROM)
+gearboy_libretro|Game Boy/Game Boy Color/Super Game Boy|cgb_boot.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_boot.bin (Game Boy Color boot ROM)
+gearcoleco_libretro|ColecoVision / ADAM|colecovision.rom|R|2c66f5911e5b42b8ebe113403548eee7|colecovision.rom (ColecoVision / ADAM OS-7 BIOS)
+gearcoleco_libretro|ColecoVision / ADAM|eos.rom|O||eos.rom (required for ADAM)
+gearcoleco_libretro|ColecoVision / ADAM|writer.rom|O||writer.rom (required for ADAM)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|syscard3.pce|O|38179df8f4ac870017db21ebcbf53114|syscard3.pce (Super CD-ROM2 System V3.xx)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|syscard2.pce|O|3cdd6614a918616bfc41c862e889dd79|syscard2.pce (CD-ROM System V2.xx)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|syscard1.pce|O|2b7ccb3d86baa18f6402c176f3065082|syscard1.pce (CD-ROM System V1.xx)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|gexpress.pce|O|6d2cb14fc3e1f65ceb135633d1694122|gexpress.pce (Game Express CD Card)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|pac-n1.bin|O||pac-n1.bin (LaserActive PAC-N1, Japan)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|pce-lp1.bin|O||pce-lp1.bin (LaserActive PCE-LP1, Japan)
+geargrafx_libretro|PC Engine/SuperGrafx/CD/LaserActive|pac-n10.bin|O||pac-n10.bin (LaserActive PAC-N10, USA)
+gearlynx_libretro|Lynx|lynxboot.img|R|fcd403db69f54290b51035d82f835e7b|lynxboot.img (Lynx Boot Image)
+gearsystem_libretro|Sega 8-bit (MS/GG/SG-1000)|bios.sms|O|840481177270d5642a14ca71ee72844c|bios.sms (Master System BIOS)
+gearsystem_libretro|Sega 8-bit (MS/GG/SG-1000)|bios.gg|O|672e104c3be3a238301aceffc3b23fd6|bios.gg (Game Gear BIOS)
+geartowns_libretro|FM Towns|geartowns/FMT_SYS.ROM|R||FMT_SYS.ROM (FM Towns System ROM)
+geartowns_libretro|FM Towns|geartowns/FMT_DOS.ROM|R||FMT_DOS.ROM (FM Towns OS ROM)
+geartowns_libretro|FM Towns|geartowns/FMT_FNT.ROM|R||FMT_FNT.ROM (FM Towns Font ROM)
+geartowns_libretro|FM Towns|geartowns/FMT_DIC.ROM|R||FMT_DIC.ROM (FM Towns Dictionary ROM)
+geartowns_libretro|FM Towns|geartowns/FMT_F20.ROM|O||FMT_F20.ROM (FM Towns 20-dot Font ROM)
+geartowns_libretro|FM Towns|geartowns/fmtowns/fmt_sys.rom|O||fmtowns/fmt_sys.rom (FM Towns Model 1/2 set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtowns/fmt_dos.rom|O||fmtowns/fmt_dos.rom (FM Towns Model 1/2 set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtowns/fmt_fnt.rom|O||fmtowns/fmt_fnt.rom (FM Towns Model 1/2 set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtowns/fmt_dic.rom|O||fmtowns/fmt_dic.rom (FM Towns Model 1/2 set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtowns.zip|O||fmtowns.zip (FM Towns Model 1/2 set, MAME zip)
+geartowns_libretro|FM Towns|geartowns/fmtownsux/fmt_sys_a.rom|O||fmtownsux/fmt_sys_a.rom (FM Towns II UX set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsux/fmt_dos_a.rom|O||fmtownsux/fmt_dos_a.rom (FM Towns II UX set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsux/fmt_fnt.rom|O||fmtownsux/fmt_fnt.rom (FM Towns II UX set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsux/fmt_dic.rom|O||fmtownsux/fmt_dic.rom (FM Towns II UX set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsux/mytownsux.rom|O||fmtownsux/mytownsux.rom (FM Towns II UX set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsux.zip|O||fmtownsux.zip (FM Towns II UX set, MAME zip)
+geartowns_libretro|FM Towns|geartowns/fmtmarty/mrom.m36|O||fmtmarty/mrom.m36 (FM Towns Marty set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtmarty/mrom.m37|O||fmtmarty/mrom.m37 (FM Towns Marty set, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtmarty.zip|O||fmtmarty.zip (FM Towns Marty set, MAME zip)
+geartowns_libretro|FM Towns|geartowns/fmtownshr/fmthr_sys.rom|O||fmtownshr/fmthr_sys.rom (FM Towns II HR set for the HG, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownshr/fmt_dos.rom|O||fmtownshr/fmt_dos.rom (FM Towns II HR set for the HG, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownshr/fmt_fnt.rom|O||fmtownshr/fmt_fnt.rom (FM Towns II HR set for the HG, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownshr/fmt_dic.rom|O||fmtownshr/fmt_dic.rom (FM Towns II HR set for the HG, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownshr/mytownshr.rom|O||fmtownshr/mytownshr.rom (FM Towns II HR set for the HG, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownshr.zip|O||fmtownshr.zip (FM Towns II HR set for the HG, MAME zip)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/fmt_sys.rom|O||fmtownsftv/fmt_sys.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/fmt_dos.rom|O||fmtownsftv/fmt_dos.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/fmt_fnt.rom|O||fmtownsftv/fmt_fnt.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/fmt_dic.rom|O||fmtownsftv/fmt_dic.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/fmt_f20.rom|O||fmtownsftv/fmt_f20.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv/mytownsftv.rom|O||fmtownsftv/mytownsftv.rom (FM Towns II Fresh TV set, the HG's second choice, MAME names)
+geartowns_libretro|FM Towns|geartowns/fmtownsftv.zip|O||fmtownsftv.zip (FM Towns II Fresh TV set, the HG's second choice, MAME zip)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_MD.bin|O|d3293ebaaa7f4eb2a6766b68a0fb4609|bios_MD.bin (Mega Drive startup ROM)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_CD_E.bin|O|e66fa1dc5820d254611fdcdba0662372|bios_CD_E.bin (MegaCD EU BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_CD_U.bin|O|2efd74e3232ff260e371b99f84024f7f|bios_CD_U.bin (SegaCD US BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_CD_J.bin|O|278a9397d192149e84e820ac621a8edd|bios_CD_J.bin (MegaCD JP BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_E.sms|O|840481177270d5642a14ca71ee72844c|bios_E.sms (MasterSystem EU BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_U.sms|O|840481177270d5642a14ca71ee72844c|bios_U.sms (MasterSystem US BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios_J.sms|O|24a519c53f67b00640d0048ef7089105|bios_J.sms (MasterSystem JP BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|bios.gg|O|672e104c3be3a238301aceffc3b23fd6|bios.gg (GameGear BIOS)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|sk.bin|O|4ea493ea4e9f6c9ebfccbdb15110367e|sk.bin (Sonic & Knuckles ROM)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|sk2chip.bin|O|b4e76e416b887f4e7413ba76fa735f16|sk2chip.bin (Sonic & Knuckles UPMEM ROM)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|areplay.bin|O|a0028b3043f9d59ceeb03da5b073b30d|areplay.bin (Action Replay ROM)
+genesis_plus_gx_libretro|Sega 8/16-bit (Various)|ggenie.bin|O|e8af7fe115a75c849f6aab3701e7799b|ggenie.bin (Game Genie ROM)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_MD.bin|O|d3293ebaaa7f4eb2a6766b68a0fb4609|bios_MD.bin (Mega Drive startup ROM)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_CD_E.bin|O|e66fa1dc5820d254611fdcdba0662372|bios_CD_E.bin (MegaCD EU BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_CD_U.bin|O|2efd74e3232ff260e371b99f84024f7f|bios_CD_U.bin (SegaCD US BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_CD_J.bin|O|278a9397d192149e84e820ac621a8edd|bios_CD_J.bin (MegaCD JP BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_E.sms|O|840481177270d5642a14ca71ee72844c|bios_E.sms (MasterSystem EU BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_U.sms|O|840481177270d5642a14ca71ee72844c|bios_U.sms (MasterSystem US BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios_J.sms|O|24a519c53f67b00640d0048ef7089105|bios_J.sms (MasterSystem JP BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|bios.gg|O|672e104c3be3a238301aceffc3b23fd6|bios.gg (GameGear BIOS)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|sk.bin|O|4ea493ea4e9f6c9ebfccbdb15110367e|sk.bin (Sonic & Knuckles ROM)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|sk2chip.bin|O|b4e76e416b887f4e7413ba76fa735f16|sk2chip.bin (Sonic & Knuckles UPMEM ROM)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|areplay.bin|O|a0028b3043f9d59ceeb03da5b073b30d|areplay.bin (Action Replay ROM)
+genesis_plus_gx_wide_libretro|Sega 8/16-bit (Various)|ggenie.bin|O|e8af7fe115a75c849f6aab3701e7799b|ggenie.bin (Game Genie ROM)
+geolith_libretro|Neo Geo|aes.zip|R|9d2ff2333e23910cf56f7f785609d36a|aes.zip (Neo Geo AES System ROM)
+geolith_libretro|Neo Geo|neogeo.zip|R|00dad01abdbf8ea9e79ad2fe11bdb182|neogeo.zip (Neo Geo MVS System ROM)
+geolith_libretro|Neo Geo|neocd.zip|R||neocd.zip (Neo Geo CD System ROM)
+geolith_libretro|Neo Geo|neocdz.zip|R|66bf2aeb1b870eac603925601e48af82|neocdz.zip (Neo Geo CDZ System ROM)
+geolith_libretro|Neo Geo|irrmaze.zip|O||irrmaze.zip (The Irritating Maze)
+gpsp_libretro|Game Boy Advance|gba_bios.bin|R|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+handy_libretro|Lynx|lynxboot.img|O|fcd403db69f54290b51035d82f835e7b|lynxboot.img (Lynx Boot Image)
+hatari2014_libretro|Atari ST/STE/TT/Falcon|tos.img|R|c1c57ce48e8ee4135885cee9e63a68a2|tos.img (TOS 1.02 US aka Mega TOS)
+hatari_libretro|Atari ST/STE/TT/Falcon|tos.img|R|c1c57ce48e8ee4135885cee9e63a68a2|tos.img (TOS 1.02 US aka Mega TOS)
+hatarib_libretro|Atari ST/STE/TT/Falcon|tos.img|O|c1c57ce48e8ee4135885cee9e63a68a2|tos.img (Default TOS)
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+higan_sfc_libretro|Super Nintendo Entertainment System|SGB1.sfc/sgb1.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|SGB1.sfc/sgb1.boot.rom (SGB Boot BIOS)
+higan_sfc_libretro|Super Nintendo Entertainment System|SGB1.sfc/program.rom|O|b15ddb15721c657d82c5bab6db982ee9|SGB1.sfc/program.rom (SGB Boot Image)
+higan_sfc_libretro|Super Nintendo Entertainment System|SGB2.sfc/sgb2.boot.rom|O|e0430bca9925fb9882148fd2dc2418c1|SGB2.sfc/sgb2.boot.rom (SGB Boot BIOS)
+higan_sfc_libretro|Super Nintendo Entertainment System|SGB2.sfc/program.rom|O|8ecd73eb4edf7ed7e81aef1be80031d5|SGB2.sfc/program.rom (SGB Boot Image)
+holani_libretro|Lynx|lynxboot.img|O|fcd403db69f54290b51035d82f835e7b|lynxboot.img (Lynx Boot Image)
+irogb_libretro|Game Boy/Game Boy Color|dmg_boot.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (DMG-BIOS)
+irogb_libretro|Game Boy/Game Boy Color|cgb_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_bios.bin (CGB-BIOS)
+jollycv_libretro|ColecoVision/CreatiVision/My Vision|coleco.rom|O|2c66f5911e5b42b8ebe113403548eee7|coleco.rom (ColecoVision BIOS)
+jollycv_libretro|ColecoVision/CreatiVision/My Vision|bioscv.rom|O|3b1ef759d8e3fb4071582efd33dd05f9|bioscv.rom (CreatiVision BIOS)
+kronos_libretro|Saturn|kronos/saturn_bios.bin|R|af5828fdff51384f99b3c4926be27762|kronos/saturn_bios.bin (Saturn BIOS)
+kronos_libretro|Saturn|kronos/stvbios.zip|R|0e92c1e02862dfeb4cdef7f4414b14a9|kronos/stvbios.zip (ST-V BIOS from MAME)
+kronos_libretro|Saturn|mpr-18811-mx.ic1|O|255113ba943c92a54facd25a10fd780c|mpr-18811-mx.ic1 (The King of Fighters '95 ROM Cartridge)
+kronos_libretro|Saturn|mpr-19367-mx.ic1|O|1cd19988d1d72a3e7caa0b73234c96b4|mpr-19367-mx.ic1 (Ultraman: Hikari no Kyojin Densetsu ROM Cartridge)
+mednafen_gba_libretro|Game Boy Advance|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+mednafen_lynx_libretro|Lynx|lynxboot.img|R|fcd403db69f54290b51035d82f835e7b|lynxboot.img (Lynx Boot Image)
+mednafen_pce_fast_libretro|PC Engine/PCE-CD|syscard3.pce|O|38179df8f4ac870017db21ebcbf53114|syscard3.pce (PCE-CD BIOS)
+mednafen_pce_fast_libretro|PC Engine/PCE-CD|syscard2.pce|O|3cdd6614a918616bfc41c862e889dd79|syscard2.pce (PCE-CD BIOS)
+mednafen_pce_fast_libretro|PC Engine/PCE-CD|syscard1.pce|O|2b7ccb3d86baa18f6402c176f3065082|syscard1.pce (PCE-CD BIOS)
+mednafen_pce_fast_libretro|PC Engine/PCE-CD|gexpress.pce|O|6d2cb14fc3e1f65ceb135633d1694122|gexpress.pce (PCE-CD BIOS)
+mednafen_pce_libretro|PC Engine/SuperGrafx/CD|syscard3.pce|O|38179df8f4ac870017db21ebcbf53114|syscard3.pce (Super CD-ROM2 System V3.xx)
+mednafen_pce_libretro|PC Engine/SuperGrafx/CD|syscard2.pce|O|3cdd6614a918616bfc41c862e889dd79|syscard2.pce (CD-ROM System V2.xx)
+mednafen_pce_libretro|PC Engine/SuperGrafx/CD|syscard1.pce|O|2b7ccb3d86baa18f6402c176f3065082|syscard1.pce (CD-ROM System V1.xx)
+mednafen_pce_libretro|PC Engine/SuperGrafx/CD|gexpress.pce|O|6d2cb14fc3e1f65ceb135633d1694122|gexpress.pce (Game Express CD Card)
+mednafen_pcfx_libretro|PC-FX|pcfx.rom|R|08e36edbea28a017f79f8d4f7ff9b6d7|pcfx.rom (PC-FX BIOS v1.00 - 2 Sep 1994)
+mednafen_psx_hw_libretro|PlayStation|scph5500.bin|R|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+mednafen_psx_hw_libretro|PlayStation|scph5501.bin|R|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+mednafen_psx_hw_libretro|PlayStation|scph5502.bin|R|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+mednafen_psx_hw_libretro|PlayStation|psxonpsp660.bin|O|c53ca5908936d412331790f4426c6c33|psxonpsp660.bin (PSP PS1 BIOS)
+mednafen_psx_hw_libretro|PlayStation|ps1_rom.bin|O|81bbe60ba7a3d1cea1d48c14cbcc647b|ps1_rom.bin (PS3 PS1 BIOS)
+mednafen_psx_libretro|PlayStation|scph5500.bin|R|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+mednafen_psx_libretro|PlayStation|scph5501.bin|R|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+mednafen_psx_libretro|PlayStation|scph5502.bin|R|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+mednafen_psx_libretro|PlayStation|psxonpsp660.bin|O|c53ca5908936d412331790f4426c6c33|psxonpsp660.bin (PSP PS1 BIOS)
+mednafen_psx_libretro|PlayStation|ps1_rom.bin|O|81bbe60ba7a3d1cea1d48c14cbcc647b|ps1_rom.bin (PS3 PS1 BIOS)
+mednafen_saturn_libretro|Saturn|sega_101.bin|R|85ec9ca47d8f6807718151cbcca8b964|sega_101.bin (Saturn JP BIOS)
+mednafen_saturn_libretro|Saturn|mpr-17933.bin|R|3240872c70984b6cbfda1586cab68dbe|mpr-17933.bin (Saturn US/EU BIOS)
+mednafen_saturn_libretro|Saturn|mpr-18811-mx.ic1|O|255113ba943c92a54facd25a10fd780c|mpr-18811-mx.ic1 (The King of Fighters '95 ROM Cartridge)
+mednafen_saturn_libretro|Saturn|mpr-19367-mx.ic1|O|1cd19988d1d72a3e7caa0b73234c96b4|mpr-19367-mx.ic1 (Ultraman: Hikari no Kyojin Densetsu ROM Cartridge)
+mednafen_supergrafx_libretro|PC Engine SuperGrafx|syscard3.pce|O|38179df8f4ac870017db21ebcbf53114|syscard3.pce (Super CD-ROM2 System V3.xx)
+mednafen_supergrafx_libretro|PC Engine SuperGrafx|syscard2.pce|O|3cdd6614a918616bfc41c862e889dd79|syscard2.pce (CD-ROM System V2.xx)
+mednafen_supergrafx_libretro|PC Engine SuperGrafx|syscard1.pce|O|2b7ccb3d86baa18f6402c176f3065082|syscard1.pce (CD-ROM System V1.xx)
+mednafen_supergrafx_libretro|PC Engine SuperGrafx|gexpress.pce|O|6d2cb14fc3e1f65ceb135633d1694122|gexpress.pce (Game Express CD Card)
+melonds_libretro|Nintendo DS|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS Firmware)
+melonds_libretro|Nintendo DS|bios7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|bios7.bin (ARM7 BIOS)
+melonds_libretro|Nintendo DS|bios9.bin|O|a392174eb3e572fed6447e956bde4b25|bios9.bin (ARM9 BIOS)
+melonds_libretro|Nintendo DS|dsi_firmware.bin|O||dsi_firmware.bin (DSi Firmware)
+melonds_libretro|Nintendo DS|dsi_bios7.bin|O|559dae4ea78eb9d67702c56c1d791e81|dsi_bios7.bin (DSi ARM7 BIOS)
+melonds_libretro|Nintendo DS|dsi_bios9.bin|O|87b665fce118f76251271c3732532777|dsi_bios9.bin (DSi ARM9 BIOS)
+melonds_libretro|Nintendo DS|dsi_nand.bin|O||dsi_nand.bin (DSi NAND)
+melonds_libretro|Nintendo DS|dsi_sd_card.bin|O||dsi_sd_card.bin (DSi SD card)
+melondsds_libretro|Nintendo DS|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS Firmware)
+melondsds_libretro|Nintendo DS|bios7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|bios7.bin (ARM7 BIOS)
+melondsds_libretro|Nintendo DS|bios9.bin|O|a392174eb3e572fed6447e956bde4b25|bios9.bin (ARM9 BIOS)
+melondsds_libretro|Nintendo DS|dsi_firmware.bin|O||dsi_firmware.bin (DSi Firmware)
+melondsds_libretro|Nintendo DS|dsi_bios7.bin|O|559dae4ea78eb9d67702c56c1d791e81|dsi_bios7.bin (DSi ARM7 BIOS)
+melondsds_libretro|Nintendo DS|dsi_bios9.bin|O|87b665fce118f76251271c3732532777|dsi_bios9.bin (DSi ARM9 BIOS)
+melondsds_libretro|Nintendo DS|dsi_nand.bin|O||dsi_nand.bin (DSi NAND)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|dmg_boot.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (GB Boot Image)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|cgb_boot.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_boot.bin (GBC Boot Image)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|sgb_boot.bin|O|d574d4f9c12f305074798f54c091a8b4|sgb_boot.bin (SGB Boot Image)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|sgb2_boot.bin|O|e0430bca9925fb9882148fd2dc2418c1|sgb2_boot.bin (SGB2 Boot Image)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|SGB1.sfc|O|b15ddb15721c657d82c5bab6db982ee9|SGB1.sfc (SGB ROM)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|SGB2.sfc|O|8ecd73eb4edf7ed7e81aef1be80031d5|SGB2.sfc (SGB2 ROM)
+mesen-s_libretro|Super Nintendo Entertainment System / Game Boy / Game Boy Color|BS-X.bin|O|fed4d8242cfbed61343d53d48432aced|BS-X.bin (Satellaview Boot ROM)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|dmg_boot.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (GB Boot Image)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|cgb_boot.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_boot.bin (GBC Boot Image)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|syscard3.pce|O|38179df8f4ac870017db21ebcbf53114|syscard3.pce (Super CD-ROM2 System V3.xx)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|syscard2.pce|O|3cdd6614a918616bfc41c862e889dd79|syscard2.pce (CD-ROM System V2.xx)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|syscard1.pce|O|2b7ccb3d86baa18f6402c176f3065082|syscard1.pce (CD-ROM System V1.xx)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|gexpress.pce|O|6d2cb14fc3e1f65ceb135633d1694122|gexpress.pce (Game Express CD Card)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|bios.sms|O|840481177270d5642a14ca71ee72844c|bios.sms (Master System BIOS)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|bios.gg|O|672e104c3be3a238301aceffc3b23fd6|bios.gg (Game Gear BIOS)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|gb_bios.bin|O|32fbbd84168d3482956eb3c5051637f5|gb_bios.bin (Game Boy BIOS)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (Game Boy Color BIOS)
+mesen2_libretro|Nintendo Entertainment System / Super Nintendo Entertainment System / Game Boy / Game Boy Color / PC Engine SuperGrafx / PC Engine - TurboGrafx 16 / PC Engine CD - TurboGrafx-CD / WonderSwan / WonderSwan Color|sgb_bios.bin|O|d574d4f9c12f305074798f54c091a8b4|sgb_bios.bin (Super Game Boy BIOS)
+mesen_libretro|Nintendo Entertainment System|disksys.rom|O|ca30b50f880eb660a320674ed365ef7a|disksys.rom (Family Computer Disk System BIOS)
+mgba_libretro|Game Boy/Game Boy Color/Game Boy Advance|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+mgba_libretro|Game Boy/Game Boy Color/Game Boy Advance|gb_bios.bin|O|32fbbd84168d3482956eb3c5051637f5|gb_bios.bin (Game Boy BIOS)
+mgba_libretro|Game Boy/Game Boy Color/Game Boy Advance|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (Game Boy Color BIOS)
+mgba_libretro|Game Boy/Game Boy Color/Game Boy Advance|sgb_bios.bin|O|d574d4f9c12f305074798f54c091a8b4|sgb_bios.bin (Super Game Boy BIOS)
+mgba_splitscreen_libretro|Game Boy Advance (2-4 linked players)|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+minivmac_libretro|Mac68k|MacII.ROM|R|66223be1497460f1e60885eeb35e03cc|MacII.ROM
+mkxp-z_libretro|RPG Maker XP/VX/VX Ace Game Engine|mkxp-z/RTP/Standard|O||mkxp-z/RTP/Standard/... (RPG Maker XP Run Time Package)
+mkxp-z_libretro|RPG Maker XP/VX/VX Ace Game Engine|mkxp-z/RTP/RPGVX|O||mkxp-z/RTP/RPGVX/... (RPG Maker VX Run Time Package)
+mkxp-z_libretro|RPG Maker XP/VX/VX Ace Game Engine|mkxp-z/RTP/RPGVXAce|O||mkxp-z/RTP/RPGVXAce/... (RPG Maker VX Ace Run Time Package)
+mu_libretro|Palm OS|palmos40-en-m500.rom|O|abed11421f47bbf3f654af618e0c6a8a|palmos40-en-m500.rom (Palm OS 4.0)
+mu_libretro|Palm OS|palmos41-en-m515.rom|R|83cb1d1c76e568b916dc2e7c0bf669f6|palmos41-en-m515.rom (Palm OS 4.1)
+mu_libretro|Palm OS|palmos52-en-t3.rom|O|a46861541c63b20aba7bf172b0d853e1|palmos52-en-t3.rom (Palm OS 5.2.1)
+mu_libretro|Palm OS|palmos60-en-t3.rom|O|c2fae3ff41cc4f94be0fdaed1523ea99|palmos60-en-t3.rom (Palm OS 6.0)
+mu_libretro|Palm OS|bootloader-dbvz.rom|O|9da101cd2317830649a31f8fa46debec|bootloader-dbvz.rom (MC68VZ328 UART Bootloader)
+mupen64plus_next_develop_libretro|Nintendo 64|Mupen64plus/IPL.n64|O|8d3d9f294b6e174bc7b1d2fd1c727530|Mupen64plus/IPL.n64 (64DD BIOS)
+mupen64plus_next_gles2_libretro|Nintendo 64|Mupen64plus/IPL.n64|O|8d3d9f294b6e174bc7b1d2fd1c727530|Mupen64plus/IPL.n64 (64DD BIOS)
+mupen64plus_next_gles3_libretro|Nintendo 64|Mupen64plus/IPL.n64|O|8d3d9f294b6e174bc7b1d2fd1c727530|Mupen64plus/IPL.n64 (64DD BIOS)
+mupen64plus_next_libretro|Nintendo 64|Mupen64plus/IPL.n64|O|8d3d9f294b6e174bc7b1d2fd1c727530|Mupen64plus/IPL.n64 (64DD BIOS)
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_f.rom|O|8834880c33164ccbe6476b559f3e37de|neocd/neocd_f.rom (Front Loader BIOS)
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_sf.rom|O|043d76d5f0ef836500700c34faef774d|neocd/neocd_sf.rom (Front Loader BIOS (SMKDAN))
+neocd_libretro|SNK Neo Geo CD|neocd/front-sp1.bin|O|5c2366f25ff92d71788468ca492ebeca|neocd/front-sp1.bin (Front Loader BIOS (MAME))
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_t.rom|O|de3cf45d227ad44645b22aa83b49f450|neocd/neocd_t.rom (Top Loader BIOS))
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_st.rom|O|f6325a33c6d63ea4b9162a3fa8c32727|neocd/neocd_st.rom (Top Loader BIOS (SMKDAN))
+neocd_libretro|SNK Neo Geo CD|neocd/top-sp1.bin|O|122aee210324c72e8a11116e6ef9c0d0|neocd/top-sp1.bin (Top Loader BIOS (MAME))
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_z.rom|O|11526d58d4c524daef7d5d677dc6b004|neocd/neocd_z.rom (CDZ BIOS)
+neocd_libretro|SNK Neo Geo CD|neocd/neocd_sz.rom|O|971ee8a36fb72da57aed01758f0a37f5|neocd/neocd_sz.rom (CDZ BIOS (SMKDAN))
+neocd_libretro|SNK Neo Geo CD|neocd/neocd.bin|O|f39572af7584cb5b3f70ae8cc848aba2|neocd/neocd.bin (CDZ BIOS (MAME))
+neocd_libretro|SNK Neo Geo CD|neocd/ng-lo.rom|O|e255264d85d5765013b1b2fa8109dd53|neocd/ng-lo.rom (Y-ZOOM ROM)
+neocd_libretro|SNK Neo Geo CD|neocd/000-lo.lo|O|fc7599f3f871578fe9a0453662d1c966|neocd/000-lo.lo (Y-ZOOM ROM (MAME))
+neocd_libretro|SNK Neo Geo CD|neocd/uni-bioscd.rom|O|08ca8b2dba6662e8024f9e789711c6fc|neocd/uni-bioscd.rom (Universe BIOS 3.2)
+nestopia_libretro|Nintendo Entertainment System|disksys.rom|O|ca30b50f880eb660a320674ed365ef7a|disksys.rom (Family Computer Disk System BIOS)
+noods_libretro|Nintendo DS|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS Firmware)
+noods_libretro|Nintendo DS|bios7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|bios7.bin (ARM7 BIOS)
+noods_libretro|Nintendo DS|bios9.bin|O|a392174eb3e572fed6447e956bde4b25|bios9.bin (ARM9 BIOS)
+noods_libretro|Nintendo DS|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+noods_libretro|Nintendo DS|nds_sd_card.bin|O||nds_sd_card.bin (NDS SD card)
+np2kai_libretro|PC-98|np2kai/font.bmp|O|7da1e5b7c482d4108d22a5b09631d967|np2kai/font.bmp (needed to display text)
+np2kai_libretro|PC-98|np2kai/FONT.ROM|O|38d32748ae49d1815b0614970849fd40|np2kai/FONT.ROM (alt font file)
+np2kai_libretro|PC-98|np2kai/bios.rom|O|cd237e16e7e77c06bb58540e9e9fca68|np2kai/bios.rom
+np2kai_libretro|PC-98|np2kai/itf.rom|O|72ea51443070f0e9212bfc9b793ee28e|np2kai/itf.rom
+np2kai_libretro|PC-98|np2kai/sound.rom|O|524473c1a5a03b17e21d86a0408ff827|np2kai/sound.rom
+np2kai_libretro|PC-98|np2kai/2608_BD.WAV|O|d94546e70f17fd899be8df3544ab6cbb|np2kai/2608_BD.WAV (YM2608 rhythm sample)
+np2kai_libretro|PC-98|np2kai/2608_SD.WAV|O|d71004351c8bbfdad53b18222c061d49|np2kai/2608_SD.WAV (YM2608 rhythm sample)
+np2kai_libretro|PC-98|np2kai/2608_TOP.WAV|O|593cff6597ab9380d822b8f824fd2c28|np2kai/2608_TOP.WAV (YM2608 rhythm sample)
+np2kai_libretro|PC-98|np2kai/2608_HH.WAV|O|08c54a0c1f774a5538a848a6665a34b4|np2kai/2608_HH.WAV (YM2608 rhythm sample)
+np2kai_libretro|PC-98|np2kai/2608_TOM.WAV|O|96a4ead13f364734f79b0c58af2f0e1f|np2kai/2608_TOM.WAV (YM2608 rhythm sample)
+np2kai_libretro|PC-98|np2kai/2608_RIM.WAV|O|465ea0768b27da404aec45dfc501404b|np2kai/2608_RIM.WAV (YM2608 rhythm sample)
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp1.data.rom|O|3d81b45fa0c2aa8b852dfb1ece7c0971|dsp1.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp1.program.rom|O|ae209fbe789fbf11a48aea5ab1197321|dsp1.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp1b.data.rom|O|1e3f568634a7d8284020dddc0ae905bc|dsp1b.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp1b.program.rom|O|d10f446888e097cbf500f3f663cf4f6d|dsp1b.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp2.data.rom|O|e9417e29223b139c3c4b635a2a3b8744|dsp2.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp2.program.rom|O|aa6e5922a3ed5ded54f24247c11143c5|dsp2.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp3.data.rom|O|0a81210c0a940b997dd9843281008ee6|dsp3.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp3.program.rom|O|d99ca4562818d49cee1f242705bba6f8|dsp3.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp4.data.rom|O|ee4990879eb68e3cbca239c5bc20303d|dsp4.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|dsp4.program.rom|O|a151023b948b90ffc23a5b594bb6fef2|dsp4.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|cx4.data.rom|O|037ac4296b6b6a5c47c440188d3c72e3|cx4.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st010.data.rom|O|254d70762b6f59f99c27c395aba7d07d|st010.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st010.program.rom|O|1d70019179a59a566a0bb5d3f2845544|st010.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st011.data.rom|O|10bd3f4aa949737ab9836512c35bcc29|st011.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st011.program.rom|O|95222ebf1c0c2990bcf25db43743f032|st011.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st018.data.rom|O|49c898b60d0f15e90d0ba780dd12f366|st018.data.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|st018.program.rom|O|dda40ccd57390c96e49d30a041f9a9e7|st018.program.rom
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|SGB1.sfc/sgb1.boot.rom|O|d574d4f9c12f305074798f54c091a8b4|SGB1.sfc/sgb1.boot.rom (SGB Boot BIOS)
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|SGB1.sfc/program.rom|O|b15ddb15721c657d82c5bab6db982ee9|SGB1.sfc/program.rom (SGB Boot Image)
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|SGB2.sfc/sgb2.boot.rom|O|e0430bca9925fb9882148fd2dc2418c1|SGB2.sfc/sgb2.boot.rom (SGB Boot BIOS)
+nside_sfc_balanced_libretro|Super Nintendo Entertainment System|SGB2.sfc/program.rom|O|8ecd73eb4edf7ed7e81aef1be80031d5|SGB2.sfc/program.rom (SGB Boot Image)
+nuance_libretro|NUON|nuance/bios.cof|R||bios.cof (NUON main BIOS, shipped with the emulator)
+nuance_libretro|NUON|nuance/minibios.cof|R||minibios.cof (NUON minibios for MPEs 0-2)
+nuance_libretro|NUON|nuance/minibiosX.cof|R||minibiosX.cof (NUON extended minibios)
+numero_libretro|TI83|ti83se.rom|O|c6ff8204c5c81b7be34614dbbd690c8b|ti83se.rom (TI-83 Silver Edition)
+numero_libretro|TI83|ti83plus.rom|O|8011181f810b5ec4e9d6a03f0e14257a|ti83plus.rom (TI-83 Plus)
+numero_libretro|TI83|ti83.rom|O|d4448d09bbfde687c04f9e3310e023ab|ti83.rom (TI-83)
+o2em_libretro|Magnavox Odyssey2 / Philips Videopac+|o2rom.bin|R|562d5ebf9e030a40d6fabfc2f33139fd|o2rom.bin (Odyssey2 BIOS - G7000 model)
+o2em_libretro|Magnavox Odyssey2 / Philips Videopac+|c52.bin|R|f1071cdb0b6b10dde94d3bc8a6146387|c52.bin (Videopac French BIOS - G7000 model)
+o2em_libretro|Magnavox Odyssey2 / Philips Videopac+|g7400.bin|R|c500ff71236068e0dc0d0603d265ae76|g7400.bin (Videopac+ European BIOS - G7400 model)
+o2em_libretro|Magnavox Odyssey2 / Philips Videopac+|jopac.bin|R|279008e4a0db2dc5f1c048853b033828|jopac.bin (Videopac+ French BIOS - G7400 model)
+opera_libretro|3DO|panafz1.bin|O|f47264dd47fe30f73ab3c010015c155b|panafz1.bin (Panasonic FZ-1 BIOS)
+opera_libretro|3DO|panafz10.bin|O|51f2f43ae2f3508a14d9f56597e2d3ce|panafz10.bin (Panasonic FZ-10 BIOS)
+opera_libretro|3DO|panafz10-norsa.bin|O|1477bda80dc33731a65468c1f5bcbee9|panafz10-norsa.bin (Panasonic FZ-10 BIOS [Encryption Check Disabled])
+opera_libretro|3DO|panafz10e-anvil.bin|O|a48e6746bd7edec0f40cff078f0bb19f|panafz10e-anvil.bin (Panasonic FZ-10E ANVIL BIOS)
+opera_libretro|3DO|panafz10e-anvil-norsa.bin|O|cf11bbb5a16d7af9875cca9de9a15e09|panafz10e-anvil-norsa.bin (Panasonic FZ-10E ANVIL BIOS [Encryption Check Disabled])
+opera_libretro|3DO|goldstar.bin|O|8639fd5e549bd6238cfee79e3e749114|goldstar.bin (Goldstar GDO-101M BIOS)
+opera_libretro|3DO|sanyotry.bin|O|35fa1a1ebaaeea286dc5cd15487c13ea|sanyotry.bin (Sanyo Try IMP-21J BIOS)
+opera_libretro|3DO|3do_arcade_saot.bin|O|8970fc987ab89a7f64da9f8a8c4333ff|3do_arcade_saot.bin (Shootout At Old Tucson BIOS)
+opera_libretro|3DO|panafz1-kanji.bin|O|b8dc97f778a6245c58e064b0312e8281|panafz1-kanji.bin (Panasonic FZ-1 Kanji Font ROM)
+opera_libretro|3DO|panafz10ja-anvil-kanji.bin|O|428577250f43edc902ea239c50d2240d|panafz10ja-anvil-kanji.bin (Panasonic FZ-10JA Kanji Font ROM)
+opera_libretro|3DO|panafz1j.bin|O|a496cfdded3da562759be3561317b605|panafz1j.bin (Panasonic FZ-1J BIOS)
+opera_libretro|3DO|panafz1j-norsa.bin|O|f6c71de7470d16abe4f71b1444883dc8|panafz1j-norsa.bin (Panasonic FZ-1J BIOS [Encryption Check Disabled])
+opera_libretro|3DO|panafz1j-kanji.bin|O|c23fb5d5e6bb1c240d02cf968972be37|panafz1j-kanji.bin (Panasonic FZ-1J Kanji Font ROM)
+parallel_n64_debug_libretro|Nintendo 64|64DD_IPL.bin|O|8d3d9f294b6e174bc7b1d2fd1c727530|64DD_IPL.bin (64DD IPL ROM)
+parallel_n64_libretro|Nintendo 64|64DD_IPL.bin|O|8d3d9f294b6e174bc7b1d2fd1c727530|64DD_IPL.bin (64DD IPL ROM)
+pcee2_libretro|Sony PlayStation 2|pcsx2/bios|R||'pcsx2/bios' folder (any valid PS2 BIOS dump, e.g. scph39001.bin)
+pcee2_libretro|Sony PlayStation 2|pcsx2/resources|R||'pcsx2/resources' folder (shaders, GameIndex.yaml, fonts)
+pcsx1_libretro|PlayStation|scph5500.bin|O|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+pcsx1_libretro|PlayStation|scph5501.bin|O|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+pcsx1_libretro|PlayStation|scph5502.bin|O|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+pcsx2_libretro|Sony PlayStation 2|pcsx2/bios|R||'pcsx2/bios' folder
+pcsx2_libretro|Sony PlayStation 2|pcsx2/resources/GameIndex.yaml|O|526291c9c9bae8b184b0e5f4bfa94eb9|pcsx2/resources/GameIndex.yaml (Game Database)
+pcsx_rearmed_interpreter_libretro|PlayStation|scph5500.bin|O|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+pcsx_rearmed_interpreter_libretro|PlayStation|scph5501.bin|O|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+pcsx_rearmed_interpreter_libretro|PlayStation|scph5502.bin|O|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+pcsx_rearmed_libretro|PlayStation|scph5500.bin|O|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+pcsx_rearmed_libretro|PlayStation|scph5501.bin|O|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+pcsx_rearmed_libretro|PlayStation|scph5502.bin|O|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+pcsx_rearmed_libretro|PlayStation|psxonpsp660.bin|O|c53ca5908936d412331790f4426c6c33|psxonpsp660.bin (PSP PSX Emu BIOS)
+pcsx_rearmed_neon_libretro|PlayStation|scph5500.bin|O|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+pcsx_rearmed_neon_libretro|PlayStation|scph5501.bin|O|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+pcsx_rearmed_neon_libretro|PlayStation|scph5502.bin|O|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+picodrive_libretro|Sega 8/16-bit + 32X (Various)|bios_CD_E.bin|O|e66fa1dc5820d254611fdcdba0662372|bios_CD_E.bin (MegaCD EU BIOS)
+picodrive_libretro|Sega 8/16-bit + 32X (Various)|bios_CD_U.bin|O|2efd74e3232ff260e371b99f84024f7f|bios_CD_U.bin (SegaCD US BIOS)
+picodrive_libretro|Sega 8/16-bit + 32X (Various)|bios_CD_J.bin|O|278a9397d192149e84e820ac621a8edd|bios_CD_J.bin (MegaCD JP BIOS)
+pokemini_libretro|Pokemon Mini|bios.min|O|1e4fb124a3a886865acb574f388c803d|bios.min (Pokemon Mini BIOS)
+pokket_libretro|PocketStation|pocketstation.bin|O||pocketstation.bin (PocketStation BIOS)
+ppsspp_libretro|PSP|PPSSPP/ppge_atlas.zim|R|866855cc330b9b95cc69135fb7b41d38|ppge_atlas.zim (PPSSPP Data ROM)
+prosystem_libretro|Atari 7800|7800 BIOS (U).rom|O||7800 BIOS (U).rom (7800 BIOS)
+puae2021_libretro|Amiga|kick33180.A500|O|85ad74194e87c08904327de1a9443b7a|kick33180.A500 / amiga-os-120.rom (A500-A2000 KS v1.2 rev 33.180)
+puae2021_libretro|Amiga|kick34005.A500|R|82a21c1890cae844b3df741f2762d48d|kick34005.A500 / amiga-os-130.rom (A500-A2000-CDTV KS v1.3 rev 34.005)
+puae2021_libretro|Amiga|kick37175.A500|O|dc10d7bdd1b6f450773dfb558477c230|kick37175.A500 / amiga-os-204.rom (A500+ KS v2.04 rev 37.175)
+puae2021_libretro|Amiga|kick37350.A600|O|465646c9b6729f77eea5314d1f057951|kick37350.A600 / amiga-os-205-a600.rom (A600 KS v2.05 rev 37.350)
+puae2021_libretro|Amiga|kick40063.A600|O|e40a5dfb3d017ba8779faba30cbd1c8e|kick40063.A600 / amiga-os-310-a600.rom (A600-A2000 KS v3.1 rev 40.063)
+puae2021_libretro|Amiga|kick39106.A1200|O|b7cc148386aa631136f510cd29e42fc3|kick39106.A1200 / amiga-os-300-a1200.rom (A1200 KS v3.0 rev 39.106)
+puae2021_libretro|Amiga|kick40068.A1200|R|646773759326fbac3b2311fd8c8793ee|kick40068.A1200 / amiga-os-310-a1200.rom (A1200 KS v3.1 rev 40.068)
+puae2021_libretro|Amiga|kick39106.A4000|O|9b8bdd5a3fd32c2a5a6f5b1aefc799a5|kick39106.A4000 / amiga-os-300-a4000.rom (A4000 KS v3.0 rev 39.106)
+puae2021_libretro|Amiga|kick40068.A4000|O|9bdedde6a4f33555b4a270c8ca53297d|kick40068.A4000 / amiga-os-310-a4000.rom (A4000 KS v3.1 rev 40.068)
+puae2021_libretro|Amiga|kick34005.CDTV|O|89da1838a24460e4b93f4f0c5d92d48d|kick34005.CDTV / amiga-os-130-cdtv-ext.rom (CDTV extended ROM v1.0)
+puae2021_libretro|Amiga|kick40060.CD32|R|5f8924d013dd57a89cf349f4cdedc6b1|kick40060.CD32 / amiga-os-310-cd32.rom (CD32 KS v3.1 rev 40.060)
+puae2021_libretro|Amiga|kick40060.CD32.ext|R|bb72565701b1b6faece07d68ea5da639|kick40060.CD32.ext / amiga-os-310-cd32-ext.rom (CD32 extended ROM rev 40.060)
+puae_libretro|Amiga|kick33180.A500|O|85ad74194e87c08904327de1a9443b7a|kick33180.A500 / amiga-os-120.rom (A500-A2000 KS v1.2 rev 33.180)
+puae_libretro|Amiga|kick34005.A500|R|82a21c1890cae844b3df741f2762d48d|kick34005.A500 / amiga-os-130.rom (A500-A2000-CDTV KS v1.3 rev 34.005)
+puae_libretro|Amiga|kick37175.A500|O|dc10d7bdd1b6f450773dfb558477c230|kick37175.A500 / amiga-os-204.rom (A500+ KS v2.04 rev 37.175)
+puae_libretro|Amiga|kick37350.A600|O|465646c9b6729f77eea5314d1f057951|kick37350.A600 / amiga-os-205-a600.rom (A600 KS v2.05 rev 37.350)
+puae_libretro|Amiga|kick40063.A600|O|e40a5dfb3d017ba8779faba30cbd1c8e|kick40063.A600 / amiga-os-310-a600.rom (A600-A2000 KS v3.1 rev 40.063)
+puae_libretro|Amiga|kick39106.A1200|O|b7cc148386aa631136f510cd29e42fc3|kick39106.A1200 / amiga-os-300-a1200.rom (A1200 KS v3.0 rev 39.106)
+puae_libretro|Amiga|kick40068.A1200|R|646773759326fbac3b2311fd8c8793ee|kick40068.A1200 / amiga-os-310-a1200.rom (A1200 KS v3.1 rev 40.068)
+puae_libretro|Amiga|kick39106.A4000|O|9b8bdd5a3fd32c2a5a6f5b1aefc799a5|kick39106.A4000 / amiga-os-300-a4000.rom (A4000 KS v3.0 rev 39.106)
+puae_libretro|Amiga|kick40068.A4000|O|9bdedde6a4f33555b4a270c8ca53297d|kick40068.A4000 / amiga-os-310-a4000.rom (A4000 KS v3.1 rev 40.068)
+puae_libretro|Amiga|kick34005.CDTV|O|89da1838a24460e4b93f4f0c5d92d48d|kick34005.CDTV / amiga-os-130-cdtv-ext.rom (CDTV extended ROM v1.0)
+puae_libretro|Amiga|kick40060.CD32|R|5f8924d013dd57a89cf349f4cdedc6b1|kick40060.CD32 / amiga-os-310-cd32.rom (CD32 KS v3.1 rev 40.060)
+puae_libretro|Amiga|kick40060.CD32.ext|R|bb72565701b1b6faece07d68ea5da639|kick40060.CD32.ext / amiga-os-310-cd32-ext.rom (CD32 extended ROM rev 40.060)
+px68k_libretro|Sharp X68000|keropi/iplrom.dat|R|7fd4caabac1d9169e289f0f7bbf71d8e|iplrom.dat (X68000 BIOS)
+px68k_libretro|Sharp X68000|keropi/cgrom.dat|R|cb0a5cfcf7247a7eab74bb2716260269|cgrom.dat (X68000 BIOS 2)
+px68k_libretro|Sharp X68000|keropi/iplrom30.dat|O|f373003710ab4322642f527f567e020a|iplrom30.dat (X68000 BIOS 3)
+quasi88_libretro|PC-88 series|quasi88/n88.rom|R|4f984e04a99d56c4cfe36115415d6eb8|n88.rom (Main BIOS)
+quasi88_libretro|PC-88 series|quasi88/n88_0.rom|R|e28fe3f520bea594350ea8fb00395370|n88_0.rom (Extension BIOS 1)
+quasi88_libretro|PC-88 series|quasi88/n88_1.rom|O|a8e298da7ac947669bcb1ff25cee0a83|n88_1.rom (Extension BIOS 2)
+quasi88_libretro|PC-88 series|quasi88/n88_2.rom|O|9d03154fd9abfc28c4e6d4dc705e6e23|n88_2.rom (Extension BIOS 3)
+quasi88_libretro|PC-88 series|quasi88/n88_3.rom|O|e1791f8154f1cdf22b576a1a365b6e1f|n88_3.rom (Extension BIOS 4)
+quasi88_libretro|PC-88 series|quasi88/n88n.rom|O|2ff07b8769367321128e03924af668a0|n88n.rom (N Basic BIOS)
+quasi88_libretro|PC-88 series|quasi88/disk.rom|O|793f86784e5608352a5d7f03f03e0858|disk.rom (Sub BIOS)
+quasi88_libretro|PC-88 series|quasi88/n88knj1.rom|O|d81c6d5d7ad1a4bbbd6ae22a01257603|n88knj1.rom (Kanji Font 1)
+quasi88_libretro|PC-88 series|quasi88/n88knj2.rom|O|898a3b7b6c3326e8b2069765bca2b944|n88knj2.rom (Kanji Font 2)
+quasi88_libretro|PC-88 series|quasi88/n88jisho.rom|O|2e548679423370262f36cbde38a22789|n88jisho.rom (Jisho)
+retrodream_libretro|Sega Dreamcast|dc/boot.bin|R|e10c53c2f8b90bab96ead2d368858623|boot.bin (Dreamcast BIOS)
+retrodream_libretro|Sega Dreamcast|dc/flash.bin|R|0a93f7940c455905bea6e392dfde92a4|flash.bin (Date/Time/Language)
+rpcs3_libretro|PlayStation 3|PS3UPDAT.PUP|R||PS3UPDAT.PUP (PS3 system software)
+rustynes_libretro|Nintendo Entertainment System|disksys.rom|O|ca30b50f880eb660a320674ed365ef7a|disksys.rom (Family Computer Disk System BIOS)
+same_cdi_libretro|CD-i|same_cdi/bios/cdimono1.zip|R|c59f92647701428bc453976740eb75cf|same_cdi/bios/cdimono1.zip
+same_cdi_libretro|CD-i|same_cdi/bios/cdimono2.zip|O|97aa5f47030cd9fdb679d4fafbb0e332|same_cdi/bios/cdimono2.zip
+same_cdi_libretro|CD-i|same_cdi/bios/cdibios.zip|O|709acce6e9c4043b851ea7429b8e7eff|same_cdi/bios/cdibios.zip
+sameboy_libretro|Game Boy/Game Boy Color|dmg_boot.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_boot.bin (Game Boy boot ROM)
+sameboy_libretro|Game Boy/Game Boy Color|cgb_boot.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_boot.bin (Game Boy Color boot ROM)
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/scummclassic.zip|O|57aaebd10238ffe3863192254629aaa9|scummclassic.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/scummmodern.zip|O|b470c7205246a0bb4718ca0a27d25055|scummmodern.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/scummremastered.zip|O|15600f0b0274f2ab4dd0c181e4ae3e95|scummremastered.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/residualvm.zip|O|9cbffee094a6bfa1765e2f6ba15a268e|residualvm.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/gui-icons.dat|O|17150a7a6ed5c4d5c0384b95c5fce479|gui-icons.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/shaders.dat|O|f073f17187d0bfa3e7ebb7f328847969|shaders.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/theme/translations.dat|O|1ca707498f9024c292ca745c5727a751|translations.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/achievements.dat|O|73cf5bd61896442a990e363f284a0bc2|achievements.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/encoding.dat|O|f2e88b2faec499a4914c3a0bcffc7db1|encoding.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/freescape.dat|O|30ca162d03b65f46997fa43e1093839e|freescape.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/grim-patch.lab|O|32b777b824f02b1e1259903740964058|grim-patch.lab
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/monkey4-patch.m4b|O|9eb7b7e7cc7dad1fe08be6e73d749abe|monkey4-patch.m4b
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/myst3.dat|O|54e9056211f2fff255b6f66a3fe39a8d|myst3.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/fonts.dat|O|65025f90c134e4538efd306e36341aa1|fonts.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/macgui.dat|O|d97f2965013b343dd3d4fdbbc7192f15|macgui.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/access.dat|O|f1925ac548f9551d9d8f648dbc92c897|access.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/cryo.dat|O|fc5886ea5388f20eae299bb408da5bcc|cryo.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/cryomni3d.dat|O|474e9a57b74c368acc8d19e8d63e3288|cryomni3d.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/drascula.dat|O|2647b6dff6d117b217dd9896cd25b34e|drascula.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/hadesch_translations.dat|O|7857da7e56a11e0749fb45100c323b3c|hadesch_translations.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/hugo.dat|O|0856a20f18b3319c92b710ef80d886cd|hugo.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/kyra.dat|O|21a57f79886e46f410cfb50186ed8d77|kyra.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/lure.dat|O|75a83c781ac7024fc9c1b6f7ecc5b936|lure.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/macventure.dat|O|d855abc95d2b7c03b748631c08603ebb|macventure.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/mort.dat|O|3cfb16d7bab4d77606b3b1274b8ae870|mort.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/nancy.dat|O|e482c84f583783b4b9dea5374aa232da|nancy.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/neverhood.dat|O|dfaab12ffb265646f31f51b6904246d1|neverhood.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/queen.tbl|O|4f5b513b52c4ef6fb1c46e984760a3b7|queen.tbl
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/sky.cpt|O|9d00157b1cebd6368cbf88135c098f40|sky.cpt
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/supernova.dat|O|f6af52d51152447f43cf3cf9a50bc144|supernova.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/teenagent.dat|O|aaaf8792af40c80122d7dbecaf1dee20|teenagent.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/titanic.dat|O|4b2fb71201dc3795cff45df6200a1918|titanic.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/tony.dat|O|891022a4e2917bb54b5cdc9a46f5b3df|tony.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/toon.dat|O|730f63ea46169f56bb4f9fa0637baef0|toon.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/ultima.dat|O|420ef1f96eee6dc15395330f28923be2|ultima.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/wintermute.zip|O|46ab65cb137a4fc8710a8f3b9455e50e|wintermute.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/mm.dat|O|fc20f5064386a19d39bd5f9df0a542fa|mm.dat
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/vkeybd_default.zip|O|bf51a61f07625ea20e891058afaa892c|vkeybd_default.zip
+scummvm_libretro|ScummVM Game Engine|scummvm/extra/Roland_SC-55.sf2|O|dbb97c34404b753724a66fe0108a32e1|Roland_SC-55.sf2
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|cgb_boot.bin|O|dbfce9db9deaa2567f6a84fde55f9680|cgb_boot.bin (GBC BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (GBC BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|cgb0_boot.bin|O||cgb0_boot.bin (GBC BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|cgb_agb_boot.bin|O||cgb_agb_boot.bin (GBC BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|dmg_rom.bin|O|32fbbd84168d3482956eb3c5051637f5|dmg_rom.bin (DMG BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|dmg0_rom.bin|O||dmg0_rom.bin (DMG BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (GBA BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|nds7.bin|O|df692a80a5b1bc90728bc3dfc76cd948|nds7.bin (NDS ARM7 BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|nds9.bin|O|a392174eb3e572fed6447e956bde4b25|nds9.bin (NDS ARM9 BIOS)
+skyemu_libretro|Nintendo - Game Boy/GBA/NDS (SkyEmu)|firmware.bin|O|e45033d9b0fa6b0de071292bba7c9d13|firmware.bin (NDS FIRMWARE)
+sm2_libretro|Model 2|sm2-emu/games.xml|R||SM2-Emu game database matching this core
+smsplus_libretro|Sega 8-bit|bios.sms|O|840481177270d5642a14ca71ee72844c|bios.sms (Master System BIOS)
+smsplus_libretro|Sega 8-bit|BIOS.col|O|2c66f5911e5b42b8ebe113403548eee7|BIOS.col (Colecovision BIOS)
+snes9x_libretro|Super Nintendo Entertainment System|BS-X.bin|O|fed4d8242cfbed61343d53d48432aced|BS-X.bin (BS-X - Sore wa Namae o Nusumareta Machi no Monogatari (Japan) (Rev 1))
+snes9x_libretro|Super Nintendo Entertainment System|STBIOS.bin|O|d3a44ba7d42a74d3ac58cb9c14c6a5ca|STBIOS.bin (Sufami Turbo (Japan))
+squirreljme_libretro|Java ME|squirreljme-0.3.0-fast.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-0.3.0-fast.jar (SquirrelJME Class Library, Versioned, Optimized and stripped)
+squirreljme_libretro|Java ME|squirreljme-0.3.0.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-0.3.0.jar (SquirrelJME Class Library, Versioned)
+squirreljme_libretro|Java ME|squirreljme-0.3.0-test.jar|O||squirreljme-0.3.0-test.jar (SquirrelJME Class Library, Versioned, Optimized and stripped with Tests)
+squirreljme_libretro|Java ME|squirreljme-0.3.0-slow.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-0.3.0-slow.jar (SquirrelJME Class Library, Versioned, Unoptimized with full debugging)
+squirreljme_libretro|Java ME|squirreljme-0.3.0-slow-test.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-0.3.0-slow-test.jar (SquirrelJME Class Library, Versioned, Unoptimized with full debugging with tests)
+squirreljme_libretro|Java ME|squirreljme-fast.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-fast.jar (SquirrelJME Class Library, Optimized and stripped)
+squirreljme_libretro|Java ME|squirreljme.jar|O|cf849d4b36cd8b7782de7887d318182a|squirreljme.jar (SquirrelJME Class Library)
+squirreljme_libretro|Java ME|squirreljme-test.jar|O||squirreljme-test.jar (SquirrelJME Class Library, Optimized and stripped with Tests)
+squirreljme_libretro|Java ME|squirreljme-slow.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-slow.jar (SquirrelJME Class Library, Unoptimized with full debugging)
+squirreljme_libretro|Java ME|squirreljme-slow-test.jar|O|8e98b0c8e5c96c191a8b2a9d29d0454b|squirreljme-slow-test.jar (SquirrelJME Class Library, Unoptimized with full debugging with tests)
+swanstation_libretro|PlayStation|psxonpsp660.bin|O|c53ca5908936d412331790f4426c6c33|psxonpsp660.bin (PSP PS1 BIOS)
+swanstation_libretro|PlayStation|scph5500.bin|O|8dd7d5296a650fac7319bce665a6a53c|scph5500.bin (PS1 JP BIOS)
+swanstation_libretro|PlayStation|scph5501.bin|O|490f666e1afb15b7362b406ed1cea246|scph5501.bin (PS1 US BIOS)
+swanstation_libretro|PlayStation|scph5502.bin|O|32736f17079d0b2b7024407c39bd3050|scph5502.bin (PS1 EU BIOS)
+swanstation_libretro|PlayStation|ps1_rom.bin|O|81bbe60ba7a3d1cea1d48c14cbcc647b|ps1_rom.bin (PS3 PS1 BIOS)
+tempgba_libretro|Game Boy Advance|gba_bios.bin|R|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+uae4arm_libretro|Amiga|kick34005.A500|R|82a21c1890cae844b3df741f2762d48d|kick34005.A500 (Amiga 500 BIOS, Kickstart v1.3 Rev. 34.005)
+uae4arm_libretro|Amiga|kick40063.A600|R|e40a5dfb3d017ba8779faba30cbd1c8e|kick40063.A600 (Amiga 600 BIOS, Kickstart v3.1 Rev. 40.063)
+uae4arm_libretro|Amiga|kick40068.A1200|R|646773759326fbac3b2311fd8c8793ee|kick40068.A1200 (Amiga 1200 BIOS, Kickstart v3.1 Rev. 40.068)
+uae4arm_libretro|Amiga|kick34005.CDTV|R|89da1838a24460e4b93f4f0c5d92d48d|kick34005.CDTV (Amiga CDTV extended ROM v1.00 Rev. 34.005)
+uae4arm_libretro|Amiga|kick40060.CD32|R|5f8924d013dd57a89cf349f4cdedc6b1|kick40060.CD32 (Amiga CD32 BIOS, Kickstart v3.1 Rev. 40.060)
+uae4arm_libretro|Amiga|kick40060.CD32.ext|R|bb72565701b1b6faece07d68ea5da639|kick40060.CD32.ext (Amiga CD32 Extended BIOS, CD32 Extended ROM Rev. 40.060)
+vba_next_libretro|Game Boy Advance|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+vbam_libretro|Game Boy/Game Boy Color/Game Boy Advance|gba_bios.bin|O|a860e8c0b6d573d191e4ec7db1b1e4f6|gba_bios.bin (Game Boy Advance BIOS)
+vbam_libretro|Game Boy/Game Boy Color/Game Boy Advance|gb_bios.bin|O|32fbbd84168d3482956eb3c5051637f5|gb_bios.bin (Game Boy BIOS)
+vbam_libretro|Game Boy/Game Boy Color/Game Boy Advance|gbc_bios.bin|O|dbfce9db9deaa2567f6a84fde55f9680|gbc_bios.bin (Game Boy Color BIOS)
+vice_x128_libretro|C128|vice/JiffyDOS_C128.bin|O|cbbd1bbcb5e4fd8046b6030ab71fc021|vice/JiffyDOS_C128.bin (JiffyDOS C128 Kernal)
+vice_x128_libretro|C128|vice/JiffyDOS_C64.bin|O|be09394f0576cf81fa8bacf634daf9a2|vice/JiffyDOS_C64.bin (JiffyDOS C64 Kernal)
+vice_x128_libretro|C128|vice/JiffyDOS_1541-II.bin|O|1b1e985ea5325a1f46eb7fd9681707bf|vice/JiffyDOS_1541-II.bin (JiffyDOS 1541 drive BIOS)
+vice_x128_libretro|C128|vice/JiffyDOS_1571_repl310654.bin|O|41c6cc528e9515ffd0ed9b180f8467c0|vice/JiffyDOS_1571_repl310654.bin (JiffyDOS 1571 drive BIOS)
+vice_x128_libretro|C128|vice/JiffyDOS_1581.bin|O|20b6885c6dc2d42c38754a365b043d71|vice/JiffyDOS_1581.bin (JiffyDOS 1581 drive BIOS)
+vice_x64_libretro|C64|vice/JiffyDOS_C64.bin|O|be09394f0576cf81fa8bacf634daf9a2|vice/JiffyDOS_C64.bin (JiffyDOS C64 Kernal)
+vice_x64_libretro|C64|vice/JiffyDOS_1541-II.bin|O|1b1e985ea5325a1f46eb7fd9681707bf|vice/JiffyDOS_1541-II.bin (JiffyDOS 1541 drive BIOS)
+vice_x64_libretro|C64|vice/JiffyDOS_1571_repl310654.bin|O|41c6cc528e9515ffd0ed9b180f8467c0|vice/JiffyDOS_1571_repl310654.bin (JiffyDOS 1571 drive BIOS)
+vice_x64_libretro|C64|vice/JiffyDOS_1581.bin|O|20b6885c6dc2d42c38754a365b043d71|vice/JiffyDOS_1581.bin (JiffyDOS 1581 drive BIOS)
+vice_x64dtv_libretro|C64DTV|vice/JiffyDOS_C64.bin|O|be09394f0576cf81fa8bacf634daf9a2|vice/JiffyDOS_C64.bin (JiffyDOS C64 Kernal)
+vice_x64dtv_libretro|C64DTV|vice/JiffyDOS_1541-II.bin|O|1b1e985ea5325a1f46eb7fd9681707bf|vice/JiffyDOS_1541-II.bin (JiffyDOS 1541 drive BIOS)
+vice_x64dtv_libretro|C64DTV|vice/JiffyDOS_1571_repl310654.bin|O|41c6cc528e9515ffd0ed9b180f8467c0|vice/JiffyDOS_1571_repl310654.bin (JiffyDOS 1571 drive BIOS)
+vice_x64dtv_libretro|C64DTV|vice/JiffyDOS_1581.bin|O|20b6885c6dc2d42c38754a365b043d71|vice/JiffyDOS_1581.bin (JiffyDOS 1581 drive BIOS)
+vice_x64sc_libretro|C64|vice/JiffyDOS_C64.bin|O|be09394f0576cf81fa8bacf634daf9a2|vice/JiffyDOS_C64.bin (JiffyDOS C64 Kernal)
+vice_x64sc_libretro|C64|vice/JiffyDOS_1541-II.bin|O|1b1e985ea5325a1f46eb7fd9681707bf|vice/JiffyDOS_1541-II.bin (JiffyDOS 1541 drive BIOS)
+vice_x64sc_libretro|C64|vice/JiffyDOS_1571_repl310654.bin|O|41c6cc528e9515ffd0ed9b180f8467c0|vice/JiffyDOS_1571_repl310654.bin (JiffyDOS 1571 drive BIOS)
+vice_x64sc_libretro|C64|vice/JiffyDOS_1581.bin|O|20b6885c6dc2d42c38754a365b043d71|vice/JiffyDOS_1581.bin (JiffyDOS 1581 drive BIOS)
+vice_xscpu64_libretro|C64 SuperCPU|vice/JiffyDOS_C64.bin|O|be09394f0576cf81fa8bacf634daf9a2|vice/JiffyDOS_C64.bin (JiffyDOS C64 Kernal)
+vice_xscpu64_libretro|C64 SuperCPU|vice/JiffyDOS_1541-II.bin|O|1b1e985ea5325a1f46eb7fd9681707bf|vice/JiffyDOS_1541-II.bin (JiffyDOS 1541 drive BIOS)
+vice_xscpu64_libretro|C64 SuperCPU|vice/JiffyDOS_1571_repl310654.bin|O|41c6cc528e9515ffd0ed9b180f8467c0|vice/JiffyDOS_1571_repl310654.bin (JiffyDOS 1571 drive BIOS)
+vice_xscpu64_libretro|C64 SuperCPU|vice/JiffyDOS_1581.bin|O|20b6885c6dc2d42c38754a365b043d71|vice/JiffyDOS_1581.bin (JiffyDOS 1581 drive BIOS)
+vircon32_libretro|Vircon32|Vircon32Bios.v32|O|73f04397cbb2dafcf2047b19a856153a|Vircon32Bios.v32 (alternative BIOS file)
+virtualjaguar_libretro|Jaguar|[BIOS] Atari Jaguar CD (World).j64|O||[BIOS] Atari Jaguar CD (World).j64 (Jaguar CD BIOS, retail - optional override)
+virtualjaguar_libretro|Jaguar|[BIOS] Atari Jaguar Developer CD (World).j64|O||[BIOS] Atari Jaguar Developer CD (World).j64 (Jaguar CD BIOS, developer - optional override)
+virtualjaguar_libretro|Jaguar|jagboot_m.rom|O||jagboot_m.rom (Jaguar cart boot ROM, Model M - optional override)
+virtualjaguar_libretro|Jaguar|jagboot.rom|O||jagboot.rom (Jaguar cart boot ROM, any revision - optional, used when Cart BIOS Type is Custom)
+vita3k_libretro|PlayStation Vita|vita3k/PSP2UPDAT.PUP|R||PSP2UPDAT.PUP (PS Vita system firmware)
+vita3k_libretro|PlayStation Vita|vita3k/PSP2UPDAT_PREINST.PUP|R||PSP2UPDAT_PREINST.PUP (PS Vita firmware preinst package)
+vita3k_libretro|PlayStation Vita|vita3k/PSP2UPDAT_FONT.PUP|O||PSP2UPDAT_FONT.PUP (PS Vita firmware fonts)
+wqxemu_libretro|Wenquxing|WQXEmu/nc1020/obj_lu.bin|O||NC1020 obj_lu.bin (System ROM)
+wqxemu_libretro|Wenquxing|WQXEmu/nc1020/nc1020.fls|O||NC1020 nc1020.fls (NOR Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/pc1000/pc1000.rom|O||PC1000 pc1000.rom (System ROM)
+wqxemu_libretro|Wenquxing|WQXEmu/pc1000/pc1000.fls|O||PC1000 pc1000.fls (NOR Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/cc800/obj.bin|O||CC800 obj.bin (System ROM)
+wqxemu_libretro|Wenquxing|WQXEmu/cc800/cc800.fls|O||CC800 cc800.fls (NOR Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/nc2000/nc2000.nor|O||NC2000 nc2000.nor (NOR Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/nc2000/nc2000.nand|O||NC2000 nc2000.nand (NAND Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/nc2000/nc2000.nand0|O||NC2000 nc2000.nand0 (First NAND Plane)
+wqxemu_libretro|Wenquxing|WQXEmu/nc3000/nc3000.nor|O||NC3000 nc3000.nor (NOR Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/nc3000/nc3000.nand|O||NC3000 nc3000.nand (NAND Flash)
+wqxemu_libretro|Wenquxing|WQXEmu/nc3000/nc3000.nand0|O||NC3000 nc3000.nand0 (Optional First NAND Plane)
+x16emu_libretro|Commander X16|x16/rom.bin|R||x16/rom.bin (Commander X16 KERNAL ROM)
+x1_libretro|Sharp X1|xmil/IPLROM.X1|O|eeeea1cd29c6e0e8b094790ae969bfa7|xmil/IPLROM.X1 (Sharp X1 IPL ROM)
+x1_libretro|Sharp X1|xmil/IPLROM.X1T|O|851e4a5936f17d13f8c39a980cf00d77|xmil/IPLROM.X1T (Sharp X1 8x8 Font ROM)
+xemu_libretro|Xbox|xemu/mcpx_1.0.bin|R||xemu/mcpx_1.0.bin (MCPX Boot ROM)
+xemu_libretro|Xbox|xemu/Complex_4627v1.03.bin|R||xemu/Complex_4627v1.03.bin (Flash ROM / BIOS)
+xemu_libretro|Xbox|xemu/xbox_hdd.qcow2|R||xemu/xbox_hdd.qcow2 (Hard disk image)
+xemu_libretro|Xbox|xemu/xbox_eeprom.bin|O||xemu/xbox_eeprom.bin (EEPROM, created when missing)
+yabasanshiro_libretro|Saturn|saturn_bios.bin|R|af5828fdff51384f99b3c4926be27762|saturn_bios.bin (Saturn BIOS)
+yabause_libretro|Saturn|saturn_bios.bin|O|af5828fdff51384f99b3c4926be27762|saturn_bios.bin (Saturn BIOS)
+yaps2_libretro|Sony PlayStation 2|pcsx2/bios|R||'pcsx2/bios' folder (any valid PS2 BIOS dump, e.g. scph39001.bin)
+yaps2_libretro|Sony PlayStation 2|pcsx2/resources|R||'pcsx2/resources' folder (shaders, GameIndex.yaml, fonts)
+ymir_libretro|Saturn|sega_101.bin|O|85ec9ca47d8f6807718151cbcca8b964|sega_101.bin (Saturn JP BIOS)
+ymir_libretro|Saturn|mpr-17933.bin|O|3240872c70984b6cbfda1586cab68dbe|mpr-17933.bin (Saturn US/EU BIOS)
+ymir_libretro|Saturn|saturn_bios.bin|O|af5828fdff51384f99b3c4926be27762|saturn_bios.bin (Saturn BIOS)
+zcdi_libretro|CD-i|cdi200.rom|O|2969341396aa61e0143dc2351aaa6ef6|cdi200.rom (CD-i BIOS, NTSC)
+zcdi_libretro|CD-i|cdi220b.rom|O|ac0d468be366779c9df633be98da250a|cdi220b.rom (CD-i BIOS, PAL)
+zcdi_libretro|CD-i|vmpega.rom|O|53ba3bf7443187a657baa272d01d3771|vmpega.rom (Digital Video Cartridge ROM, needed for DVC titles)
