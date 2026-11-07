@@ -426,7 +426,7 @@ function Rom-Count($folders) {
   }
   return $tot
 }
-function Rp($folders) { if (-not $folders) { return '-' }; $n = Rom-Count $folders; if ($n -gt 0) { return '1' } elseif ($n -lt 0) { return '-' } else { return '0' } }
+function RomFlag($folders) { if (-not $folders) { return '-' }; $n = Rom-Count $folders; if ($n -gt 0) { return '1' } elseif ($n -lt 0) { return '-' } else { return '0' } }
 function Rom-Note($folders) {
   if (-not $folders) { return '' }
   $n = Rom-Count $folders; $f = ([string]$folders).Replace(',', ' | ')
@@ -549,7 +549,7 @@ function Check-Psx {
   L-Info "DuckStation reads BIOS by hash from: $(Short $dir)  (filename does not matter)"
   if ($cfg) { L-Sub "config: $(Short $cfg)" }
   Hash-Dir $dir 'PS1'
-  $rp = Rp 'psx'
+  $rp = RomFlag 'psx'
   if ($script:HD_COUNT -eq 0) {
     $e = @(Elsewhere-Tag 'PS1' $dir)
     if ($e.Count) { L-Warn 'no PS1 BIOS in that folder, but found elsewhere:'; foreach ($f in $e) { $c = Fix-Copy $f (JP $dir ([IO.Path]::GetFileName($f))); L-Fix $c; Add-Fix $c } }
@@ -577,7 +577,7 @@ function Check-Ps2 {
     if ($script:HD_COUNT -eq 0) {
       $e = @(Elsewhere-Tag 'PS2' $dir)
       if ($e.Count) { L-Warn 'PS2 BIOS found elsewhere:'; foreach ($f in $e) { $c = Fix-Copy $f (JP $dir ([IO.Path]::GetFileName($f))); L-Fix $c; Add-Fix $c } }
-      if ((Rp 'ps2') -eq '1') { L-Bad 'NO PS2 BIOS - PCSX2 cannot run games'; Add-Need "PS2 (PCSX2): one PS2 BIOS dump (e.g. SCPH-70012 US / SCPH-70004 EU / SCPH-70000 JP) in $(Short $dir)" }
+      if ((RomFlag 'ps2') -eq '1') { L-Bad 'NO PS2 BIOS - PCSX2 cannot run games'; Add-Need "PS2 (PCSX2): one PS2 BIOS dump (e.g. SCPH-70012 US / SCPH-70004 EU / SCPH-70000 JP) in $(Short $dir)" }
       else { L-Warn 'no PS2 BIOS (needed once you add PS2 games)' }
     } else {
       Mark-Ok 'ps2'
@@ -591,7 +591,7 @@ function Check-Ps2 {
     Sub 'RetroArch LRPS2 core' (Short $d) -Now
     Hash-Dir $d 'PS2'
     if ($script:HD_COUNT -eq 0) {
-      if ((Rp 'ps2') -eq '1') { L-Warn 'LRPS2 core has no BIOS in system/pcsx2/bios'; Add-Warn "PS2 (RetroArch LRPS2): put a PS2 BIOS in $(Short $d)" }
+      if ((RomFlag 'ps2') -eq '1') { L-Warn 'LRPS2 core has no BIOS in system/pcsx2/bios'; Add-Warn "PS2 (RetroArch LRPS2): put a PS2 BIOS in $(Short $d)" }
       else { L-Opt 'LRPS2: no BIOS in system/pcsx2/bios' }
     }
   }
@@ -620,7 +620,7 @@ function Check-Ps3 {
     if ($nm -gt 50) { L-Ok "PS3 firmware installed: $(if ($rel) { $rel } else { 'unknown' }) ($nm system modules in $(Short $flash))"; $script:CNT_OK++ }
     else { L-Warn "firmware version file present ($rel) but only $nm modules in dev_flash/sys/external - install looks incomplete"
            Add-Warn "PS3: firmware install in $(Short $flash) looks incomplete - reinstall PS3UPDAT.PUP via File > Install Firmware" }
-  } elseif ((Rp 'ps3') -eq '1') { L-Bad "PS3 firmware NOT installed (no $(Short $vt))"; Add-Need 'PS3 (RPCS3): install PS3UPDAT.PUP via RPCS3 > File > Install Firmware' }
+  } elseif ((RomFlag 'ps3') -eq '1') { L-Bad "PS3 firmware NOT installed (no $(Short $vt))"; Add-Need 'PS3 (RPCS3): install PS3UPDAT.PUP via RPCS3 > File > Install Firmware' }
   else { L-Warn 'PS3 firmware not installed (needed once you add PS3 games)' }
   foreach ($p in $script:ALLFILES) {
     if ([IO.Path]::GetFileName($p) -like 'ps3updat*.pup') {
@@ -646,7 +646,7 @@ function Check-Vita {
   if ($pref -and (IsDir $vs0) -and @([IO.Directory]::GetFileSystemEntries($vs0)).Count -gt 0) {
     $v = ''; $vf = JP $vs0 'vsh/etc/version.txt'; if (IsFile $vf) { $m = [regex]::Match([IO.File]::ReadAllText($vf), 'release:([0-9.]+)'); if ($m.Success) { $v = " ($($m.Groups[1].Value))" } }
     L-Ok "Vita firmware installed$v ($(Short $vs0))"; $script:CNT_OK++
-  } elseif ((Rp 'psvita') -eq '1') { L-Bad 'Vita firmware NOT installed'; Add-Need 'Vita (Vita3K): install PSVUPDAT.PUP via Vita3K > File > Install Firmware' }
+  } elseif ((RomFlag 'psvita') -eq '1') { L-Bad 'Vita firmware NOT installed'; Add-Need 'Vita (Vita3K): install PSVUPDAT.PUP via Vita3K > File > Install Firmware' }
   else { L-Warn 'Vita firmware not installed (needed once you add Vita games)' }
   $pvf = JP $pref 'sa0/data/font/pvf'
   if ($pref -and (IsDir $pvf) -and @([IO.Directory]::GetFiles($pvf, '*.pvf')).Count -gt 0) { L-Ok 'firmware font package installed (sa0/data/font/pvf)'; $script:CNT_OK++ }
@@ -668,7 +668,7 @@ function Check-Xbox {
   if (-not $boot) { $boot = JP $script:BIOS 'mcpx_1.0.bin' }
   if (-not $flash) { $flash = FirstExisting (JP $script:BIOS 'Complex_4627v1.03.bin') (JP $script:BIOS 'Complex_4627.bin') (JP $script:BIOS 'Complex.bin'); if (-not $flash) { $flash = JP $script:BIOS 'Complex_4627v1.03.bin' } }
   if (-not $hdd) { $hdd = FirstExisting (JP $script:STORAGE 'xemu/xbox_hdd.qcow2') (JP $script:BIOS 'xbox_hdd.qcow2') }
-  $rp = Rp 'xbox'
+  $rp = RomFlag 'xbox'
   [void](Report-File 'MCPX boot ROM' $boot 'd49c52a4102f6df7bcf8d0617ac475ed' 'REQ' $rp 'Xbox' 'must be MCPX 1.0 (512 bytes)')
   [void](Report-File 'Flash ROM (BIOS)' $flash '' 'REQ' $rp 'Xbox' 'Complex 4627 recommended')
   if ($script:P.state -eq 'NOHASH') { $s = FSize $flash; if ($s -ne 1048576 -and $s -ne 262144) { L-Warn "flash ROM size is $s bytes - expected 262144 or 1048576"; Add-Warn "Xbox: flash ROM $(Short $flash) has an odd size ($s)" } }
@@ -703,7 +703,7 @@ function Sw-Fw($g) {
   if ($g -lt $m.Count) { return $m[$g] } else { return 'newer than 20.x' }
 }
 function Check-SwitchEmu($name, $kdir, $fwdir, $layout, $link) {
-  $rp = Rp 'switch'
+  $rp = RomFlag 'switch'
   Sub "$name$(if ($script:NOTINST) { ' (not installed)' })" "keys: $(Short $kdir)  firmware: $(Short $fwdir)" -Now
   if ($link) {
     foreach ($pair in @(@((JP $link 'keys'), $kdir), @((JP $link 'firmware'), $fwdir))) {
@@ -827,7 +827,7 @@ function Check-Nds {
   $cfg = FirstExisting (Emu 'melonDS/melonDS.toml') (Emu 'melonDS/melonDS.ini')
   if (-not (Set-Have ([bool]$cfg -or (Std-Installed (Emu 'melonDS'))))) { return }
   Hdr 'Nintendo DS - melonDS' (Rom-Note 'nds'); $script:CUR_KEY = 'nds'
-  $rp = Rp 'nds'
+  $rp = RomFlag 'nds'
   $b7 = ''; $b9 = ''; $fw = ''; $ext = ''
   if ($cfg) {
     L-Sub "config: $(Short $cfg)"; $base = [IO.Path]::GetDirectoryName($cfg)
@@ -855,11 +855,11 @@ function Check-Flycast {
   Hdr 'Sega Dreamcast / NAOMI / Atomiswave - Flycast (standalone)' (Rom-Note 'dreamcast,naomi,naomi2,atomiswave')
   L-Info "Flycast data folder: $(Short $d)"
   $script:CUR_KEY = 'dreamcast'
-  [void](Report-File 'dc_boot.bin' (JP $d 'dc_boot.bin') 'e10c53c2f8b90bab96ead2d368858623,d407fcf70b56acb84b8c77c93b0e5327,93a9766f14159b403178ac77417c6b68' 'REC' (Rp 'dreamcast') 'Dreamcast' 'HLE BIOS works for most games')
+  [void](Report-File 'dc_boot.bin' (JP $d 'dc_boot.bin') 'e10c53c2f8b90bab96ead2d368858623,d407fcf70b56acb84b8c77c93b0e5327,93a9766f14159b403178ac77417c6b68' 'REC' (RomFlag 'dreamcast') 'Dreamcast' 'HLE BIOS works for most games')
   [void](Report-File 'dc_flash.bin' (JP $d 'dc_flash.bin') '0a93f7940c455905bea6e392dfde92a4' 'OPT' '-' 'Dreamcast')
-  $script:CUR_KEY = 'naomi';      if ((Report-File 'naomi.zip' (JP $d 'naomi.zip') '526eda1e2a7920c92c88178789d71d84' 'REQ' (Rp 'naomi') 'NAOMI') -eq 0) { Mark-Ok 'naomi' }
-  $script:CUR_KEY = 'naomi2';     if ((Report-File 'naomi2.zip' (JP $d 'naomi2.zip') 'c50072cbab75673e1b1a6b94355e6fa8' 'REQ' (Rp 'naomi2') 'NAOMI 2') -eq 0) { Mark-Ok 'naomi2' }
-  $script:CUR_KEY = 'atomiswave'; if ((Report-File 'awbios.zip' (JP $d 'awbios.zip') '85254fbe320ca82a768ec2c26bb08def' 'REQ' (Rp 'atomiswave') 'Atomiswave') -eq 0) { Mark-Ok 'atomiswave' }
+  $script:CUR_KEY = 'naomi';      if ((Report-File 'naomi.zip' (JP $d 'naomi.zip') '526eda1e2a7920c92c88178789d71d84' 'REQ' (RomFlag 'naomi') 'NAOMI') -eq 0) { Mark-Ok 'naomi' }
+  $script:CUR_KEY = 'naomi2';     if ((Report-File 'naomi2.zip' (JP $d 'naomi2.zip') 'c50072cbab75673e1b1a6b94355e6fa8' 'REQ' (RomFlag 'naomi2') 'NAOMI 2') -eq 0) { Mark-Ok 'naomi2' }
+  $script:CUR_KEY = 'atomiswave'; if ((Report-File 'awbios.zip' (JP $d 'awbios.zip') '85254fbe320ca82a768ec2c26bb08def' 'REQ' (RomFlag 'atomiswave') 'Atomiswave') -eq 0) { Mark-Ok 'atomiswave' }
 }
 
 # --------------------------------------------------------------------------
@@ -881,7 +881,7 @@ function Zip-Members($p) {
   } catch { return $null }
 }
 function Check-NeoGeo {
-  $rp = Rp 'neogeo'; $rpa = Rp 'arcade,fbneo,mame'
+  $rp = RomFlag 'neogeo'; $rpa = RomFlag 'arcade,fbneo,mame'
   if (-not ($rp -eq '1' -or $rpa -eq '1' -or $All -or ($script:RA_CORES -contains 'fbneo_libretro'))) { return }
   Hdr 'Arcade - Neo Geo BIOS (neogeo.zip)' (Rom-Note 'neogeo,arcade,fbneo'); $script:CUR_KEY = 'neogeo'
   $found = @()
@@ -951,7 +951,7 @@ function Ra-CoreDone {
 }
 function Ra-FlushGroups {
   foreach ($g in @($script:GRP.Keys)) {
-    $grp = $script:GRP[$g]; $rp = Rp $grp.roms
+    $grp = $script:GRP[$g]; $rp = RomFlag $grp.roms
     $script:CUR_KEY = ($grp.roms -split ',')[0]
     $label = Grp-Label $g; $core = ($g -split ':')[0]
     $script:R = @{ note = $grp.note; file = ($grp.names -join ', ') }
@@ -1000,7 +1000,7 @@ function Check-RetroArch {
       $last = $core; $done[$core] = $true; $inst = $wanted.ContainsKey($core)
       Sub ($core -replace '_libretro$', '') "$($row.sys)  $(Rom-Note $rr.roms)"
     }
-    $rp = Rp $rr.roms; if (-not $inst) { $rp = '0' }
+    $rp = RomFlag $rr.roms; if (-not $inst) { $rp = '0' }
     $script:CUR_KEY = ($rr.roms -split ',')[0]
     $want = JP $script:RA_SYS $row.path
     $short = $core -replace '_libretro$', ''
@@ -1063,9 +1063,9 @@ function Write-Utf8($path, $text) {
 function Do-Shortcut([bool]$install) {
   $dir = JP $LAD 'deck-bios-check'; $target = JP $dir 'deck-bios-check.ps1'
   $desk = [Environment]::GetFolderPath('Desktop'); $start = JP $AD 'Microsoft/Windows/Start Menu/Programs'
-  $lnks = @((JP $desk 'BIOS Checker.lnk'), (JP $start 'BIOS Checker.lnk'))
+  $lnks = @($(if ($desk) { JP $desk 'BIOS Checker.lnk' } else { '' }), (JP $start 'BIOS Checker.lnk'))
   if (-not $install) {
-    foreach ($l in $lnks) { if (IsFile $l) { Remove-Item -LiteralPath $l -Force } }
+    foreach ($l in $lnks) { if ($l -and (IsFile $l)) { Remove-Item -LiteralPath $l -Force } }
     if (IsDir $dir) { Remove-Item -LiteralPath $dir -Recurse -Force }
     Write-Host 'BIOS Checker shortcut removed.'; return 0
   }
@@ -1076,7 +1076,9 @@ function Do-Shortcut([bool]$install) {
   if (-not $IsWin) { Write-Host "Shortcuts are Windows-only. Script saved to $target"; return 0 }
   $ps = JP $env:SystemRoot 'System32/WindowsPowerShell/v1.0/powershell.exe'
   $sh = New-Object -ComObject WScript.Shell
+  if (-not (IsDir $start)) { [void](New-Item -ItemType Directory -Force -Path $start) }
   foreach ($l in $lnks) {
+    if (-not $desk -and $l -eq $lnks[0]) { continue }
     $ld = [IO.Path]::GetDirectoryName($l); if (-not (IsDir $ld)) { continue }
     $s = $sh.CreateShortcut($l)
     $s.TargetPath = $ps
@@ -1087,7 +1089,7 @@ function Do-Shortcut([bool]$install) {
     $s.Save()
   }
   Write-Host 'Installed:'
-  Write-Host "  desktop:     $($lnks[0])"
+  if ($lnks[0]) { Write-Host "  desktop:     $($lnks[0])" }
   Write-Host "  Start menu:  $($lnks[1])"
   Write-Host "  script:      $target"
   Write-Host "Double-click 'BIOS Checker' to get the friendly report. Remove with -UninstallShortcut."

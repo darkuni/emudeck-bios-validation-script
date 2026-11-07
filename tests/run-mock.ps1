@@ -126,7 +126,7 @@ if ($out2.Contains('custom') -and $out2.Contains("BIOS:    $B")) { Write-Host 'P
 # shortcut (Windows only)
 if ($isWin) {
   $o3 = (& $exe -NoProfile -ExecutionPolicy Bypass -File $script -InstallShortcut 2>&1 | Out-String)
-  $lnk = Join-Path ([Environment]::GetFolderPath('Desktop')) 'BIOS Checker.lnk'
+  $lnk = J $ADd 'Microsoft' 'Windows' 'Start Menu' 'Programs' 'BIOS Checker.lnk'
   $copy = J $LADd 'deck-bios-check' 'deck-bios-check.ps1'
   if ((Test-Path $lnk) -and (Test-Path $copy)) { Write-Host 'PASS  shortcut installed' } else { Write-Host "FAIL  shortcut install`n$o3"; $fail = 1 }
   & $exe -NoProfile -ExecutionPolicy Bypass -File $script -UninstallShortcut | Out-Null
