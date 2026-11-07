@@ -91,6 +91,11 @@ $ErrorActionPreference = 'Continue'
 $out = (& $exe -NoProfile -ExecutionPolicy Bypass -File $t -NoColor -ReportFile $rep -NoOpen -Json $js 2>&1 | Out-String)
 $rc = $LASTEXITCODE
 
+if ($env:DBC_ARTIFACTS) {
+  New-Item -ItemType Directory -Force -Path $env:DBC_ARTIFACTS | Out-Null
+  Copy-Item -LiteralPath $rep -Destination (Join-Path $env:DBC_ARTIFACTS 'report.html')
+  [IO.File]::WriteAllText((Join-Path $env:DBC_ARTIFACTS 'console.txt'), $out)
+}
 $fail = 0
 function Expect($s) { if ($out.Contains($s)) { Write-Host "PASS  $s" } else { Write-Host "FAIL  $s"; $script:fail = 1 } }
 $S = [IO.Path]::DirectorySeparatorChar
@@ -137,3 +142,5 @@ foreach ($k in $saved.Keys) { Set-Item -Path "env:$k" -Value $saved[$k] -ErrorAc
 if ($fail) { Write-Host ''; Write-Host $out; Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue; exit 1 }
 Remove-Item -Recurse -Force $work -ErrorAction SilentlyContinue
 Write-Host "all checks passed ($($PSVersionTable.PSEdition) $($PSVersionTable.PSVersion))"
+
+exit 0
