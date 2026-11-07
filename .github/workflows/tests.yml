@@ -1,0 +1,32 @@
+name: tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  bash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild from templates and confirm committed scripts are up to date
+        run: bash tools/build.sh && git diff --exit-code deck-bios-check.sh deck-bios-check.ps1
+      - name: Mock Steam Deck test
+        run: bash tests/run-mock.sh
+  powershell-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mock test (PowerShell 7 on Linux)
+        shell: pwsh
+        run: ./tests/run-mock.ps1
+  windows:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mock EmuDeck-for-Windows test (${{ matrix.shell }})
+        shell: ${{ matrix.shell }}
+        run: ./tests/run-mock.ps1

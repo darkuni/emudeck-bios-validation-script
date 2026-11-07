@@ -49,7 +49,7 @@
 #  Exit code: 0 = nothing blocking, 1 = something you NEED is missing, 2 = error
 # =============================================================================
 
-VERSION="1.1.0"
+VERSION="@@VERSION@@"
 set -u
 shopt -s nullglob extglob
 
@@ -230,81 +230,7 @@ RA_TABLE=$(cat <<'@@RA_END@@'
 #   First matching line wins; unmatched lines fall back to libretro's R/O flag.
 # ----------------------------------------------------------------------------
 RA_RULES=$(cat <<'@@RULES_END@@'
-^swanstation_libretro$@.@ANY:psx@psx@one PS1 BIOS is required (region-matched, or region-free psxonpsp660.bin / ps1_rom.bin)
-^(mednafen_psx|mednafen_psx_hw)_libretro$@.@ANY:psx@psx@one PS1 BIOS is required; Beetle uses scph5500 (JP) / scph5501 (US) / scph5502 (EU) per game region
-^pcsx_rearmed.*_libretro$@.@REC@psx@PCSX ReARMed has an HLE BIOS, a real one improves compatibility
-^mednafen_saturn_libretro$@^(sega_101|mpr-17933)\.bin$@ANY:sat@saturn,saturnjp@sega_101.bin = JP games, mpr-17933.bin = US/EU games
-^mednafen_saturn_libretro$@\.ic1$@OPT@saturn,saturnjp@only for KOF95 / Ultraman cartridge games
-^kronos_libretro$@stvbios@REQ@stv@ST-V arcade only
-^kronos_libretro$@saturn_bios@REQ@saturn,saturnjp@
-^kronos_libretro$@\.ic1$@OPT@@
-^(yabause|yabasanshiro)_libretro$@saturn_bios@REC@saturn,saturnjp@core has an HLE BIOS
-^(genesis_plus_gx|genesis_plus_gx_wide|genesis_plus_gx_expanded|picodrive)_libretro$@bios_CD_@ANY:scd@segacd,megacd,megacdjp@one per region of the Sega CD games you play
-^(genesis_plus_gx|genesis_plus_gx_wide|genesis_plus_gx_expanded|picodrive)_libretro$@.@OPT@@
-^flycast.*_libretro$@dc_boot\.bin@REC@dreamcast@Flycast has an HLE BIOS; a few games need the real one
-^flycast.*_libretro$@dc/naomi\.zip@REQ@naomi@
-^flycast.*_libretro$@dc/naomi2\.zip@REQ@naomi2@
-^flycast.*_libretro$@dc/awbios\.zip@REQ@atomiswave@
-^flycast.*_libretro$@.@OPT@@only for those specific arcade games
-^neocd_libretro$@/(neocd_f|neocd_sf|front-sp1|neocd_t|neocd_st|top-sp1|neocd_z|neocd_sz|neocd)\.(rom|bin)$@ANY:loader@neogeocd,neogeocdjp@any one CD loader BIOS
-^neocd_libretro$@/(ng-lo\.rom|000-lo\.lo)$@ANY:zoom@neogeocd,neogeocdjp@the Y-ZOOM ROM is mandatory
-^neocd_libretro$@.@OPT@@
-^mednafen_(pce|pce_fast|supergrafx)_libretro$@syscard3\.pce@REQ@pcenginecd,tg-cd@needed for all CD games (incl. Arcade Card titles)
-^mednafen_(pce|pce_fast|supergrafx)_libretro$@.@OPT@@
-^(mesen|nestopia|fceumm|bnes)_libretro$@disksys\.rom@REQ@fds@
-^(mesen|nestopia|fceumm)_libretro$@.@OPT@@
-^mupen64plus_next.*_libretro$@IPL\.n64@REQ@n64dd@
-^parallel_n64_libretro$@.@OPT@@
-^(melonds|melondsds)_libretro$@/?(bios7|bios9|firmware)\.bin$@REC@nds@built-in FreeBIOS works for most games
-^(melonds|melondsds)_libretro$@dsi_@OPT@nds@only for DSi mode / DSiWare
-^desmume.*_libretro$@.@OPT@@
-^opera_libretro$@^(panafz1|panafz10|panafz10-norsa|panafz10e-anvil|panafz10e-anvil-norsa|goldstar|sanyotry|panafz1j|panafz1j-norsa)\.bin$@ANY:3do@3do@any one 3DO BIOS (panafz10.bin is the usual pick)
-^opera_libretro$@.@OPT@@kanji fonts: some Japanese games
-^o2em_libretro$@o2rom\.bin@REQ@odyssey2,videopac@
-^o2em_libretro$@.@OPT@@Videopac+ / French models only
-^freechaf_libretro$@sl9@OPT@@Channel F II only
-^freechaf_libretro$@.@REQ@channelf@
-^puae.*_libretro$@kick(34005\.A500|40068\.A1200|40060\.CD32(\.ext)?)$@REC@amiga,amiga600,amiga1200,amigacd32,cdtv@PUAE falls back to AROS, but real Kickstarts are far more compatible
-^puae.*_libretro$@.@OPT@@
-^same_cdi_libretro$@cdimono1\.zip@REQ@cdimono1,cdi@
-^same_cdi_libretro$@.@OPT@@
-^handy_libretro$@lynxboot@REC@atarilynx@
-^mednafen_lynx_libretro$@lynxboot@REQ@atarilynx@
-^mednafen_pcfx_libretro$@pcfx\.rom@REQ@pcfx@
-^(a5200|atari800)_libretro$@5200\.rom@REQ@atari5200@
-^atari800_libretro$@ATARI(XL|OSB|BAS)\.ROM@REC@atari800,atarixe@
-^atari800_libretro$@.@OPT@@
-^prosystem_libretro$@.@OPT@atari7800@only for the boot screen
-^hatari_libretro$@tos\.img@REQ@atarist@
-^freeintv_libretro$@.@REQ@intellivision@
-^gearcoleco_libretro$@colecovision\.rom@REQ@colecovision@
-^gearcoleco_libretro$@.@OPT@@
-^bluemsx_libretro$@.@REQ@msx,msx1,msx2,msx2+,msxturbor@copy the Machines + Databases folders from the blueMSX package
-^fmsx_libretro$@^MSX2?P?(EXT)?\.ROM$@REQ@msx,msx1,msx2,msx2+@
-^fmsx_libretro$@.@OPT@@
-^px68k_libretro$@keropi/(iplrom|cgrom)\.dat@REQ@x68000@
-^px68k_libretro$@.@OPT@@
-^np2kai_libretro$@np2kai/(bios|itf|sound)\.rom@REC@pc98@
-^np2kai_libretro$@np2kai/(font\.bmp|FONT\.ROM)@ANY:font@pc98@
-^np2kai_libretro$@.@OPT@@
-^quasi88_libretro$@quasi88/n88(_0)?\.rom@REQ@pc88@
-^quasi88_libretro$@.@OPT@@
-^minivmac_libretro$@MacII@REQ@macintosh@
-^(snes9x|snes9x2010|bsnes.*|mesen-s)_libretro$@BS-X\.bin@REQ@satellaview@
-^(snes9x|snes9x2010|bsnes.*)_libretro$@STBIOS\.bin@REQ@sufami@
-^(bsnes.*|mesen-s)_libretro$@SGB[12]\.sfc@OPT@sgb@
-^(bsnes.*|mesen-s)_libretro$@(dsp|cx4|st01)@OPT@@only for DSP/ST-chip games (Pilotwings, Super Mario Kart, ...)
-^(mgba|gambatte|sameboy|gearboy|gpsp|vbam|vba_next|mesen-s|tgbdual|bsnes.*|snes9x)_libretro$@.@OPT@@boot ROMs only add the boot logo
-^dolphin_libretro$@codehandler@REQ@gc,wii@copy the dolphin-emu/Sys folder
-^dolphin_libretro$@.@OPT@@
-^fbneo_libretro$@.@OPT@@checked in the Arcade section
-^fbalpha.*_libretro$@.@OPT@@
-^mame.*_libretro$@.@OPT@@
-^pcsx2_libretro$@.@SKIP@@checked in the PS2 section
-^ppsspp_libretro$@.@REQ@psp@RetroArch Online Updater > Core System Files Downloader
-^citra.*_libretro$@.@OPT@n3ds@only for encrypted dumps
-^prboom_libretro$@.@REQ@doom@
-^pokemini_libretro$@.@OPT@@has a free BIOS built in
+@@RULES@@
 @@RULES_END@@
 )
 

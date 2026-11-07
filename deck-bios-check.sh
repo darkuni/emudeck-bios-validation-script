@@ -49,7 +49,7 @@
 #  Exit code: 0 = nothing blocking, 1 = something you NEED is missing, 2 = error
 # =============================================================================
 
-VERSION="1.1.0"
+VERSION="1.2.0"
 set -u
 shopt -s nullglob extglob
 
@@ -2730,17 +2730,7 @@ REPORT_TPL=$(cat <<'@@REPORT_END@@'
 
   <div id="cards"></div>
 
-  <div class="howto">
-    <h3>How to use a fix</h3>
-    Each fix is a single command that copies or renames a file. Fixes never overwrite anything (<code>cp -n</code> / <code>mv -n</code>); the only deletions are Windows junk files (<code>Zone.Identifier</code>).
-    <ol>
-      <li>Press <b>Copy</b> next to the fix (or <b>Copy all fixes</b> at the top).</li>
-      <li>Open <b>Konsole</b> (Desktop Mode - application menu - System - Konsole).</li>
-      <li>Paste with <b>Ctrl+Shift+V</b> and press <b>Enter</b>.</li>
-      <li>Run BIOS Checker again to confirm.</li>
-    </ol>
-    BIOS, firmware and keys must be dumped from hardware you own. This tool never downloads or shares them.
-  </div>
+  <div class="howto" id="howto"></div>
   <footer id="foot"></footer>
 </div>
 <div class="toast" id="toast">Copied</div>
@@ -2749,6 +2739,9 @@ REPORT_TPL=$(cat <<'@@REPORT_END@@'
 <script>
 "use strict";
 const D = JSON.parse(document.getElementById('data').textContent);
+const WIN = D.platform === 'windows';
+const SHELL = WIN ? 'PowerShell' : 'Konsole';
+const PASTE = WIN ? 'right-click (or Ctrl+V)' : 'Ctrl+Shift+V';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const base = p => String(p||'').split('/').pop();
@@ -2781,7 +2774,9 @@ const GLOSS = [
   ['Y-ZOOM','A small ROM the Neo Geo CD needs for scaling graphics.'],
   ['LLE','"Low-level emulation" - using real system files instead of fakes.'],
   ['region','Where a console was sold (US, Europe, Japan). Some emulators want the BIOS that matches each game\'s region.'],
-  ['case-sensitive','On the Deck, "BIOS.BIN" and "bios.bin" are two different names.'],
+  ['case-sensitive','On Linux and the Steam Deck, "BIOS.BIN" and "bios.bin" are two different names.'],
+  ['OneDrive','Microsoft\'s cloud sync. "Online-only" files are not really on your PC, so emulators can\'t read them.'],
+  ['junction','A Windows folder shortcut. EmuDeck uses these to link emulator folders to your bios folder.'],
   ['core','A RetroArch "core" is one emulator running inside RetroArch.'],
 ];
 const GLOSS_RE = new RegExp('\\b(' + GLOSS.map(g => g[0]).join('|') + ')\\b', 'g');
@@ -2817,6 +2812,7 @@ const HELP = [
   [/Disk System|mesen|nestopia|fceumm/i, 'Regular NES games need nothing. Famicom Disk System games need disksys.rom.'],
   [/PC Engine|TurboGrafx|pce/i, 'Regular PC Engine/TurboGrafx games need nothing. CD games need syscard3.pce.'],
   [/RetroArch/i, 'RetroArch looks for all BIOS files in its "system" folder. On EmuDeck and RetroDECK that is your bios folder.'],
+  [/hygiene|BIOS folder/i, 'General problems in your BIOS folder that confuse emulators.'],
 ];
 const help = t => (HELP.find(([re]) => re.test(t)) || [null, ''])[1];
 
@@ -2858,8 +2854,10 @@ function friendly(e){
     case 'bios_found': return ['ok', `Found a ${esc(REGION[e.note]||e.note)} BIOS: ${B(f)}<span class="small">${esc(e.what)}</span>`];
     case 'wrongfile': return ['bad', `${B(f)} is the <b>wrong file</b>. It is really: ${B(e.what)}. Replace it with the correct one.`];
     case 'badhash': return ['warn', `${B(f)} is a different version than expected (${esc(e.what)}). It will probably work - if games act strange, replace it with a known-good dump.`];
-    case 'case': return ['warn', `${B(f)} is there, but spelled with different capital letters (${C(base(e.found))}). The Deck is <abbr title="On the Deck, &quot;BIOS.BIN&quot; and &quot;bios.bin&quot; are two different names.">case-sensitive</abbr>, so the emulator can't see it. The fix below renames it.`];
+    case 'case': return ['warn', `${B(f)} is there, but spelled with different capital letters (${C(base(e.found))}). Linux is <abbr title="On the Deck, &quot;BIOS.BIN&quot; and &quot;bios.bin&quot; are two different names.">case-sensitive</abbr>, so the emulator can't see it. The fix below renames it.`];
     case 'elsewhere': return ['warn', `You have ${B(f)}, but it's in the wrong place: ${C(e.found)}. The emulator looks in ${C(e.want)}. The fix below copies it there.`];
+    case 'doubleext': return ['warn', `${B(f)} is there, but its real name is ${C(base(e.found))}. Windows hides file extensions by default, so the extra one is easy to miss. The fix below renames it.`];
+    case 'cloudonly': return ['bad', `${B(f)} is only in <abbr title="Microsoft's cloud sync. Online-only files are not really on your PC.">OneDrive</abbr>, not actually on this PC. Right-click it in File Explorer and choose <b>Always keep on this device</b>.`];
     case 'empty': return ['bad', `${B(f)} is an empty file (0 bytes) - the copy probably failed. Copy it again.`];
     case 'broken': return ['bad', `${B(f)} is a broken shortcut that points nowhere.`];
     case 'missing_req': return ['bad', `Missing ${B(f)}. You have games for this, so you need it. It goes here: ${C(e.want)}${noteTxt(e)}`];
@@ -2970,7 +2968,7 @@ const n = {red:0, yellow:0, green:0, idle:0}; cards.forEach(c => n[c.level]++);
 const banner = $('#banner');
 if (!D.contexts.length){
   banner.className = 'banner red'; $('#bannerTitle').textContent = 'No EmuDeck or RetroDECK setup found';
-  $('#bannerText').textContent = 'Run the script from Konsole with --bios to point it at your BIOS folder.';
+  $('#bannerText').textContent = WIN ? 'Run the script from PowerShell with -Bios to point it at your BIOS folder.' : 'Run the script from Konsole with --bios to point it at your BIOS folder.';
 } else if (n.red){
   banner.className = 'banner red';
   $('#bannerTitle').textContent = `${n.red} system${n.red>1?'s need':' needs'} something before ${n.red>1?'their':'its'} games will run`;
@@ -3038,18 +3036,33 @@ if (fixes.length){
   $('#btnCopyAll').classList.remove('hidden'); $('#btnSave').classList.remove('hidden');
   $('#btnCopyAll').textContent = `Copy all fixes (${fixes.length})`;
 }
-const script = () => '#!/usr/bin/env bash\n# BIOS Checker fixes - ' + D.generated + '\n# cp -n / mv -n never overwrite existing files.\n' + fixes.join('\n') + '\n';
+const script = () => WIN
+  ? '# BIOS Checker fixes - ' + D.generated + '\r\n# Copies never overwrite existing files.\r\n' + fixes.join('\r\n') + '\r\n'
+  : '#!/usr/bin/env bash\n# BIOS Checker fixes - ' + D.generated + '\n# cp -n / mv -n never overwrite existing files.\n' + fixes.join('\n') + '\n';
+$('#howto').innerHTML = WIN
+  ? `<h3>How to use a fix</h3>Each fix is one PowerShell command that copies or renames a file. Copies never overwrite an existing file; the only deletions are download junk files (<code>Zone.Identifier</code>).
+     <ol><li>Press <b>Copy</b> next to the fix (or <b>Copy all fixes</b> at the top).</li>
+     <li>Open <b>PowerShell</b> (Start menu - type <i>PowerShell</i>).</li>
+     <li>Right-click (or Ctrl+V) to paste, then press <b>Enter</b>.</li>
+     <li>Run BIOS Checker again to confirm.</li></ol>
+     BIOS, firmware and keys must be dumped from hardware you own. This tool never downloads or shares them.`
+  : `<h3>How to use a fix</h3>Each fix is a single command that copies or renames a file. Fixes never overwrite anything (<code>cp -n</code> / <code>mv -n</code>); the only deletions are Windows junk files (<code>Zone.Identifier</code>).
+     <ol><li>Press <b>Copy</b> next to the fix (or <b>Copy all fixes</b> at the top).</li>
+     <li>Open <b>Konsole</b> (Desktop Mode - application menu - System - Konsole).</li>
+     <li>Paste with <b>Ctrl+Shift+V</b> and press <b>Enter</b>.</li>
+     <li>Run BIOS Checker again to confirm.</li></ol>
+     BIOS, firmware and keys must be dumped from hardware you own. This tool never downloads or shares them.`;
 $('#btnCopyAll').addEventListener('click', () => copy(fixes.join('\n')));
 $('#btnSave').addEventListener('click', () => {
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([script()], {type:'text/x-shellscript'}));
-  a.download = 'bios-fixes.sh'; document.body.appendChild(a); a.click(); a.remove();
-  toast('Saved bios-fixes.sh to Downloads - run it with: bash ~/Downloads/bios-fixes.sh');
+  a.href = URL.createObjectURL(new Blob([script()], {type:'text/plain'}));
+  a.download = WIN ? 'bios-fixes.ps1' : 'bios-fixes.sh'; document.body.appendChild(a); a.click(); a.remove();
+  toast(WIN ? 'Saved bios-fixes.ps1 to Downloads - right-click it > Run with PowerShell' : 'Saved bios-fixes.sh to Downloads - run it with: bash ~/Downloads/bios-fixes.sh');
 });
 async function copy(t){
   try { await navigator.clipboard.writeText(t); }
   catch(e){ const a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }
-  toast('Copied - paste into Konsole with Ctrl+Shift+V');
+  toast(`Copied - paste into ${SHELL} with ${PASTE}`);
 }
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2600); }
 $('#foot').innerHTML = `deck-bios-check v${esc(D.version)} - <a href="https://github.com/darkuni/emudeck-bios-validation-script">github.com/darkuni/emudeck-bios-validation-script</a>`;

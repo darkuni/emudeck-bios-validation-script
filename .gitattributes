@@ -1,1 +1,2 @@
 *.sh text eol=lf
+deck-bios-check.ps1 -text
