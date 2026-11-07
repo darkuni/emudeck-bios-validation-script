@@ -95,6 +95,8 @@ if ($env:DBC_ARTIFACTS) {
   New-Item -ItemType Directory -Force -Path $env:DBC_ARTIFACTS | Out-Null
   Copy-Item -LiteralPath $rep -Destination (Join-Path $env:DBC_ARTIFACTS 'report.html')
   [IO.File]::WriteAllText((Join-Path $env:DBC_ARTIFACTS 'console.txt'), $out)
+  Write-Host '----- CONSOLE OUTPUT -----'; Write-Host $out; Write-Host '----- END CONSOLE -----'
+  Write-Host ('JSONB64:' + [Convert]::ToBase64String([IO.File]::ReadAllBytes($js)))
 }
 $fail = 0
 function Expect($s) { if ($out.Contains($s)) { Write-Host "PASS  $s" } else { Write-Host "FAIL  $s"; $script:fail = 1 } }
