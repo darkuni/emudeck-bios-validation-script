@@ -19,14 +19,17 @@ jobs:
       - name: Mock test (PowerShell 7 on Linux)
         shell: pwsh
         run: ./tests/run-mock.ps1
-  windows:
+  windows-powershell-5:
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shell: [powershell, pwsh]
     steps:
       - uses: actions/checkout@v4
-      - name: Mock EmuDeck-for-Windows test (${{ matrix.shell }})
-        shell: ${{ matrix.shell }}
+      - name: Mock EmuDeck-for-Windows test (Windows PowerShell 5.1)
+        shell: powershell
+        run: ./tests/run-mock.ps1
+  windows-pwsh-7:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mock EmuDeck-for-Windows test (PowerShell 7)
+        shell: pwsh
         run: ./tests/run-mock.ps1
