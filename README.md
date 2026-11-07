@@ -1,8 +1,10 @@
 # EmuDeck BIOS Validation Script
 
+[![tests](https://github.com/darkuni/emudeck-bios-validation-script/actions/workflows/tests.yml/badge.svg)](https://github.com/darkuni/emudeck-bios-validation-script/actions/workflows/tests.yml)
+
 A BIOS / firmware / keys checker for the Steam Deck that tells you what you **need**, not just "you have it or you don't".
 
-It works with **EmuDeck** and **RetroDECK**, or any folder you point it at. It's one plain bash script: no binaries, no Python, no network access, nothing to install. Read it top to bottom before you run it.
+It works with **EmuDeck** and **RetroDECK** on the Deck, **EmuDeck for Windows** on PC (PowerShell version), or any folder you point it at. On the Deck it's one plain bash script: no binaries, no Python, no network access, nothing to install. Read it top to bottom before you run it.
 
 EmuDeck's built-in check answers true/false for 8 systems. This one hashes every file in your BIOS folder and checks it against about 510 known-good hashes and every firmware entry of every RetroArch core you have installed. Then it tells you exactly what's wrong and how to fix it.
 
@@ -27,6 +29,30 @@ The report:
 - explains what each system needs in a "What does this system need?" section
 
 Remove the shortcut with `bash deck-bios-check.sh --uninstall-shortcut`.
+
+## Windows (EmuDeck for Windows / RetroArch)
+
+There's a native PowerShell version, `deck-bios-check.ps1`, with the same checks, the same hash database and the same friendly report. It runs on the PowerShell built into Windows 10/11 - nothing to install.
+
+Open **PowerShell** (Start menu - type *PowerShell*) and paste:
+
+```powershell
+irm https://raw.githubusercontent.com/darkuni/emudeck-bios-validation-script/main/deck-bios-check.ps1 -OutFile deck-bios-check.ps1
+powershell -ExecutionPolicy Bypass -File .\deck-bios-check.ps1 -InstallShortcut
+```
+
+That adds a **BIOS Checker** icon to your desktop and Start menu. Double-click it for the report.
+
+Run it once without the shortcut: `powershell -ExecutionPolicy Bypass -File .\deck-bios-check.ps1 -Report`
+
+What's different on Windows:
+- Reads EmuDeck for Windows' own settings (`%APPDATA%\EmuDeck\settings.ps1`) and its emulators in `%APPDATA%\EmuDeck\Emulators`. Without EmuDeck it checks a regular RetroArch install, or any folder with `-Bios`.
+- Also finds regular installs: DuckStation and PCSX2 in Documents, Ryujinx/Citron/Eden/Cemu/xemu/Vita3K in `%APPDATA%`.
+- Windows-only catches: **hidden double extensions** (`scph5501.bin.bin` - Windows hides the last one), **OneDrive "online-only" files** emulators can't read, and **broken EmuDeck junctions**.
+- Fixes are PowerShell commands (`Rename-Item`, `Copy-Item` that never overwrites).
+- Windows doesn't care about upper/lower case, so the case check is Linux-only.
+
+Options: `-Report`, `-ReportFile FILE`, `-NoOpen`, `-InstallShortcut`, `-UninstallShortcut`, `-Bios DIR`, `-Roms DIR`, `-All`, `-ShowOptional`, `-Unknown`, `-FixScript FILE`, `-Json FILE`, `-NoColor`, `-Help`.
 
 ## Quick start (terminal)
 
@@ -172,16 +198,20 @@ The hash database is generated from, and credit goes to:
 The script is built from a template plus generated data:
 
 ```
-tools/template.sh       the script logic (edit this, not deck-bios-check.sh)
-tools/report.html       the friendly report page (inlined into the script at build time)
+tools/template.sh       Linux/Deck script logic (edit this, not deck-bios-check.sh)
+tools/template.ps1      Windows PowerShell script logic (edit this, not deck-bios-check.ps1)
+tools/report.html       the friendly report page, shared by both (inlined at build time)
+tools/data/rules.txt    real-world "what do you actually need" rules, shared by both
+tools/VERSION           version stamped into both scripts
 tools/data/known.txt    md5|TAG|REGION|description
 tools/data/ra.txt       RetroArch core firmware table
 tools/update-data.sh    re-pull all upstream sources and rebuild (needs git, jq, python3)
-tools/build.sh          rebuild deck-bios-check.sh from template + data
+tools/build.sh          rebuild both scripts from templates + data
 tests/run-mock.sh       builds a fake Deck full of mistakes and checks each one is caught
+tests/run-mock.ps1      same for a fake EmuDeck-for-Windows install
 ```
 
-`tests/run-mock.sh` needs no real BIOS files. It swaps reference hashes for the hashes of dummy files.
+Neither test needs real BIOS files. They swap reference hashes for the hashes of dummy files. GitHub Actions runs them on every push: bash on Linux, Windows PowerShell 5.1 and PowerShell 7 on Windows, and PowerShell 7 on Linux.
 
 Bug reports with your output (`--no-color`) and `grep Path= ~/.config/EmuDeck/settings.sh` are welcome.
 
